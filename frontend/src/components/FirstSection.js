@@ -77,6 +77,7 @@ export default FirstSection
 const Wrap = styled.div`
   width: 100vw;
   height: 100vh;
+
  ${props =>
     props.backgroundImg
       ? `background-image: url(${props.backgroundImg})`
@@ -89,7 +90,16 @@ const Wrap = styled.div`
   border-bottom: 1px solid #ffa500;
 `
 
-const SliderWrapper = styled.div`width: 100vw;
+const SliderWrapper = styled.div`width: 80vw;
+
+@media (max-width: 1280px) {
+  width: 60vw;
+}
+
+@media (max-width: 768px) {
+  width: 100vw;
+}
+
 `
 
 const ItemText = styled.div`
