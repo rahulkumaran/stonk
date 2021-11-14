@@ -17,7 +17,7 @@ function FirstSection({
         <ItemText>
           <h2 style={{ color: '#ffa500' }}>
             {/* {title} */}
-            Welcome to the Stonk Society
+            The Stonk Society
           </h2>
           <br />
           <span style={{ color: '#ffa500' }}>3333</span> pieces of uniquely
@@ -43,11 +43,7 @@ function FirstSection({
 
       <Fade in delay={300} appear>
         <>
-        {!seventyFiveSold &&
-          <small style={{ color: 'red', padding: '10px' }}>
-            Note: Collection will be available on PaintSwap once 2500 pieces are
-            minted!
-          </small>}
+    
         <ButtonsWrapper>
           <ButtonGroup>
             {!sellOut &&
@@ -59,6 +55,11 @@ function FirstSection({
             </RightButton>{' '}
           </ButtonGroup>
         </ButtonsWrapper>
+        {!seventyFiveSold &&
+          <small style={{ color: 'red', padding: '10px' }}>
+            Collection will be available on PaintSwap once 2500 pieces are
+            minted!
+          </small>}
         <DownArrowWrapper>
           <DownArrow src="/images/down-arrow.svg" />
         </DownArrowWrapper>

@@ -24,7 +24,7 @@ export default function CardComponent() {
     },
     {
       name: 'Ashar',
-      about: 'Artiist',
+      about: 'Artist',
       image: `${teamImages[2]}`
     },
     {

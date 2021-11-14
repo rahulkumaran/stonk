@@ -14,6 +14,8 @@ const WalletCard = () => {
   const [defaultAccount, setDefaultAccount] = useState(null);
   const [userBalance, setUserBalance] = useState(null);
   const [connButtonText, setConnButtonText] = useState('Connect');
+  const [isConnected, setIsConnected] = useState(false);
+
 
   const connectWalletHandler = async () => {
 
@@ -29,7 +31,8 @@ const WalletCard = () => {
         window.ethereum?.request({ method: 'eth_requestAccounts' })
           .then(result => {
             accountChangedHandler(result[0]);
-            setConnButtonText('Connected to ' + account[0]?.substring(0, 4) + "___" + account[0]?.substring(38, 42));
+            setIsConnected(true);
+            setConnButtonText(account[0]?.substring(0, 4) + "___" + account[0]?.substring(38, 42));
             // console.log(account[0]);
           })
           .catch(error => {
@@ -71,7 +74,7 @@ const WalletCard = () => {
   window.ethereum?.on('chainChanged', chainChangedHandler);
 
   return (
-    <ConnectButton onClick={connectWalletHandler} class="walletButton">
+    <ConnectButton onClick={connectWalletHandler} class="walletButton" isConnected={isConnected}>
       <img
         src={metaMaskLogo}
         alt="metamask"
@@ -220,9 +223,9 @@ const RightMenu = styled.div`
 `
 const ConnectButton = styled.div`
   background-color: rgba(23, 26, 32, 0.8);
-  border: solid 1px white;
+  border: ${props => props.isConnected ? 'solid 1px #86dc3d;' : 'solid 1px red;'}
   height: 40px;
-  width: 180px;
+  width: 145px;
   color: white;
   display: flex;
   justify-content: space-around;
@@ -230,11 +233,10 @@ const ConnectButton = styled.div`
   border-radius: 5px;
   opacity: 0.85;
   text-transform: uppercase;
-  font-size: 16px;
+  font-size: ${props => !props.isConnected ? '20px;' : '15px;'}
   margin: 8px;
 
   &:hover{
       opacity:0.65;
-      border: solid 1px #ffa500;
   }
 `
