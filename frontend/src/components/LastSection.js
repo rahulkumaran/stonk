@@ -92,6 +92,10 @@ const Wrap = styled.div`
   @media (max-width: 768px) {
     height: auto;
   }
+
+  @media (max-width: 1280px) {
+    height: auto;
+  }
 `
 
 const ItemText = styled.div`

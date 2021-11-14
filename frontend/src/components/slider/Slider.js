@@ -26,6 +26,11 @@ const Image = styled.img`
     height: 180px;
     width: 180px;
   }
+
+  @media (max-width: 1280px) {
+    height: 180px;
+    width: 180px;
+  }
 `
 
 export default Slider

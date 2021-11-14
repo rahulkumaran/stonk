@@ -14,12 +14,12 @@ export default function CardComponent() {
   const team = [
     {
       name: 'Rahul Whale',
-      about: 'Full Stack Engeinner',
+      about: 'Full Stack Dev',
       image: `${teamImages[0]}`
     },
     {
       name: 'CyberHyper',
-      about: 'Full Stack Engineer',
+      about: 'Full Stack Dev',
       image: `${teamImages[1]}`
     },
     {
@@ -29,7 +29,7 @@ export default function CardComponent() {
     },
     {
       name: 'Blaze',
-      about: 'Marketing Expert | Social Engineer',
+      about: 'Marketing Expert',
       image: `${teamImages[3]}`
     }
   ]
@@ -40,9 +40,10 @@ export default function CardComponent() {
       <CardActionArea>
         <CardMedia
           component="img"
-          height="390"
+          // height="390"
           image={member.image}
           alt="green iguana"
+          style={{maxWidth:"100%", maxHeight:"100%"}}
         />
         <CardContent style={{opactity:"0.7", backgroundColor:"black", borderTop: "1px solid #ffa500"}}>
           <Typography
@@ -68,7 +69,9 @@ const CustomCard = styled(Card)`
 background-color: #dedede !important;
 border: 2px solid #ffa500;
 margin: 20px;
-width: 600px;
+height:330px;
+width: 250px;
+
 
 &:hover{
  opacity: 0.7

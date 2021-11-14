@@ -1,5 +1,5 @@
 {
-  "name": "tesla-clone",
+  "name": "The Stonk Society",
   "version": "0.1.0",
   "proxy": "http://localhost:6000",
   "private": true,

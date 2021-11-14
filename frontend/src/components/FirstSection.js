@@ -15,10 +15,10 @@ function FirstSection({
     <Wrap backgroundImg={backgroundImg} id={`${location}`}>
       <Fade in delay={300} appear>
         <ItemText>
-          <h1 style={{ color: '#ffa500' }}>
+          <h2 style={{ color: '#ffa500' }}>
             {/* {title} */}
             Welcome to the Stonk Society
-          </h1>
+          </h2>
           <br />
           <span style={{ color: '#ffa500' }}>3333</span> pieces of uniquely
           generated art.
