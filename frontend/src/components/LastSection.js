@@ -114,7 +114,7 @@ const ItemText = styled.div`
 const CardWrapper = styled.div`
   display: flex;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     flex-direction: column;
   }
 `

@@ -22,16 +22,16 @@ function Home() {
         location="mint"
       />
       <Section
-        title="Roadmap"
-        description="We are ambitious!"
-        backgroundImg={StarBG}
-        location="roadmap"
-      />
-      <Section
         title="Treasury Management Plan"
         description="We abide by the project name, we want our society's portfolio to get StOnKs!"
         backgroundImg={StarBG}
         location="plan"
+      />
+      <Section
+        title="Roadmap"
+        description="We are ambitious!"
+        backgroundImg={StarBG}
+        location="roadmap"
       />
       <LastSection
         title="Team"

@@ -55,11 +55,11 @@ function FirstSection({
             </RightButton>{' '}
           </ButtonGroup>
         </ButtonsWrapper>
-        {!seventyFiveSold &&
+        {/* {!seventyFiveSold &&
           <small style={{ color: 'red', padding: '10px' }}>
             Collection will be available on PaintSwap once 2500 pieces are
             minted!
-          </small>}
+          </small>} */}
         <DownArrowWrapper>
           <DownArrow src="/images/down-arrow.svg" />
         </DownArrowWrapper>
@@ -96,7 +96,7 @@ const SliderWrapper = styled.div`width: 80vw;
   width: 60vw;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   width: 100vw;
 }
 

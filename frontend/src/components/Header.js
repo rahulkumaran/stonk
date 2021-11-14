@@ -101,8 +101,8 @@ function Header() {
           <Menu>
             <Link to="/attributes">Attributes</Link>
             <a href="/#mint">Mint</a>
-            <a href="/#roadmap">Roadmap</a>
             <a href="/#plan">Plan</a>
+            <a href="/#roadmap">Roadmap</a>
             <a href="/#team">Team</a>
           </Menu></Fragment> :
         <Fragment>
@@ -142,6 +142,7 @@ export default (Header)
 
 
 const Container = styled.div`
+  max-width: 100vw;
   min-height: 60px;
   position: fixed;
   display: flex;
@@ -202,7 +203,7 @@ const Menu = styled.div`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     a {
       display: none;
     }
