@@ -1,0 +1,51 @@
+.bannerImages {
+  display: block;
+  width: 250px;
+  margin: 10px;
+  border: 2px solid #ffa500;
+  border-radius: 5px;
+}
+
+@media (max-width:900px) {
+  img {
+    display: block;
+    width: 200px;
+  }
+}
+
+section {
+  width: 100%;
+  overflow: hidden;
+}
+
+article {
+  display: flex;
+  width: 200%;
+  animation: bannermove 20s linear infinite;
+}
+
+/* article.paused {
+  -webkit-animation-play-state: paused;
+  animation-play-state: paused;
+} */
+
+.bannerDiv {
+  width: 100%;
+}
+
+.bannerUl {
+  display: flex;
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+@keyframes bannermove {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
