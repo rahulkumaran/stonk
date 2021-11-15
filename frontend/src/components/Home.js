@@ -23,15 +23,17 @@ function Home() {
       />
       <Section
         title="Treasury Management Plan"
-        description="We abide by the project name, we want our society's portfolio to get StOnKs!"
+        description="Aiming for the moon. Slowly but surely!"
         backgroundImg={StarBG}
         location="plan"
+        plan={true}
       />
       <Section
         title="Roadmap"
-        description="We are ambitious!"
+        description="We are gonna make it!"
         backgroundImg={StarBG}
         location="roadmap"
+        roadmap={true}
       />
       <LastSection
         title="Team"

@@ -15,7 +15,7 @@ function LastSection({ title, description, backgroundImg, location }) {
             {title}
           </h1>
           <br />
-          <p>
+          <p style={{ color: "#66aff5" }}>
             {description}
           </p>
         </ItemText>

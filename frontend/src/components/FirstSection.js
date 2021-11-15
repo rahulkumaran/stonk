@@ -20,49 +20,46 @@ function FirstSection({
             The Stonk Society
           </h2>
           <br />
-          <span style={{ color: '#ffa500' }}>3333</span> pieces of uniquely
-          generated art.
+          <span style={{ color: '#ffa500' }}>3333 </span>unique pieces of the Stonks Man. It is more than just an ART!
         </ItemText>
       </Fade>
 
       <Fade in delay={300} appear>
         <>
-        <SliderWrapper>
-          <Slider />
-        </SliderWrapper>
+          <SliderWrapper>
+            <Slider />
+          </SliderWrapper>
 
-        <RarityItemText>
-          With <span style={{ color: '#86dc3d' }}>common</span>,{' '}
-          <span style={{ color: '#66aff5' }}>uncommon</span>,{' '}
-          <span style={{ color: '#a95aec' }}>rare</span> and{' '}
-          <span style={{ color: '#fcc201' }}>legendary</span> attributes.
-        </RarityItemText>
+          <RarityItemText>
+            Hold2Earn NFTs! Just <span style={{ color: '#86dc3d' }}>Hold-</span><span style={{ color: '#66aff5' }}>Vote-</span><span style={{ color: '#a95aec' }}>Profit-</span><span style={{ color: '#fcc201' }}>Repeat</span> until stonks!
+
+          </RarityItemText>
 
         </>
       </Fade>
 
       <Fade in delay={300} appear>
         <>
-    
-        <ButtonsWrapper>
-          <ButtonGroup>
-            {!sellOut &&
-              <a href="#mint">
-                <RightButton>Mint Now!</RightButton>{' '}
-              </a>}
-            <RightButton disabled={!seventyFiveSold}>
-              PaintSwap
+
+          <ButtonsWrapper>
+            <ButtonGroup>
+              {!sellOut &&
+                <a href="#mint">
+                  <RightButton>Mint Now!</RightButton>{' '}
+                </a>}
+              <RightButton disabled={!seventyFiveSold}>
+                PaintSwap
             </RightButton>{' '}
-          </ButtonGroup>
-        </ButtonsWrapper>
-        {/* {!seventyFiveSold &&
+            </ButtonGroup>
+          </ButtonsWrapper>
+          {/* {!seventyFiveSold &&
           <small style={{ color: 'red', padding: '10px' }}>
             Collection will be available on PaintSwap once 2500 pieces are
             minted!
           </small>} */}
-        <DownArrowWrapper>
-          <DownArrow src="/images/down-arrow.svg" />
-        </DownArrowWrapper>
+          <DownArrowWrapper>
+            <DownArrow src="/images/down-arrow.svg" />
+          </DownArrowWrapper>
         </>
       </Fade>
     </Wrap>
@@ -93,7 +90,7 @@ const Wrap = styled.div`
 const SliderWrapper = styled.div`width: 80vw;
 
 @media (max-width: 1280px) {
-  width: 60vw;
+  width: 75vw;
 }
 
 @media (max-width: 1024px) {
@@ -135,7 +132,7 @@ const LeftButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 100px;
+  border-radius: 10px;
   opacity: 0.85;
   text-transform: uppercase;
   font-size: 20px;
