@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography'
 import { CardActionArea } from '@mui/material'
 import Paper from '@mui/material/Paper'
 import teamImages from './teamImages'
-
+import Fade from 'react-reveal/Fade';
 
 
 export default function CardComponent() {
@@ -34,32 +34,35 @@ export default function CardComponent() {
     }
   ]
 
-  return ( <>
-    { team.map((member, index) => (
-      <CustomCard sx={{ maxWidth: 345 }} hoverable key={index}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          // height="390"
-          image={member.image}
-          alt="green iguana"
-          style={{maxWidth:"100%", maxHeight:"100%"}}
-        />
-        <CardContent style={{opactity:"0.7", backgroundColor:"black", borderTop: "1px solid #ffa500"}}>
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="div"
-            color="#ffa500"
-          >
-            {member.name}
-          </Typography>
-          <Typography variant="body2" color="white">
-           {member.about}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </CustomCard>
+  return (<>
+    {team.map((member, index) => (
+      <Fade direction={index % 2 === 0 ? "left" : "right"} delay={index === 0 ? "500" : index === 1 ? "600" : index === 2 ? "700" : "800"} cascade>
+        <CustomCard sx={{ maxWidth: 345 }} hoverable key={index}>
+          <CardActionArea>
+            <CardMedia
+              component="img"
+              // height="390"
+              image={member.image}
+              alt="green iguana"
+              style={{ maxWidth: "100%", maxHeight: "100%" }}
+            />
+            <CardContent style={{ opactity: "0.7", backgroundColor: "black", borderTop: "1px solid #ffa500" }}>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                color="#ffa500"
+              >
+                {member.name}
+              </Typography>
+              <Typography variant="body2" color="white">
+                {member.about}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </CustomCard>
+      </Fade>
+
 
     ))}
   </>)

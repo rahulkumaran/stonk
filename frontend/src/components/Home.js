@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import Section from './Section'
 import LastSection from './LastSection'
 import FirstSection from './FirstSection'
+import RoadmapSection from './RoadmapSection'
+import PlanSection from './PlanSection'
 
 import StarBG from '../components/assets/star1.gif'
 
@@ -21,19 +23,17 @@ function Home() {
         backgroundImg={StarBG}
         location="mint"
       />
-      <Section
+      <PlanSection
         title="Treasury Management Plan"
         description="Aiming for the moon. Slowly but surely!"
         backgroundImg={StarBG}
         location="plan"
-        plan={true}
       />
-      <Section
+      <RoadmapSection
         title="Roadmap"
         description="We are gonna make it!"
         backgroundImg={StarBG}
         location="roadmap"
-        roadmap={true}
       />
       <LastSection
         title="Team"
