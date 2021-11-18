@@ -1,0 +1,22 @@
+{
+  "dna": "04100000902000110401304035",
+  "name": "#1",
+  "description": "This is an NFT made by the coolest generative code.",
+  "editionRarity": "legendary",
+  "image": "https://hashlips/nft/1",
+  "edition": 1,
+  "date": 1636771843079,
+  "attributes": [
+    { "name": "PopsicleFinancel", "rarity": "legendary" },
+    { "name": "StonksArrowc", "rarity": "common" },
+    { "name": "OriginalStonks" },
+    { "name": "PurpleChecksr", "rarity": "rare" },
+    { "name": "Tanc", "rarity": "common" },
+    { "name": "RedTiec", "rarity": "common" },
+    { "name": "BrownDucktaill", "rarity": "legendary" },
+    { "name": "Pipel", "rarity": "legendary" },
+    { "name": "LazerEyesl", "rarity": "legendary" },
+    { "name": "BigGoldEarringl", "rarity": "legendary" },
+    { "name": "KingCrownl", "rarity": "legendary" }
+  ]
+}

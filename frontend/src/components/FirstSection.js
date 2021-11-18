@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment,} from 'react'
 import Fade from 'react-reveal/Fade'
 import styled from 'styled-components'
 import Slider from './slider/Slider'
@@ -11,6 +11,7 @@ function FirstSection({
   sellOut,
   seventyFiveSold
 }) {
+
   return (
     <Wrap backgroundImg={backgroundImg} id={`${location}`}>
       <Fade in delay={300} appear>
