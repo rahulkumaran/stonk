@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Section from './Section'
+import MintSection from './MintSection'
 import LastSection from './LastSection'
 import FirstSection from './FirstSection'
 import RoadmapSection from './RoadmapSection'
@@ -17,12 +17,7 @@ function Home() {
         sellOut={false}
         seventyFiveSold={false}
       />
-      <Section
-        title="Mint your Meme Man!"
-        description="Become a part of the stonk society! Lets pAmP it up!"
-        backgroundImg={StarBG}
-        location="mint"
-      />
+      <MintSection backgroundImg={StarBG} location="mint" />
       <PlanSection
         title="Treasury Management Plan"
         description="Aiming for the moon. Slowly but surely!"
