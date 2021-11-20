@@ -17,14 +17,7 @@ contract SmartContract is ERC721Enumerable, Ownable {
   bool public paused = false;
   mapping(address => bool) public whitelisted;
 
-  constructor(
-    string memory _name,
-    string memory _symbol,
-    string memory _initBaseURI
-  ) ERC721(_name, _symbol) {
-    setBaseURI(_initBaseURI);
-    mint(msg.sender, 2);
-  }
+  constructor() ERC721("Smart Contract","SC"){}
 
   // internal
   function _baseURI() internal view virtual override returns (string memory) {

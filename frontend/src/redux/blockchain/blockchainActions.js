@@ -41,10 +41,10 @@ export const connect = () => {
     if (window.ethereum) {
       let web3 = new Web3(window.ethereum);
       try {
-        const accounts = await window.ethereum.request({
+        const accounts = await window.ethereum?.request({
           method: "eth_requestAccounts",
         });
-        const networkId = await window.ethereum.request({
+        const networkId = await window.ethereum?.request({
           method: "net_version",
         });
         const NetworkData = await SmartContract.networks[networkId];
@@ -63,10 +63,10 @@ export const connect = () => {
           
 
           // Add listeners start
-          window.ethereum.on("accountsChanged", (accounts) => {
+          window.ethereum?.on("accountsChanged", (accounts) => {
             dispatch(updateAccount(accounts[0]));
           });
-          window.ethereum.on("chainChanged", () => {
+          window.ethereum?.on("chainChanged", () => {
             window.location.reload();
           });
           // Add listeners end

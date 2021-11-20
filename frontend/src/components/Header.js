@@ -13,6 +13,8 @@ const WalletCard = () => {
 
   const [userBalance, setUserBalance] = useState(null);
   const [connButtonText, setConnButtonText] = useState('Connect');
+  //const [isConnected, setIsConnected] = useState(false);
+
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
@@ -29,10 +31,10 @@ const WalletCard = () => {
     <div>
 
       {blockchain.account === "" || blockchain.smartContract === null ? (
-        <ConnectButton onClick={(e) => {
+        <ConnectButton isConnected={blockchain.account === "" ? false : true} onClick={(e) => {
           e.preventDefault();
           dispatch(connect());
-        }} class="walletButton">
+        }}>
           <img
             src={metaMaskLogo}
             alt="metamask"
@@ -43,16 +45,16 @@ const WalletCard = () => {
 
       ) : (
         
-        <ConnectButton onClick={(e) => {
+        <ConnectButton isConnected={blockchain.account === ""? false : true} onClick={(e) => {
           e.preventDefault();
           dispatch(connect());
-        }} class="walletButton">
+        }}>
           <img
             src={metaMaskLogo}
             alt="metamask"
             style={{ height: '50px', width: '30px' }}
           />
-          Connected with {account.substring(0, 4) + "___" + account.substring(38, 42)} 
+          {account.substring(0, 4) + "___" + account.substring(38, 42)} 
         </ConnectButton>
       )}
     </div>
