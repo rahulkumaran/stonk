@@ -5,7 +5,6 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import { CardActionArea } from '@mui/material'
-import Paper from '@mui/material/Paper'
 import teamImages from './teamImages'
 import Fade from 'react-reveal/Fade';
 
@@ -37,7 +36,7 @@ export default function CardComponent() {
   return (<>
     {team.map((member, index) => (
       <Fade direction={index % 2 === 0 ? "left" : "right"} delay={index === 0 ? "500" : index === 1 ? "600" : index === 2 ? "700" : "800"} cascade>
-        <CustomCard sx={{ maxWidth: 345 }} hoverable key={index}>
+        <CustomCard sx={{ maxWidth: 345 }} key={index}>
           <CardActionArea>
             <CardMedia
               component="img"

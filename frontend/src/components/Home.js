@@ -9,32 +9,40 @@ import PlanSection from './PlanSection'
 
 import StarBG from '../components/assets/star1.gif'
 
-function Home() {
+function Home({ BG, EE }) {
   return (
     <Container>
       <FirstSection
-        backgroundImg={StarBG}
+        backgroundImg={BG !== '' ? BG : StarBG}
+        EE={EE}
         sellOut={false}
         seventyFiveSold={false}
       />
-      <MintSection backgroundImg={StarBG} location="mint" />
+      <MintSection
+        backgroundImg={BG !== '' ? BG : StarBG}
+        location="mint"
+        EE={EE}
+      />
       <PlanSection
         title="Treasury Management Plan"
         description="Aiming for the moon. Slowly but surely!"
-        backgroundImg={StarBG}
+        backgroundImg={BG !== '' ? BG : StarBG}
         location="plan"
+        EE={EE}
       />
       <RoadmapSection
         title="Roadmap"
         description="We are gonna make it!"
-        backgroundImg={StarBG}
+        backgroundImg={BG !== '' ? BG : StarBG}
         location="roadmap"
+        EE={EE}
       />
       <LastSection
         title="Team"
         description="We are one among you. Together with you, we make the Stonk Society!"
-        backgroundImg={StarBG}
+        backgroundImg={BG !== '' ? BG : StarBG}
         location="team"
+        EE={EE}
       />
     </Container>
   )

@@ -11,11 +11,12 @@ function FirstSection({
   backgroundImg,
   location,
   sellOut,
-  seventyFiveSold
+  seventyFiveSold, 
+  EE
 }) {
 
   return (
-    <Wrap backgroundImg={backgroundImg} id={`${location}`}>
+    <Wrap backgroundImg={backgroundImg} EE={EE} id={`${location}`}>
       <Fade in delay={300} appear>
         <ItemText>
           <h2 style={{ color: '#ffa500' }}>
@@ -81,7 +82,11 @@ const Wrap = styled.div`
     props.backgroundImg
       ? `background-image: url(${props.backgroundImg})`
       : ''};
-  // background-color: black;
+  ${props =>
+    props.EE
+      ?  `background-size: cover;
+      background-repeat: no-repeat;`
+      : ''};
   display: flex;
   flex-direction: column;
   justify-content: space-between;

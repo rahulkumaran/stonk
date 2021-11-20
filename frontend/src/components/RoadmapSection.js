@@ -9,10 +9,11 @@ function RoadmapSection({
   leftBtnText,
   rightBtnText,
   backgroundImg,
-  location
+  location,
+  EE
 }) {
   return (
-    <Wrap backgroundImg={backgroundImg} id={`${location}`}>
+    <Wrap backgroundImg={backgroundImg} id={`${location}`} EE={EE}>
       <Fade in delay={300} appear>
         <Fragment>
           <ItemText>
@@ -186,6 +187,11 @@ const Wrap = styled.div`
 
   ${props =>
     props.backgroundImg ? `background-image: url(${props.backgroundImg})` : ''};
+  ${props =>
+    props.EE
+      ? `background-size: cover;
+        background-repeat: no-repeat;`
+      : ''};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
