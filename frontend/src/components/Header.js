@@ -64,7 +64,7 @@ const WalletCard = () => {
   )
 }
 
-function Header() {
+function Header({ handleEasterEgg }) {
   let location = useLocation()
   const [burgerOpen, setBurgerOpen] = useState(false)
   const [colorChange, setColorchange] = useState(false)
@@ -95,7 +95,7 @@ function Header() {
                 justifyContent: 'center'
               }}
             >
-              <span>Stonk</span>{' '}
+              <span style={{ color: '#ffa500' }}>Stonk</span>{' '}
               <img
                 style={{
                   height: '30px',
@@ -106,11 +106,12 @@ function Header() {
                 }}
                 src={ArrowLogo}
                 alt="logo"
+                onClick={handleEasterEgg}
               />
               {''}
-              <span>Society</span>
+              <span style={{ color: '#66aff5' }}>Society</span>
             </a>
-            <Menu>
+            <Menu showNav={colorChange}>
               <Link to="/attributes">Attributes</Link>
               <a href="/#mint">Mint</a>
               <a href="/#plan">Plan</a>
@@ -142,7 +143,7 @@ function Header() {
               {''}
               <span>Society</span>
             </Link>
-            <Menu>
+            <Menu showNav={colorChange}>
               <Link to="/">Back to Home</Link>
             </Menu>
           </Fragment>}
@@ -251,11 +252,14 @@ const Menu = styled.div`
   justify-content: center;
 
   a {
+    color: white;
     font-weight: 1000;
+    font-size: ${props => (props.showNav ? '' : '23px !important;')};
+    // color: ${props => (props.showNav ? 'white' : '#ffa500;')};
+
     text-transform: uppercase;
     margin-right: 10px;
     padding: 0 20px;
-    color: white;
 
     &:hover {
       color: #ffa500;

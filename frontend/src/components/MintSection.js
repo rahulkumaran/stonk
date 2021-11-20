@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
 import Fade from 'react-reveal/Fade'
 import styled from 'styled-components'
-import { useDispatch, useSelector } from "react-redux";
-import { connect } from "../redux/blockchain/blockchainActions";
-import { fetchData } from "../redux/data/dataActions";
+import { useDispatch, useSelector } from 'react-redux'
+import { connect } from '../redux/blockchain/blockchainActions'
+import { fetchData } from '../redux/data/dataActions'
 
 //const startMintingProcess = () => {}
 
@@ -13,13 +13,14 @@ function Section({
   leftBtnText,
   rightBtnText,
   backgroundImg,
-  location
+  location,
+  EE
 }) {
-  const blockchain = useSelector((state) => state.blockchain);
-  const data = useSelector((state) => state.data);
+  const blockchain = useSelector(state => state.blockchain)
+  const data = useSelector(state => state.data)
 
   return (
-    <Wrap backgroundImg={backgroundImg} id={`${location}`}>
+    <Wrap backgroundImg={backgroundImg} id={`${location}`} EE={EE}>
       <Fade in delay={300} appear>
         <Fragment>
           <ItemText>
@@ -29,25 +30,27 @@ function Section({
               Become a part of the stonk society! Lets pAmP it up!
             </p>
             <br />
-            {blockchain.account === "" || blockchain.smartContract === null ? (
-              <p style={{ color: '#66aff5' }}>You are not connected to your wallet currently.</p>)
-              : (
-                <p style={{ color: '#66aff5' }}>You are connected with Wallet Address : <span style={{ color: '#ffa500' }}>{blockchain.account}</span></p>
-                )
-            }
+            {blockchain.account === '' || blockchain.smartContract === null
+              ? <p style={{ color: '#66aff5' }}>
+                  You are not connected to your wallet currently.
+                </p>
+              : <p style={{ color: '#66aff5' }}>
+                  You are connected with Wallet Address :{' '}
+                  <span style={{ color: '#ffa500' }}>{blockchain.account}</span>
+                </p>}
           </ItemText>
         </Fragment>
       </Fade>
       <Fade top delay={300} appear>
         <ButtonsWrapper>
           <ButtonGroup>
-              <RightButton
-                onClick={(e) => {
-                  e.preventDefault();
-                }}
-              >
-                Mint Your Stonks
-              </RightButton>
+            <RightButton
+              onClick={e => {
+                e.preventDefault()
+              }}
+            >
+              Mint Your Stonks
+            </RightButton>
           </ButtonGroup>
         </ButtonsWrapper>
       </Fade>
@@ -63,9 +66,13 @@ export default Section
 const Wrap = styled.div`
   width: 100vw;
   height: 100vh;
-
   ${props =>
     props.backgroundImg ? `background-image: url(${props.backgroundImg})` : ''};
+  ${props =>
+    props.EE
+      ? `background-size: cover;
+        background-repeat: no-repeat;`
+      : ''};
   display: flex;
   flex-direction: column;
   justify-content: space-between;

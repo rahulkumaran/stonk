@@ -6,16 +6,16 @@ import CardComponent from '../components/card/Card'
 import twitterLogo from '../components/assets/twitter.jpg'
 import discordLogo from '../components/assets/discord.jpg'
 
-function LastSection({ title, description, backgroundImg, location }) {
+function LastSection({ title, description, backgroundImg, location, EE }) {
   return (
-    <Wrap backgroundImg={backgroundImg} id={`${location}`}>
+    <Wrap backgroundImg={backgroundImg} id={`${location}`} EE={EE}>
       <Fade in delay={300} appear>
         <ItemText>
           <h1 style={{ color: '#ffa500' }}>
             {title}
           </h1>
           <br />
-          <p style={{ color: "#66aff5" }}>
+          <p style={{ color: '#66aff5' }}>
             {description}
           </p>
         </ItemText>
@@ -82,7 +82,11 @@ const Wrap = styled.div`
   height: 100vh;
   ${props =>
     props.backgroundImg ? `background-image: url(${props.backgroundImg})` : ''};
-  // background-color: black;
+  ${props =>
+    props.EE
+      ? `background-size: cover;
+        background-repeat: no-repeat;`
+      : ''};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
