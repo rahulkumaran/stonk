@@ -86,8 +86,8 @@ function Attributes() {
                 <Fade delay={800}>
                   <AttributesInfoWrapper>
                     <AttributesInfo>
-                      <BlockWrapper>
-                        <div>
+                      <BlockWrapper flexCol={true}>
+                        <BlockDiv>
                           <AttributeBlockOne>
                             <PH>Edition</PH>
 
@@ -95,94 +95,100 @@ function Attributes() {
                               {' '}#{nftData.metadata.edition}
                             </P>
                           </AttributeBlockOne>{' '}
+
                           <AttributeBlockOne>
                             <PH> Edition Rarity</PH>
-                            <P>
+                            <P rarity={nftData.metadata.editionRarity}>
                               {nftData.metadata.editionRarity}
                             </P>
                           </AttributeBlockOne>{' '}
+
                           <AttributeBlockOne>
                             <PH>Background</PH>
                             <P>
                               {nftData.metadata.attributes[0].name}
                             </P>
-                            <P>
+                            <P rarity={nftData.metadata.attributes[0].rarity}>
                               ({nftData.metadata.attributes[0].rarity})
                             </P>
                           </AttributeBlockOne>{' '}
+
                           <AttributeBlockOne>
                             <PH>Overlay Arrow</PH>
                             <P>
                               {' '}{nftData.metadata.attributes[1].name}{' '}
                             </P>
-                            <P>
+                            <P rarity={nftData.metadata.attributes[1].rarity}>
                               ({nftData.metadata.attributes[1].rarity})
                             </P>
                           </AttributeBlockOne>{' '}
-                          <AttributeBlockOne> 5</AttributeBlockOne>{' '}
-                        </div>
 
-                        <div>
-                          <AttributeBlockOne> 6</AttributeBlockOne>{' '}
-                          <AttributeBlockOne> 7</AttributeBlockOne>{' '}
-                          <AttributeBlockOne> 8</AttributeBlockOne>{' '}
-                          <AttributeBlockOne> 9</AttributeBlockOne>{' '}
-                          <AttributeBlockOne> 10</AttributeBlockOne>{' '}
-                        </div>
-                        <div>
-                          <AttributeBlockOne> 11</AttributeBlockOne>{' '}
-                          <AttributeBlockOne> 12</AttributeBlockOne>{' '}
-                          <AttributeBlockOne> 13</AttributeBlockOne>{' '}
-                          <AttributeBlockOne> 14</AttributeBlockOne>{' '}
-                          <AttributeBlockOne> 15</AttributeBlockOne>{' '}
-                        </div>
+                          <AttributeBlockOne> 
+                          <PH>Body</PH>
+                            <P>
+                            {nftData.metadata.attributes[2].name}
+                            </P>
+                            <P rarity={nftData.metadata.attributes[2]?.rarity}>
+                            ({nftData.metadata.attributes[2]?.rarity})
+                            </P>
+                            </AttributeBlockOne>{' '}
+                        </BlockDiv>
+
+                        <BlockDiv>
+                          <AttributeBlockOne> 
+                            <PH>Suit</PH>
+                            <P> {nftData.metadata.attributes[3].name} </P>
+                            <P rarity={nftData.metadata.attributes[3].rarity}>({nftData.metadata.attributes[3].rarity})</P>
+                          </AttributeBlockOne>
+
+                          <AttributeBlockOne> 
+                            <PH>Skin Tone</PH>
+                            <P> {nftData.metadata.attributes[4].name} </P>
+                            <P rarity={nftData.metadata.attributes[4].rarity}>({nftData.metadata.attributes[4].rarity})</P>
+                          </AttributeBlockOne>
+
+                          <AttributeBlockOne> 
+                            <PH>Tie</PH>
+                            <P>{nftData.metadata.attributes[5].name}</P>
+                            <P rarity={nftData.metadata.attributes[5].rarity}>({nftData.metadata.attributes[5].rarity})</P>
+                          </AttributeBlockOne>
+
+                          <AttributeBlockOne> 
+                          <PH>Facial Hair</PH> 
+                            <P>{nftData.metadata.attributes[6].name}</P>
+                            <P rarity={nftData.metadata.attributes[6].rarity}>({nftData.metadata.attributes[6].rarity})</P>
+                          </AttributeBlockOne>
+
+                          <AttributeBlockOne>
+                            <PH>Mouth Piece</PH>
+                            <P>{nftData.metadata.attributes[7].name}</P>
+                            <P rarity={nftData.metadata.attributes[7].rarity}>({nftData.metadata.attributes[7].rarity})</P>
+                          </AttributeBlockOne>
+                        </BlockDiv>
+
+                        <BlockDiv>
+                          <AttributeBlockOne> 
+                            <PH>Eyes/Eye wear</PH>
+                            <P>{nftData.metadata.attributes[8].name}</P>
+                            <P rarity={nftData.metadata.attributes[8].rarity}>({nftData.metadata.attributes[8].rarity})</P>
+                          </AttributeBlockOne>
+                          
+                          <AttributeBlockOne>
+                            <PH>Earring</PH>
+                            <P>{nftData.metadata.attributes[9].name}</P>
+                            <P rarity={nftData.metadata.attributes[9].rarity}>({nftData.metadata.attributes[9].rarity})</P>
+                          </AttributeBlockOne>
+
+
+                          <AttributeBlockOne>
+                            <PH>Hair/Head Wear</PH>
+                            <P>{nftData.metadata.attributes[10].name}</P>
+                            <P rarity={nftData.metadata.attributes[10].rarity}>({nftData.metadata.attributes[10].rarity})</P>
+                          </AttributeBlockOne>
+
+                        </BlockDiv>
                       </BlockWrapper>
-                      {/* <ul>
-
-                  
-                      
-                        <li>
-                          Overlay Arrow: {nftData.metadata.attributes[1].name} {' '}
-                          ({nftData.metadata.attributes[1].rarity})
-                        </li>
-
-                        <li>
-                          Body: {nftData.metadata.attributes[2].name} {' '}
-                          ({nftData.metadata.attributes[2]?.rarity})
-                        </li>
-                        <li>
-                          Suit: {nftData.metadata.attributes[3].name} {' '}
-                          ({nftData.metadata.attributes[3].rarity})
-                        </li>
-                        <li>
-                          Skin Tone: {nftData.metadata.attributes[4].name} {' '}
-                          ({nftData.metadata.attributes[4].rarity})
-                        </li>
-                        <li>
-                          Tie: {nftData.metadata.attributes[5].name} {' '}
-                          ({nftData.metadata.attributes[5].rarity})
-                        </li>
-                        <li>
-                          Facial Hair: {nftData.metadata.attributes[6].name} {' '}
-                          ({nftData.metadata.attributes[6].rarity})
-                        </li>
-                        <li>
-                          Mouth Piece: {nftData.metadata.attributes[7].name} {' '}
-                          ({nftData.metadata.attributes[7].rarity})
-                        </li>
-                        <li>
-                          Eyes/Eye wear: {nftData.metadata.attributes[8].name} {' '}
-                          ({nftData.metadata.attributes[8].rarity})
-                        </li>
-                        <li>
-                          Earring: {nftData.metadata.attributes[9].name} {' '}
-                          ({nftData.metadata.attributes[9].rarity})
-                        </li>
-                        <li>
-                          Hair/Head Wear: {nftData.metadata.attributes[10].name} {' '}
-                          ({nftData.metadata.attributes[10].rarity})
-                        </li>
-                      </ul>  */}
+                     
                     </AttributesInfo>
                   </AttributesInfoWrapper>
                 </Fade>
@@ -227,6 +233,10 @@ const Wrap = styled.div`
     ${props => (props.nftData ? 'height: auto;' : 'height: 100vh;')};
   }
 
+  @media (max-width: 1024px) {
+    height: 100vh;
+  }
+
   @media (max-width: 800px) {
     ${props => (props.nftData ? 'height: auto;' : 'height: 100vh;')};
   }
@@ -246,6 +256,7 @@ const ItemText = styled.div`
   @media (max-width: 768px) {
     font-size: 15px;
   }
+
 `
 
 const ButtonsWrapper = styled.div`
@@ -325,7 +336,11 @@ const RightButton = styled(LeftButton)`
 const ContentWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding-bottom: 80px;
+  padding-bottom: 20px;
+
+  @media (max-width: 1204px) {
+    padding-bottom: 0px;
+  }
 `
 
 const AttributesWrapper = styled.div`
@@ -337,10 +352,16 @@ const AttributesWrapper = styled.div`
   @media (max-width: 2000px) {
   }
 
-  @media (max-width: 1280px) {
+  @media (max-width: 1204px) {
+    flex-direction: column;
+    align-items: center;
+    font-size: 10px;
   }
 
   @media (max-width: 800px) {
+    flex-direction: column;
+    align-items: center;
+    font-size: 10px;
   }
 
   @media (max-width: 550px) {
@@ -350,7 +371,8 @@ const AttributesWrapper = styled.div`
   }
 `
 
-const AttributesImageWrapper = styled.div`justify-content: flex-start;`
+const AttributesImageWrapper = styled.div`justify-content: flex-start;
+`
 
 const AttributesInfoWrapper = styled.div`
   display: flex;
@@ -358,6 +380,11 @@ const AttributesInfoWrapper = styled.div`
   width: 100%;
   padding-left: 50px;
   line-height: 30px;
+
+  @media (max-width: 550px) {
+    padding: 0;
+  }
+
 `
 
 const AttributesInfo = styled.div`
@@ -373,11 +400,23 @@ const SearchInput = styled.input`
   width: 100%;
   height: 40px;
 `
-const IMG = styled.img`border: 2px solid #ffa500;`
-const QM = styled.img`
-  border: 2px solid #ffa500;
+const IMG = styled.img`border: 2px solid #ffa500;
+
+
+@media (max-width: 1204px) {
   width: 350px;
   height: 350px;
+}
+
+@media (max-width: 800px) {
+  width: 300px;
+  height: 300px;
+}
+`
+const QM = styled.img`
+  border: 2px solid #ffa500;
+  width: 300px;
+  height: 300;
 `
 
 const LoadingWrapper = styled.div`
@@ -388,9 +427,9 @@ const LoadingWrapper = styled.div`
 
 const QuestionMarkWrapper = styled.div`padding-top: 70px;`
 const AttributeBlockOne = styled.div`
-  background-color: white;
+  // background-color: rgba(255,215,0, 0.2);
   height: 80px;
-  width: 180px;
+  width: 200px;
   color: black;
   display: flex;
   flex-direction: column;
@@ -401,6 +440,9 @@ const AttributeBlockOne = styled.div`
   text-transform: uppercase;
   font-size: 20px;
   margin: 8px;
+  border: 2px solid #ffa500;
+  line-height: 25px;
+
 
   ${props =>
     !props.disabled &&
@@ -411,12 +453,24 @@ const AttributeBlockOne = styled.div`
 const BlockWrapper = styled.div`
   width: 100%;
   display: flex;
+
+  @media (max-width: 550px) {
+  ${props => (props.flexCol ? "flex-direction:column; align-items:center; justify-content:center;" : '')};
+  
+}
+
 `
+
+const BlockDiv = styled.div`
+
+`
+
 const P = styled.p`
-  color: black;
+  color: white;
   font-size: 15px;
+  color : ${props => props.rarity && props.rarity ==="common" ? "#86dc3d" : props.rarity ==="uncommon" ? "#66aff5" : props.rarity === "rare" ? "#a95aec" : props.rarity === "legendary" ? "#fcc201" : "" }
 `
 const PH = styled.p`
-  color: #66aff5;
+  color: white;
   font-size: 15px;
 `
