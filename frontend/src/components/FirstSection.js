@@ -2,6 +2,8 @@ import React, { Fragment,} from 'react'
 import Fade from 'react-reveal/Fade'
 import styled from 'styled-components'
 import Slider from './slider/Slider'
+import PaintSwapLogo from './assets/paintswap.png'
+import MintLogo from './assets/mint.png'
 
 function FirstSection({
   title,
@@ -46,11 +48,10 @@ function FirstSection({
             <ButtonGroup>
               {!sellOut &&
                 <a href="#mint">
-                  <RightButton>Mint Now!</RightButton>{' '}
+                  <RightButton><img src={MintLogo} style={{height:"30px", width:"30px"}} alt="paintswap"/>&nbsp;Mint Now!</RightButton>{' '}
                 </a>}
               <RightButton disabled={!seventyFiveSold}>
-                PaintSwap
-            </RightButton>{' '}
+                <img src={PaintSwapLogo} style={{height:"30px", width:"30px"}} alt="paintswap"/>&nbsp;PaintSwap</RightButton>{' '}
             </ButtonGroup>
           </ButtonsWrapper>
           {/* {!seventyFiveSold &&

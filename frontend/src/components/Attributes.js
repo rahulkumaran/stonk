@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Fade from 'react-reveal/Fade'
 import QuestionMark from '../components/assets/qm.gif'
 import StarBG from './assets/star1.gif'
+import SearchIcon from './assets/search.png'
 
 function Attributes() {
   const [search, setSearch] = useState('')
@@ -50,7 +51,7 @@ function Attributes() {
                   placeholder="Enter your Stonk number..."
                   onChange={e => setSearch(e.target.value)}
                 />
-                <RightButton onClick={searchHandler}>Search</RightButton>
+                <RightButton onClick={searchHandler}><img src={SearchIcon} style={{height:"25px", width:"25px"}} alt="search"/>&nbsp;Search</RightButton>
               </ButtonGroup>
             </ButtonsWrapper>
           </Fragment>
@@ -417,6 +418,11 @@ const QM = styled.img`
   border: 2px solid #ffa500;
   width: 300px;
   height: 300;
+
+  @media (max-width: 1280px) {
+    width: 250px;
+    height: 250px;
+  }
 `
 
 const LoadingWrapper = styled.div`
