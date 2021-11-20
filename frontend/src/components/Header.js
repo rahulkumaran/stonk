@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState, Fragment } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
-import MenuIcon from '@material-ui/icons/Menu';
-import CloseIcon from '@material-ui/icons/Close';
+import MenuIcon from '@material-ui/icons/Menu'
+import CloseIcon from '@material-ui/icons/Close'
 import StarBG from './assets/star1.gif'
 import metaMaskLogo from './assets/metamask.svg'
 import ArrowLogo from './assets/ArrowLogo.png'
@@ -65,21 +65,19 @@ const WalletCard = () => {
 }
 
 function Header() {
-
   let location = useLocation()
-  const [burgerOpen, setBurgerOpen] = useState(false);
+  const [burgerOpen, setBurgerOpen] = useState(false)
   const [colorChange, setColorchange] = useState(false)
 
   const changeNavbarColor = () => {
     if (window.scrollY >= 60) {
-      setColorchange(true);
+      setColorchange(true)
+    } else {
+      setColorchange(false)
     }
-    else {
-      setColorchange(false);
-    }
-  };
+  }
 
-  window.addEventListener('scroll', changeNavbarColor);
+  window.addEventListener('scroll', changeNavbarColor)
 
   const toggleBurger = () => {
     setBurgerOpen(!burgerOpen)
@@ -89,65 +87,65 @@ function Header() {
     <Container showNav={colorChange}>
       {location.pathname == '/'
         ? <Fragment>
-          <a
-            href="#"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          >
-            <span>Stonk</span>{' '}
-            <img
+            <a
+              href="#"
               style={{
-                height: '30px',
-                width: '30px',
-                position: 'relative',
-                marginBottom: '10px',
-                marginLeft: '4px'
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
               }}
-              src={ArrowLogo}
-              alt="logo"
-            />
-            {''}
-            <span>Society</span>
-          </a>
-          <Menu>
-            <Link to="/attributes">Attributes</Link>
-            <a href="/#mint">Mint</a>
-            <a href="/#plan">Plan</a>
-            <a href="/#roadmap">Roadmap</a>
-            <a href="/#team">Team</a>
-          </Menu>
-        </Fragment>
+            >
+              <span>Stonk</span>{' '}
+              <img
+                style={{
+                  height: '30px',
+                  width: '30px',
+                  position: 'relative',
+                  marginBottom: '10px',
+                  marginLeft: '4px'
+                }}
+                src={ArrowLogo}
+                alt="logo"
+              />
+              {''}
+              <span>Society</span>
+            </a>
+            <Menu>
+              <Link to="/attributes">Attributes</Link>
+              <a href="/#mint">Mint</a>
+              <a href="/#plan">Plan</a>
+              <a href="/#roadmap">Roadmap</a>
+              <a href="/#team">Team</a>
+            </Menu>
+          </Fragment>
         : <Fragment>
-          <Link
-            to="/"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          >
-            <span>Stonk</span>{' '}
-            <img
+            <Link
+              to="/"
               style={{
-                height: '30px',
-                width: '30px',
-                position: 'relative',
-                marginBottom: '10px',
-                marginLeft: '4px'
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
               }}
-              src={ArrowLogo}
-              alt="logo"
-            />
-            {''}
-            <span>Society</span>
-          </Link>
-          <Menu>
-            <Link to="/">Back to Home</Link>
-          </Menu>
-        </Fragment>}
+            >
+              <span>Stonk</span>{' '}
+              <img
+                style={{
+                  height: '30px',
+                  width: '30px',
+                  position: 'relative',
+                  marginBottom: '10px',
+                  marginLeft: '4px'
+                }}
+                src={ArrowLogo}
+                alt="logo"
+              />
+              {''}
+              <span>Society</span>
+            </Link>
+            <Menu>
+              <Link to="/">Back to Home</Link>
+            </Menu>
+          </Fragment>}
       <RightMenu>
         <SocialsWrapper>
           <SocialAnchor href="#" target="_blank">
@@ -166,27 +164,38 @@ function Header() {
           </SocialAnchor>
         </SocialsWrapper>
         <WalletCard />
-        <CustomMenu onClick={toggleBurger} />
+        <CustomMenuWrapper>
+          <CustomMenu onClick={toggleBurger} />{' '}
+        </CustomMenuWrapper>
       </RightMenu>
 
       <BurgerNav show={burgerOpen} backgroundImg={StarBG}>
         <CustomCloseWrapper>
           <CustomClose onClick={toggleBurger} isOpen={burgerOpen} />
-
         </CustomCloseWrapper>
-        {location.pathname == '/' ?
-          <Fragment>
-            <li><Link to="/attributes">Attributes</Link></li>
-            <li><a href="/#mint">Mint</a></li>
-            <li><a href="/#plan">Plan</a></li>
-            <li><a href="/#roadmap">Roadmap</a></li>
-            <li><a href="/#team">Team</a></li>
-          </Fragment> :
-          <Fragment>
-            <li><Link to="/">Back to Home</Link></li>
-          </Fragment>
-        }
-
+        {location.pathname == '/'
+          ? <Fragment>
+              <li>
+                <Link to="/attributes">Attributes</Link>
+              </li>
+              <li>
+                <a href="/#mint">Mint</a>
+              </li>
+              <li>
+                <a href="/#plan">Plan</a>
+              </li>
+              <li>
+                <a href="/#roadmap">Roadmap</a>
+              </li>
+              <li>
+                <a href="/#team">Team</a>
+              </li>
+            </Fragment>
+          : <Fragment>
+              <li>
+                <Link to="/">Back to Home</Link>
+              </li>
+            </Fragment>}
       </BurgerNav>
     </Container>
   )
@@ -201,7 +210,10 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   padding: 0 20px;
-  background-color: ${props => props.showNav ? 'rgba(0, 0, 0, 0.9);   border-bottom: 1px solid #ffa500;' : ''};
+  background-color: ${props =>
+    props.showNav
+      ? 'rgba(0, 0, 0, 0.9);   border-bottom: 1px solid #ffa500;'
+      : ''};
   /* opacity: 0.9; */
   z-index: 1;
 
@@ -233,10 +245,10 @@ const SocialAnchor = styled.a`
 `
 
 const Menu = styled.div`
- display: flex;
+  display: flex;
   align-items: center;
   flex: 1;
-  justify-content: center; 
+  justify-content: center;
 
   a {
     font-weight: 1000;
@@ -285,54 +297,76 @@ const ConnectButton = styled.div`
   font-size: ${props => (!props.isConnected ? '20px;' : '15px;')};
   margin: 8px;
 
-  &:hover{
-      opacity:0.65;
+  &:hover {
+    opacity: 0.65;
   }
 `
+const CustomMenuWrapper = styled.div`
+  padding: 4px;
+  border: 1px solid #ffa500;
+  border-radius: 5px;
+
+  @media (min-width: 1280px) {
+    display: none !important;
+  }
+
+  @media (max-width: 400px) {
+    padding: 0;
+    border: none;
+  }
+`
+
 const CustomMenu = styled(MenuIcon)`
+  cursor: pointer;
+
   @media (min-width: 1280px) {
     display: none !important;
   }
 `
 const BurgerNav = styled.div`
- position: fixed;
- top: 0;
- bottom :0;
- right: 0;
- ${props =>
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  ${props =>
     props.backgroundImg ? `background-image: url(${props.backgroundImg})` : ''};
- width: 300px;
- list-style:none;
- padding: 20px;
- display: flex;
- flex-direction:column;
- text-align: start; 
- transform: ${(props) => props.show ? 'translateX(0)' : 'translateX(100%)'};
- transition: transform 0.2s ease-in;
- border-left: 1px solid #ffa500;
-/* z-index:10; */
-li{
- padding: 15px 0;
- border-bottom: 1px solid rgba(0, 0, 0, .2);
- a{
-  font-weight: 1000;
- }
+  width: 300px;
+  list-style: none;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  transform: ${props => (props.show ? 'translateX(0)' : 'translateX(100%)')};
+  transition: transform 0.2s ease-in;
+  border-left: 1px solid #ffa500;
+  /* z-index:10; */
+  li {
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+    a {
+      font-weight: 1000;
 
- &:after {
-    content: "";
-    display: block;
-    height: 2px;
-    width: 4rem;
-    background: orange;
-    margin: 10px 0;
-}
-}
+      &:hover {
+        color: #ffa500;
+      }
+    }
+
+    &:after {
+      content: "";
+      display: block;
+      height: 2px;
+      width: 4rem;
+      background: orange;
+      margin: 10px 0;
+    }
+  }
 `
 
 const CustomCloseWrapper = styled.div`
-display: flex;
-justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 `
 
 const CustomClose = styled(CloseIcon)`
+cursor: pointer;
 `
