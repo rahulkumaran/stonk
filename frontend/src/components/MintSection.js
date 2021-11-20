@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import Fade from 'react-reveal/Fade'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
@@ -16,8 +16,50 @@ function Section({
   location,
   EE
 }) {
-  const blockchain = useSelector(state => state.blockchain)
-  const data = useSelector(state => state.data)
+  const dispatch = useDispatch();
+  const blockchain = useSelector((state) => state.blockchain);
+  const data = useSelector((state) => state.data);
+  console.log(data);
+  const [feedback, setFeedback] = useState("Maybe it's your lucky day.");
+  const [claimingNft, setClaimingNft] = useState(false);
+
+  const claimNFTs = (_amount) => {
+    if (_amount <= 0) {
+      return;
+    }
+    setFeedback("Minting your Stonks...");
+    setClaimingNft(true);
+    blockchain.smartContract.methods
+      .mint(blockchain.account, _amount)
+      .send({
+        gasLimit: "350000",
+        to: "0xf86aA85CE16A665e581405Dab0d9b526Cb46e3cE",
+        from: blockchain.account,
+        value: blockchain.web3.utils.toWei((1 * _amount).toString(), "ether"),
+      })
+      .once("error", (err) => {
+        console.log(err);
+        setFeedback("Sorry, something went wrong please try again later.");
+        setClaimingNft(false);
+      })
+      .then((receipt) => {
+        setFeedback(
+          "Congratulation, you now own a Stonks NFT!!"
+        );
+        setClaimingNft(false);
+        dispatch(fetchData(blockchain.account));
+      });
+  };
+
+  const getData = () => {
+    if (blockchain.account !== "" && blockchain.smartContract !== null) {
+      dispatch(fetchData(blockchain.account));
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, [blockchain.account]);
 
   return (
     <Wrap backgroundImg={backgroundImg} id={`${location}`} EE={EE}>
@@ -37,22 +79,44 @@ function Section({
               : <p style={{ color: '#66aff5' }}>
                   You are connected with Wallet Address :{' '}
                   <span style={{ color: '#ffa500' }}>{blockchain.account}</span>
-                </p>}
+                </p>
+            }
+            <br />
+            {blockchain.account === '' || blockchain.smartContract === null
+              ? <h2 style={{ color: '#66aff5' }}>
+                  /10 Minted!
+                </h2>
+              : 
+                <h2 style={{ color: '#66aff5' }}>
+                  {data.totalSupply}/10 Minted
+                </h2>}
           </ItemText>
         </Fragment>
       </Fade>
       <Fade top delay={300} appear>
-        <ButtonsWrapper>
-          <ButtonGroup>
-            <RightButton
-              onClick={e => {
-                e.preventDefault()
-              }}
-            >
-              Mint Your Stonks
-            </RightButton>
-          </ButtonGroup>
-        </ButtonsWrapper>
+        
+            {Number(data.totalSupply) === 6 ?
+              <h2 style={{ color: '#66aff5' }}>
+                The sale has ended! However, you can buy from our Paintswap Collection!
+              </h2>
+            : 
+              <ButtonsWrapper>
+                <ButtonGroup>
+                  <RightButton
+                    disabled={claimingNft ? 1 : 0}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      claimNFTs(1);
+                      getData();
+                    }}
+                  >
+                  {claimingNft ? "Minting......" : "Mint Your Stonks"}
+                  </RightButton>
+                </ButtonGroup>
+              </ButtonsWrapper>
+            }
+          
+        
       </Fade>
     </Wrap>
   )

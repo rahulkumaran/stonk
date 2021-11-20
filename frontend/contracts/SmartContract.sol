@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: GPL-3.0
 
 
-pragma solidity ^0.8.0;
+pragma solidity >=0.7.0 <0.9.0;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract SmartContract is ERC721Enumerable, Ownable {
+contract Tester is ERC721Enumerable, Ownable {
   using Strings for uint256;
 
   string public baseURI;
   string public baseExtension = ".json";
-  uint256 public cost = 1 ether;
+  uint256 public cost = 5 ether;
   uint256 public maxSupply = 10;
   uint256 public maxMintAmount = 2;
   bool public paused = false;
