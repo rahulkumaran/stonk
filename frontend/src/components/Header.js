@@ -1,96 +1,133 @@
-import React, { useRef, useEffect, useState, Fragment } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import styled from 'styled-components';
-import metaMaskLogo from './assets/metamask.svg';
-import ArrowLogo from './assets/ArrowLogo.png';
+import React, { useRef, useEffect, useState, Fragment } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import styled from 'styled-components'
+import metaMaskLogo from './assets/metamask.svg'
+import ArrowLogo from './assets/ArrowLogo.png'
 import twitterLogo from '../components/assets/twitter.jpg'
 import discordLogo from '../components/assets/discord.jpg'
-import { useDispatch, useSelector } from "react-redux";
-import { connect } from "../redux/blockchain/blockchainActions";
-import { fetchData } from "../redux/data/dataActions";
+import { useDispatch, useSelector } from 'react-redux'
+import { connect } from '../redux/blockchain/blockchainActions'
+import { fetchData } from '../redux/data/dataActions'
 //ds
 const WalletCard = () => {
-
-  const [userBalance, setUserBalance] = useState(null);
-  const [connButtonText, setConnButtonText] = useState('Connect');
-  const dispatch = useDispatch();
-  const blockchain = useSelector((state) => state.blockchain);
-  const data = useSelector((state) => state.data);
+  const [userBalance, setUserBalance] = useState(null)
+  const [connButtonText, setConnButtonText] = useState('Connect')
+  const dispatch = useDispatch()
+  const blockchain = useSelector(state => state.blockchain)
+  const data = useSelector(state => state.data)
   const account = blockchain.account
-  useEffect(() => {
-    if (blockchain.account !== "" && blockchain.smartContract !== null) {
-      dispatch(fetchData(blockchain.account));
-    }
-  }, [blockchain.smartContract, dispatch]);
-  
+  useEffect(
+    () => {
+      if (blockchain.account !== '' && blockchain.smartContract !== null) {
+        dispatch(fetchData(blockchain.account))
+        setConnButtonText(
+          account.substring(0, 4) + '___' + account.substring(38, 42)
+        )
+      }
+    },
+    [blockchain.smartContract, blockchain.account, dispatch]
+  )
+
   //setConnButtonText(data.name?.substring(0, 4) + "___" + data.name?.substring(38, 42));
+
+  const handleConnectClick = e => {
+    e.preventDefault()
+    if (blockchain.account === '' || blockchain.smartContract === null) {
+      dispatch(connect())
+    } else {
+      alert(
+        `You are already connected with wallet ${account}. If you wish to change it please use metamask.`
+      )
+    }
+  }
 
   return (
     <div>
-
-      {blockchain.account === "" || blockchain.smartContract === null ? (
-        <ConnectButton onClick={(e) => {
-          e.preventDefault();
-          dispatch(connect());
-        }} class="walletButton">
-          <img
-            src={metaMaskLogo}
-            alt="metamask"
-            style={{ height: '50px', width: '30px' }}
-          />
-          {connButtonText}
-        </ConnectButton>
-
-      ) : (
-        
-        <ConnectButton onClick={(e) => {
-          e.preventDefault();
-          dispatch(connect());
-        }} class="walletButton">
-          <img
-            src={metaMaskLogo}
-            alt="metamask"
-            style={{ height: '50px', width: '30px' }}
-          />
-          Connected with {account.substring(0, 4) + "___" + account.substring(38, 42)} 
-        </ConnectButton>
-      )}
+      <ConnectButton
+        isConnected={
+          blockchain.account === '' || blockchain.smartContract !== null
+        }
+        onClick={handleConnectClick}
+      >
+        <img
+          src={metaMaskLogo}
+          alt="metamask"
+          style={{ height: '50px', width: '30px' }}
+        />
+        {connButtonText}
+      </ConnectButton>
     </div>
-  );
+  )
 }
 
 function Header() {
-
-  let location = useLocation();
+  let location = useLocation()
 
   return (
     <Container>
-
-      {location.pathname == "/" ?
-        <Fragment>
-          <a href="#" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <span>Stonk</span> <img style={{ height: "30px", width: "30px", position: "relative", marginBottom: "10px", marginLeft: "4px" }} src={ArrowLogo} alt="logo" />
-            {''}<span>Society</span>
-          </a>
-          <Menu>
-            <Link to="/attributes">Attributes</Link>
-            <a href="/#mint">Mint</a>
-            <a href="/#plan">Plan</a>
-            <a href="/#roadmap">Roadmap</a>
-            <a href="/#team">Team</a>
-          </Menu></Fragment> :
-        <Fragment>
-          <Link to="/" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <span>Stonk</span> <img style={{ height: "30px", width: "30px", position: "relative", marginBottom: "10px", marginLeft: "4px" }} src={ArrowLogo} alt="logo" />
-            {''}<span>Society</span>
-          </Link>
-          <Menu>
-            <Link to="/">Back to Home</Link>
-          </Menu>
-        </Fragment>
-      }
+      {location.pathname == '/'
+        ? <Fragment>
+            <a
+              href="#"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <span>Stonk</span>{' '}
+              <img
+                style={{
+                  height: '30px',
+                  width: '30px',
+                  position: 'relative',
+                  marginBottom: '10px',
+                  marginLeft: '4px'
+                }}
+                src={ArrowLogo}
+                alt="logo"
+              />
+              {''}
+              <span>Society</span>
+            </a>
+            <Menu>
+              <Link to="/attributes">Attributes</Link>
+              <a href="/#mint">Mint</a>
+              <a href="/#plan">Plan</a>
+              <a href="/#roadmap">Roadmap</a>
+              <a href="/#team">Team</a>
+            </Menu>
+          </Fragment>
+        : <Fragment>
+            <Link
+              to="/"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <span>Stonk</span>{' '}
+              <img
+                style={{
+                  height: '30px',
+                  width: '30px',
+                  position: 'relative',
+                  marginBottom: '10px',
+                  marginLeft: '4px'
+                }}
+                src={ArrowLogo}
+                alt="logo"
+              />
+              {''}
+              <span>Society</span>
+            </Link>
+            <Menu>
+              <Link to="/">Back to Home</Link>
+            </Menu>
+          </Fragment>}
       <RightMenu>
-      <SocialsWrapper>
+        <SocialsWrapper>
           <SocialAnchor href="#" target="_blank">
             <img
               src={twitterLogo}
@@ -109,11 +146,10 @@ function Header() {
         <WalletCard />
       </RightMenu>
     </Container>
-  );
+  )
 }
 
-export default (Header)
-
+export default Header
 
 const Container = styled.div`
   max-width: 100vw;
@@ -133,11 +169,10 @@ const Container = styled.div`
   left: 0;
   right: 0;
 
-  a{
+  a {
     font-weight: 1000;
     text-transform: uppercase;
     color: white;
-
   }
 `
 
@@ -156,7 +191,6 @@ const SocialAnchor = styled.a`
   }
 `
 
-
 const Menu = styled.div`
   display: flex;
   align-items: center;
@@ -170,10 +204,8 @@ const Menu = styled.div`
     padding: 0 20px;
     color: white;
 
-
-    &:hover{
+    &:hover {
       color: #ffa500;
-
     }
   }
 
@@ -198,7 +230,8 @@ const RightMenu = styled.div`
 `
 const ConnectButton = styled.div`
   background-color: rgba(23, 26, 32, 0.8);
-  border: ${props => props.isConnected ? 'solid 1px #86dc3d;' : 'solid 1px red;'}
+  border: ${props =>
+    props.isConnected ? 'solid 1px #86dc3d;' : 'solid 1px red;'}
   height: 40px;
   width: 145px;
   color: white;
@@ -208,7 +241,7 @@ const ConnectButton = styled.div`
   border-radius: 5px;
   opacity: 0.85;
   text-transform: uppercase;
-  font-size: ${props => !props.isConnected ? '20px;' : '15px;'}
+  font-size: ${props => (!props.isConnected ? '20px;' : '15px;')}
   margin: 8px;
 
   &:hover{
