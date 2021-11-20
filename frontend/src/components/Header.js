@@ -1,87 +1,61 @@
-import React, { useState, Fragment } from 'react';
+import React, { useRef, useEffect, useState, Fragment } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import metaMaskLogo from './assets/metamask.svg';
 import ArrowLogo from './assets/ArrowLogo.png';
 import twitterLogo from '../components/assets/twitter.jpg'
 import discordLogo from '../components/assets/discord.jpg'
-import Web3 from 'web3';
-import { ethers } from 'ethers';
-
+import { useDispatch, useSelector } from "react-redux";
+import { connect } from "../redux/blockchain/blockchainActions";
+import { fetchData } from "../redux/data/dataActions";
+//ds
 const WalletCard = () => {
 
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [defaultAccount, setDefaultAccount] = useState(null);
   const [userBalance, setUserBalance] = useState(null);
   const [connButtonText, setConnButtonText] = useState('Connect');
-  const [isConnected, setIsConnected] = useState(false);
-
-
-  const connectWalletHandler = async () => {
-
-    if (window.ethereum && window.ethereum.isMetaMask) {
-      // console.log('MetaMask Here!');
-      const account = await window.ethereum.request({ method: 'eth_accounts' });
-      const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-      parseInt(chainId, 16);
-      //console.log(setCurrentChainID(() => parseInt(chainId, 16)));
-      if (chainId != 250) {
-        alert('Please connect to Fantom Network!')
-      } else {
-        window.ethereum?.request({ method: 'eth_requestAccounts' })
-          .then(result => {
-            accountChangedHandler(result[0]);
-            setIsConnected(true);
-            setConnButtonText(account[0]?.substring(0, 4) + "___" + account[0]?.substring(38, 42));
-            // console.log(account[0]);
-          })
-          .catch(error => {
-            alert(error.message);
-
-          });
-      }
-
-    } else {
-      // console.log('Need to install MetaMask');
-      alert('Please install MetaMask browser extension to interact');
+  const dispatch = useDispatch();
+  const blockchain = useSelector((state) => state.blockchain);
+  const data = useSelector((state) => state.data);
+  const account = blockchain.account
+  useEffect(() => {
+    if (blockchain.account !== "" && blockchain.smartContract !== null) {
+      dispatch(fetchData(blockchain.account));
     }
-  }
-
-  // update account, will cause component re-render
-  const accountChangedHandler = (newAccount) => {
-    setDefaultAccount(newAccount);
-  }
-
-  // const getAccountBalance = (account) => {
-  //   window.ethereum?.request({ method: 'eth_getBalance', params: [account, 'latest'] })
-  //     .then(balance => {
-  //       setUserBalance(ethers.utils.formatEther(balance));
-  //     })
-  //     .catch(error => {
-  //       alert(error.message);
-  //     });
-  // };
-
-  const chainChangedHandler = () => {
-    // reload the page to avoid any errors with chain change mid use of application
-    window.location.reload();
-  }
-
-
-  // listen for account changes
-  window.ethereum?.on('accountsChanged', accountChangedHandler);
-
-  window.ethereum?.on('chainChanged', chainChangedHandler);
+  }, [blockchain.smartContract, dispatch]);
+  
+  //setConnButtonText(data.name?.substring(0, 4) + "___" + data.name?.substring(38, 42));
 
   return (
-    <ConnectButton onClick={connectWalletHandler} class="walletButton" isConnected={isConnected}>
-      <img
-        src={metaMaskLogo}
-        alt="metamask"
-        style={{ height: '50px', width: '30px' }}
-      />
-      {connButtonText}
-    </ConnectButton>
+    <div>
+
+      {blockchain.account === "" || blockchain.smartContract === null ? (
+        <ConnectButton onClick={(e) => {
+          e.preventDefault();
+          dispatch(connect());
+        }} class="walletButton">
+          <img
+            src={metaMaskLogo}
+            alt="metamask"
+            style={{ height: '50px', width: '30px' }}
+          />
+          {connButtonText}
+        </ConnectButton>
+
+      ) : (
+        
+        <ConnectButton onClick={(e) => {
+          e.preventDefault();
+          dispatch(connect());
+        }} class="walletButton">
+          <img
+            src={metaMaskLogo}
+            alt="metamask"
+            style={{ height: '50px', width: '30px' }}
+          />
+          Connected with {account.substring(0, 4) + "___" + account.substring(38, 42)} 
+        </ConnectButton>
+      )}
+    </div>
   );
 }
 
