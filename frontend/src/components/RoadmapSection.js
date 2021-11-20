@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import Fade from 'react-reveal/Fade'
 import styled from 'styled-components'
+import Medium from './assets/medium.svg'
 
 function RoadmapSection({
   title,
@@ -162,7 +163,9 @@ function RoadmapSection({
             <br />
             <ButtonsWrapper>
               <ButtonGroup>
-                <RightButton>Medium</RightButton>
+                <RightButton>
+                  <img src={Medium} alt="medium" />&nbsp;Medium
+                </RightButton>
               </ButtonGroup>
             </ButtonsWrapper>
           </TextContainer>
