@@ -46,21 +46,19 @@ const WalletCard = () => {
   }
 
   return (
-    <div>
-      <ConnectButton
-        isConnected={
-          blockchain.account === '' || blockchain.smartContract !== null
-        }
-        onClick={handleConnectClick}
-      >
-        <img
-          src={metaMaskLogo}
-          alt="metamask"
-          style={{ height: '50px', width: '30px' }}
-        />
-        {connButtonText}
-      </ConnectButton>
-    </div>
+    <ConnectButton
+      isConnected={
+        blockchain.account === '' || blockchain.smartContract !== null
+      }
+      onClick={handleConnectClick}
+    >
+      <img
+        src={metaMaskLogo}
+        alt="metamask"
+        style={{ height: '50px', width: '30px' }}
+      />
+      {connButtonText}
+    </ConnectButton>
   )
 }
 

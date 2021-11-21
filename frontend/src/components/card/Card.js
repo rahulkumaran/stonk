@@ -7,17 +7,20 @@ import Typography from '@mui/material/Typography'
 import { CardActionArea } from '@mui/material'
 import teamImages from './teamImages'
 import Fade from 'react-reveal/Fade';
+import IconButton from '@mui/material/IconButton';
+import TwitterIcon from '../assets/twitter-brands.svg';
+
 
 
 export default function CardComponent() {
   const team = [
     {
-      name: 'Rahul Whale',
+      name: 'Rahul',
       about: 'Full Stack Dev',
       image: `${teamImages[0]}`
     },
     {
-      name: 'CyberHyper',
+      name: 'Adeesh',
       about: 'Full Stack Dev',
       image: `${teamImages[1]}`
     },
@@ -27,7 +30,7 @@ export default function CardComponent() {
       image: `${teamImages[2]}`
     },
     {
-      name: 'Blaze',
+      name: 'Aaryan',
       about: 'Marketing Expert',
       image: `${teamImages[3]}`
     }
@@ -54,9 +57,17 @@ export default function CardComponent() {
               >
                 {member.name}
               </Typography>
+
+              <CustomDiv>
               <Typography variant="body2" color="white">
                 {member.about}
               </Typography>
+                <a href="https://google.com" target="_blank">
+                <IconButton aria-label="twitter" >
+                  <img src={TwitterIcon} alt="twitter" style={{height:"30px", width:"30px"}}/>
+                  </IconButton>
+                </a>
+              </CustomDiv>
             </CardContent>
           </CardActionArea>
         </CustomCard>
@@ -71,11 +82,16 @@ const CustomCard = styled(Card)`
 background-color: #dedede !important;
 border: 2px solid #ffa500;
 margin: 20px;
-height:330px;
+height:350px;
 width: 250px;
 
 
 &:hover{
  opacity: 0.7
 }
+`
+const CustomDiv = styled.div`
+display:flex;
+justify-content: space-between;
+align-items: center;
 `

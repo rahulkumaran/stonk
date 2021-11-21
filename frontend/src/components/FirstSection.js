@@ -49,7 +49,7 @@ function FirstSection({
             <ButtonGroup>
               {!sellOut &&
                 <a href="#mint">
-                  <RightButton><img src={MintLogo} style={{height:"30px", width:"30px"}} alt="paintswap"/>&nbsp;Mint Now!</RightButton>{' '}
+                  <RightButton><img src={MintLogo} style={{height:"30px", width:"30px"}} alt="mint"/>&nbsp;Mint Now!</RightButton>{' '}
                 </a>}
               <RightButton disabled={!seventyFiveSold}>
                 <img src={PaintSwapLogo} style={{height:"30px", width:"30px"}} alt="paintswap"/>&nbsp;PaintSwap</RightButton>{' '}

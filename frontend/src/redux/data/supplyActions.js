@@ -1,29 +1,30 @@
-// log
 import store from '../store'
 
-const fetchDataRequest = () => {
+// check supplly
+const fetchSupplyRequest = payload => {
   return {
-    type: 'CHECK_DATA_REQUEST'
+    type: 'CHECK_SUPPLY_SUCCESS',
+    payload: payload
   }
 }
 
-const fetchDataSuccess = payload => {
+const fetchSupplySuccess = payload => {
   return {
     type: 'CHECK_DATA_SUCCESS',
     payload: payload
   }
 }
 
-const fetchDataFailed = payload => {
+const fetchSupplyFailed = payload => {
   return {
-    type: 'CHECK_DATA_FAILED',
+    type: 'CHECK_SUPPLY_FAILED',
     payload: payload
   }
 }
 
-export const fetchData = account => {
+export const fetchSupply = () => {
   return async dispatch => {
-    dispatch(fetchDataRequest())
+    dispatch(fetchSupplyRequest())
     try {
       let totalSupply = await store
         .getState()
@@ -31,13 +32,13 @@ export const fetchData = account => {
         .call()
       //console.log(totalSupply)
       dispatch(
-        fetchDataSuccess({
+        fetchSupplySuccess({
           totalSupply
         })
       )
     } catch (err) {
       console.log(err)
-      dispatch(fetchDataFailed('Could not load data from contract.'))
+      dispatch(fetchSupplyFailed('Could not load supply data from contract.'))
     }
   }
 }

@@ -4,125 +4,186 @@ import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { connect } from '../redux/blockchain/blockchainActions'
 import { fetchData } from '../redux/data/dataActions'
+import metaMaskLogo from './assets/metamask.svg'
+import CircularProgress from '@mui/material/CircularProgress'
+import WalletIcon from './assets/wallet-solid.svg'
 
 //const startMintingProcess = () => {}
 
-function Section({
-  title,
-  description,
-  leftBtnText,
-  rightBtnText,
-  backgroundImg,
-  location,
-  EE
-}) {
-  const dispatch = useDispatch();
-  const blockchain = useSelector((state) => state.blockchain);
-  const data = useSelector((state) => state.data);
-  console.log(data);
-  const [feedback, setFeedback] = useState("Maybe it's your lucky day.");
-  const [claimingNft, setClaimingNft] = useState(false);
+function MintSection({ backgroundImg, location, EE }) {
+  const dispatch = useDispatch()
+  const blockchain = useSelector(state => state.blockchain)
+  const data = useSelector(state => state.data)
+  console.log(data)
+  const [feedback, setFeedback] = useState("Maybe it's your lucky day.")
+  const [claimingNft, setClaimingNft] = useState(false)
+  const [mintCount, setMintCount] = useState(1)
 
-  const claimNFTs = (_amount) => {
+  useEffect(
+    () => {
+      getData()
+    },
+    [blockchain.account]
+  )
+
+  var isConnected =
+    blockchain.account === '' || blockchain.smartContract !== null
+
+  const claimNFTs = _amount => {
     if (_amount <= 0) {
-      return;
+      return
     }
-    setFeedback("Minting your Stonks...");
-    setClaimingNft(true);
+    setFeedback('Minting your Stonks...')
+    setClaimingNft(true)
     blockchain.smartContract.methods
       .mint(blockchain.account, _amount)
       .send({
-        gasLimit: "350000",
-        to: "0xf86aA85CE16A665e581405Dab0d9b526Cb46e3cE",
+        gasLimit: '350000',
+        to: '0xf86aA85CE16A665e581405Dab0d9b526Cb46e3cE',
         from: blockchain.account,
-        value: blockchain.web3.utils.toWei((1 * _amount).toString(), "ether"),
+        value: blockchain.web3.utils.toWei((1 * _amount).toString(), 'ether')
       })
-      .once("error", (err) => {
-        console.log(err);
-        setFeedback("Sorry, something went wrong please try again later.");
-        setClaimingNft(false);
+      .once('error', err => {
+        console.log(err)
+        setFeedback('Sorry, something went wrong please try again later.')
+        setClaimingNft(false)
       })
-      .then((receipt) => {
-        setFeedback(
-          "Congratulation, you now own a Stonks NFT!!"
-        );
-        setClaimingNft(false);
-        dispatch(fetchData(blockchain.account));
-      });
-  };
+      .then(receipt => {
+        setFeedback('Congratulation, you now own a Stonks NFT!!')
+        setClaimingNft(false)
+        dispatch(fetchData(blockchain.account))
+      })
+  }
 
   const getData = () => {
-    if (blockchain.account !== "" && blockchain.smartContract !== null) {
-      dispatch(fetchData(blockchain.account));
+    if (blockchain.account !== '' && blockchain.smartContract !== null) {
+      dispatch(fetchData(blockchain.account))
     }
-  };
+  }
 
-  useEffect(() => {
-    getData();
-  }, [blockchain.account]);
-
+  const handleConnect = e => {
+    e.preventDefault()
+    if (!isConnected) {
+      if (blockchain.account === '' || blockchain.smartContract === null) {
+        dispatch(connect())
+      }
+    }
+  }
   return (
     <Wrap backgroundImg={backgroundImg} id={`${location}`} EE={EE}>
       <Fade in delay={300} appear>
         <Fragment>
           <ItemText>
-            <h2 style={{ color: '#ffa500' }}>Mint your Meme Man!</h2>
+            <h2 style={{ color: '#ffa500' }}>Mint your NFT!</h2>
             <br />
             <p style={{ color: '#66aff5' }}>
               Become a part of the stonk society! Lets pAmP it up!
             </p>
-            <br />
-            {blockchain.account === '' || blockchain.smartContract === null
-              ? <p style={{ color: '#66aff5' }}>
-                  You are not connected to your wallet currently.
-                </p>
-              : <p style={{ color: '#66aff5' }}>
-                  You are connected with Wallet Address :{' '}
-                  <span style={{ color: '#ffa500' }}>{blockchain.account}</span>
-                </p>
-            }
-            <br />
-            {blockchain.account === '' || blockchain.smartContract === null
-              ? <h2 style={{ color: '#66aff5' }}>
-                  /10 Minted!
-                </h2>
-              : 
-                <h2 style={{ color: '#66aff5' }}>
-                  {data.totalSupply}/10 Minted
-                </h2>}
           </ItemText>
+          <br />
+          {isConnected &&
+            <ConnectedP
+              style={{
+                color: '#ffa500',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <WalletImg src={WalletIcon} alt="wallet address" />
+              <Address>
+                {blockchain.account}
+              </Address>
+            </ConnectedP>}
+        </Fragment>
+        <Fragment>
+          {blockchain.account === '' || blockchain.smartContract === null
+            ? <H1Count>
+                <CircularProgress style={{ width: '40px' }} />&nbsp;/10 Minted!
+              </H1Count>
+            : <H1Count>
+                {data.totalSupply}/10 Minted
+              </H1Count>}
+          <br />
+          {(blockchain.account === '' || blockchain.smartContract === null) &&
+            <ConnectButton
+              isConnected={
+                blockchain.account === '' || blockchain.smartContract !== null
+              }
+              onClick={handleConnect}
+            >
+              <img
+                src={metaMaskLogo}
+                alt="metamask"
+                style={{ width: '50px' }}
+              />
+              Connect Wallet
+            </ConnectButton>}
         </Fragment>
       </Fade>
-      <Fade top delay={300} appear>
-        
-            {Number(data.totalSupply) === 6 ?
-              <h2 style={{ color: '#66aff5' }}>
-                The sale has ended! However, you can buy from our Paintswap Collection!
-              </h2>
-            : 
-              <ButtonsWrapper>
-                <ButtonGroup>
-                  <RightButton
-                    disabled={claimingNft ? 1 : 0}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      claimNFTs(1);
-                      getData();
-                    }}
-                  >
-                  {claimingNft ? "Minting......" : "Mint Your Stonks"}
-                  </RightButton>
-                </ButtonGroup>
-              </ButtonsWrapper>
-            }
-          
-        
+      <div />
+      <Fade>
+        <Fragment>
+          {Number(data.totalSupply) === 6
+            ? <H2>
+                The sale has ended! However, you can buy from our Paintswap
+                Collection!
+              </H2>
+            : isConnected
+              ? <Fragment>
+                  <ButtonsWrapper>
+                    <ButtonGroup>
+                      <CounterButton
+                        onClick={e => {
+                          if (mintCount > 1) {
+                            setMintCount(mintCount - 1)
+                          }
+                        }}
+                      >
+                        -
+                      </CounterButton>
+
+                      <MintInput
+                        disabled
+                        onChange={e => setMintCount(e.target.value)}
+                        value={mintCount}
+                        style={{ paddingLeft: '85px', fontSize: '40px' }}
+                      />
+                      <CounterButton
+                        onClick={e => {
+                          if (mintCount < 5) {
+                            setMintCount(mintCount + 1)
+                          }
+                        }}
+                      >
+                        +
+                      </CounterButton>
+                    </ButtonGroup>
+                  </ButtonsWrapper>
+
+                  <ButtonsWrapper>
+                    <ButtonGroup>
+                      <RightButton
+                        disabled={claimingNft ? 1 : 0}
+                        onClick={e => {
+                          e.preventDefault()
+                          claimNFTs(mintCount)
+                          getData()
+                        }}
+                      >
+                        {claimingNft ? 'Minting......' : 'Mint Your Stonks'}
+                      </RightButton>
+                    </ButtonGroup>
+                  </ButtonsWrapper>
+                </Fragment>
+              : null}
+        </Fragment>
       </Fade>
     </Wrap>
   )
 }
 
-export default Section
+export default MintSection
 
 // align-items is for vertical alignments
 // justify-content is for horizontal alignments
@@ -151,8 +212,19 @@ const ItemText = styled.div`
   text-align: center;
   font-size: 25px;
   @media (max-width: 768px) {
-    padding: 8vh;
-    font-size: 20px;
+    padding: 4vh;
+    font-size: 18px;
+  }
+`
+
+const ConnectedP = styled.p`
+  padding: 20px;
+  line-height: 35px;
+  text-align: center;
+  font-size: 20px;
+  @media (max-width: 768px) {
+    padding: 4vh;
+    font-size: 18px;
   }
 `
 
@@ -164,8 +236,9 @@ flex-direction: column */
 
 const ButtonGroup = styled.div`
   display: flex;
-  margin-bottom: 30px;
+  margin-bottom: 100px;
   justify-content: center;
+  align-items: center;
 
   @media (max-width: 768px) {
     flex: column;
@@ -174,8 +247,8 @@ const ButtonGroup = styled.div`
 
 const LeftButton = styled.div`
   background-color: rgba(23, 26, 32, 0.8);
-  height: 40px;
-  width: 256px;
+  height: 60px;
+  width: 300px;
   color: white;
   display: flex;
   justify-content: center;
@@ -202,76 +275,85 @@ const RightButton = styled(LeftButton)`
   }`}
 
   @media (max-width: 768px) {
-          height: 30px;
-    width: 150px;
+    height: 60px;
+    width: 250px;
   }
 `
 
-const TextContainer = styled.div`
-  max-width: 1050px;
-  margin: 0 auto;
-  line-height: 25px;
+const ConnectButton = styled.div`
+  background-color: rgba(23, 26, 32, 0.8);
+  border: ${props =>
+    props.isConnected ? 'solid 1px #86dc3d;' : 'solid 1px red;'};
+  height: 70px;
+  width: 300px;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 5px;
+  opacity: 0.85;
+  text-transform: uppercase;
+  font-size: ${props => (!props.isConnected ? '20px;' : '15px;')};
+  margin: 8px;
+
+  &:hover {
+    opacity: 0.65;
+  }
+`
+const H1Count = styled.h1`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #86dc3d;
+`
+
+const H2 = styled.h2`color: #66aff5;`
+
+const Address = styled.p`
+  @media (max-width: 550px) {
+    font-size: 10px;
+  }
+  color: white;
+`
+const MintInput = styled.input`
+  border: 1px solid #ffa500;
+
+  background-color: rgba(255, 215, 0, 0.2);
+  width: 200px;
+  height: 80px;
+`
+
+const CounterButton = styled.div`
+  height: 80px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.85;
+  text-transform: uppercase;
   font-size: 20px;
-  text-align: justify;
+  opacity: 0.85;
+  color: black;
+  border: 2px solid #ffa500;
+  background-color: white;
 
-  @media (max-width: 2000px) {
-    max-width: 1300px;
-    font-size: 22px;
-    line-height: 25px;
-  }
-
-  @media (max-width: 1280px) {
-    max-width: 1050px;
-    font-size: 18px;
-    line-height: 22px;
-  }
-
-  @media (max-width: 800px) {
-    max-width: 600px;
-    font-size: 17px;
-  }
-
-  @media (max-width: 550px) {
-    max-width: 300px;
-    font-size: 15px;
-    line-height: 20px;
+  ${props =>
+    props.disabled ? `cursor: not-allowed; opacity: 0.4;}` : ''} ${props =>
+      !props.disabled &&
+      `&:hover{
+    opacity: 0.65;
+  }`} @media (max-width: 768px) {
+    height: 80px;
+    width: 70px;
   }
 `
-
-const H3 = styled.h3`
-  color: #86dc3d;
-
-  &:after {
-    content: "";
-    display: block;
-    height: 2px;
-    width: 4rem;
-    background: orange;
-    margin: 10px 0;
-  }
-`
-
-const H3P = styled.h3`
-  color: #86dc3d;
-
-  &:after {
-    content: "";
-    display: block;
-    height: 2px;
-    width: 10rem;
-    background: orange;
-    margin: 10px 0;
-    margin-left: -23px;
-  }
+const WalletImg = styled.img`
+  height: 40px;
+  width: 60px;
 
   @media (max-width: 550px) {
-    &:after {
-      content: "";
-      display: block;
-      height: 2px;
-      width: 4rem;
-      background: orange;
-      margin: 10px 0;
-    }
+    height: 30px;
+    width: 30px;
+    padding-right: 5px;
   }
 `

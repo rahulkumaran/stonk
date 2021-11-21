@@ -4,8 +4,13 @@ import './App.css'
 import Header from './components/Header'
 import Home from './components/Home'
 import Attributes from './components/Attributes'
+import { fetchSupply } from './redux/data/supplyActions'
+import { useDispatch, useSelector } from 'react-redux'
 
 function App() {
+  const dispatch = useDispatch()
+  // dispatch(fetchSupply())
+
   const [clicks, setClicks] = useState(0)
   const [BG, setBG] = useState('')
   const [EE, setEE] = useState(false)
