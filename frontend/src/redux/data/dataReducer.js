@@ -1,6 +1,6 @@
 const initialState = {
   loading: false,
-  name: "",
+  totalSupply: "",
   error: false,
   errorMsg: "",
 };
@@ -16,7 +16,7 @@ const dataReducer = (state = initialState, action) => {
       return {
         ...initialState,
         loading: false,
-        name: action.payload.name,
+        totalSupply: action.payload.totalSupply,
       };
     case "CHECK_DATA_FAILED":
       return {
