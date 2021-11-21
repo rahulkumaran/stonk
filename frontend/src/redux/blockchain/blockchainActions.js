@@ -1,8 +1,8 @@
-// constants
 import Web3 from 'web3'
-import SmartContract from '../../contracts/SmartContract.json'
-// log
+import SmartContract from '../../contracts/TTTTTT.json'
+
 import { fetchData } from '../data/dataActions'
+
 
 const connectRequest = () => {
   console.log('Conn_req')
@@ -38,23 +38,23 @@ const updateAccountRequest = payload => {
 export const connect = () => {
   return async dispatch => {
     dispatch(connectRequest())
-
-    if (window.ethereum) {
-      let web3 = new Web3(window.ethereum)
+    const { ethereum } = window;
+    const metamaskIsInstalled = ethereum && ethereum.isMetaMask;
+    if (metamaskIsInstalled) {
+      let web3 = new Web3(ethereum)
 
       try {
-        const accounts = await window.ethereum.request({
+        const accounts = await ethereum.request({
           method: 'eth_requestAccounts'
         })
-        const networkId = await window.ethereum.request({
+        const networkId = await ethereum.request({
           method: 'net_version'
         })
-        const NetworkData = await SmartContract.networks[networkId]
 
-        if (NetworkData) {
+        if (networkId == 0xfa2) {
           const SmartContractObj = new web3.eth.Contract(
-            SmartContract.abi,
-            NetworkData.address
+            SmartContract,
+            "0xf86aA85CE16A665e581405Dab0d9b526Cb46e3cE"
           )
           dispatch(
             connectSuccess({
@@ -65,10 +65,10 @@ export const connect = () => {
           )
 
           // Add listeners start
-          window.ethereum.on('accountsChanged', accounts => {
+          ethereum.on('accountsChanged', accounts => {
             dispatch(updateAccount(accounts[0]))
           })
-          window.ethereum.on('chainChanged', () => {
+          ethereum.on('chainChanged', () => {
             window.location.reload()
           })
           // Add listeners end
