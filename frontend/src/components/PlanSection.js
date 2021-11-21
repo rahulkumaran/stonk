@@ -16,7 +16,7 @@ function PlanSection({
       <Fade in delay={300} appear>
         <Fragment>
           <ItemText>
-            <h2 style={{ color: '#ffa500' }}>
+            <h2 style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>
               {title}
             </h2>
             <br />
@@ -108,8 +108,8 @@ const ItemText = styled.div`
   text-align: center;
   font-size: 25px;
   @media (max-width: 768px) {
-    padding: 8vh;
-    font-size: 20px;
+    padding: 4vh;
+    font-size: 18px;
   }
 `
 
@@ -181,6 +181,11 @@ const TextContainer = styled.div`
     max-width: 1050px;
     font-size: 18px;
     line-height: 22px;
+  }
+
+  @media (max-width: 1204px) {
+    max-width: 700px;
+    font-size: 17px;
   }
 
   @media (max-width: 800px) {

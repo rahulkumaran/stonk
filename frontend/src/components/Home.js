@@ -25,7 +25,7 @@ function Home({ BG, EE }) {
       />
       <PlanSection
         title="Treasury Management Plan"
-        description="Aiming for the moon. Slowly but surely!"
+        description="It's Stonks for all!"
         backgroundImg={BG !== '' ? BG : StarBG}
         location="plan"
         EE={EE}

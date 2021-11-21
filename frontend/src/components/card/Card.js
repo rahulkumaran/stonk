@@ -17,22 +17,26 @@ export default function CardComponent() {
     {
       name: 'Rahul',
       about: 'Full Stack Dev',
-      image: `${teamImages[0]}`
+      image: `${teamImages[0]}`,
+      twitter: "https://twitter.com/RahulKumaran4"
     },
     {
       name: 'Adeesh',
       about: 'Full Stack Dev',
-      image: `${teamImages[1]}`
+      image: `${teamImages[1]}`,
+      twitter: "https://twitter.com/_CyberHyper_"
     },
     {
       name: 'Ashar',
       about: 'Artist',
-      image: `${teamImages[2]}`
+      image: `${teamImages[2]}`,
+      twitter: "https://twitter.com/AzCHIT"
     },
     {
       name: 'Aaryan',
       about: 'Marketing Expert',
-      image: `${teamImages[3]}`
+      image: `${teamImages[3]}`,
+      twitter: "https://twitter.com/__aaryansharma"
     }
   ]
 
@@ -54,17 +58,19 @@ export default function CardComponent() {
                 variant="h5"
                 component="div"
                 color="#ffa500"
+                style={{ fontFamily: "manaspc" }}
               >
                 {member.name}
               </Typography>
 
               <CustomDiv>
-              <Typography variant="body2" color="white">
-                {member.about}
-              </Typography>
-                <a href="https://google.com" target="_blank">
-                <IconButton aria-label="twitter" >
-                  <img src={TwitterIcon} alt="twitter" style={{height:"30px", width:"30px"}}/>
+                <Typography variant="body2" color="white" style={{ fontFamily: "manaspc" }}
+                >
+                  {member.about}
+                </Typography>
+                <a href={member.twitter} target="_blank">
+                  <IconButton aria-label="twitter" >
+                    <img src={TwitterIcon} alt="twitter" style={{ height: "30px", width: "30px" }} />
                   </IconButton>
                 </a>
               </CustomDiv>
