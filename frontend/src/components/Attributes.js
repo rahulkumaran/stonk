@@ -1,28 +1,35 @@
 import React, { Fragment, useState, useEffect } from 'react'
+import {Navigate} from 'react-router-dom'
 import styled from 'styled-components'
 import Fade from 'react-reveal/Fade'
 import QuestionMark from '../components/assets/qm.gif'
 import StarBG from './assets/star1.gif'
 import SearchIcon from './assets/search.png'
+import {  useSelector } from 'react-redux'
 
 function Attributes() {
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState(0)
   const [nftData, setNftData] = useState(null)
   const [loading, setLoading] = useState(false)
 
-  // useEffect(() => {
-  //   fetch('/api/attributes/1').then(response => response.json()).then(data => {
-  //     setNftData(data)
-  //   })
-  // }, [])
 
-  // TODO: change range from 1-10 to 1-3333 on line 22, 33 and in backed api.
+  const supplyState = useSelector(state => state.supply)
+
+
+  if(supplyState.errorMsg){
+    console.count("test")
+    alert(supplyState.errorMsg)
+    return <Navigate to="/" />
+  }
+
+  const searchRange = parseInt(supplyState.totalSupply);
+
   const searchHandler = e => {
     e.preventDefault()
-    if (search !== '' && search >= 1 && search <= 10) {
+    if (search != 0 && search >= 1 && search <= searchRange) {
       setNftData(null)
       setLoading(true)
-      fetch(`/api/attributes/${search}`)
+      fetch(`/api/attributes/${search}?limit=${searchRange}`)
         .then(response => response.json())
         .then(data => {
           setTimeout(() => {
@@ -31,10 +38,10 @@ function Attributes() {
           }, 600)
         })
     } else {
-      alert('Please enter art number ranging between 1 and 10')
+      alert(`Please enter art number ranging between 1 and ${searchRange}`)
     }
-    console.log(search)
   }
+
   return (
     <Container>
       <Wrap nftData={nftData} backgroundImg={StarBG}>
@@ -56,8 +63,8 @@ function Attributes() {
         </Fragment>
 
         {loading && <LoadingWrapper> LOADING.... </LoadingWrapper>}
-        {!loading &&
-          nftData &&
+        {!loading && nftData &&
+          nftData.error === null &&
           <Fragment>
             <ItemText
               nftTitle={true}
@@ -187,15 +194,15 @@ function Attributes() {
             </ContentWrapper>
           </Fragment>}
 
-        {!nftData &&
-          !loading &&
+        {!nftData && 
+          !loading ?
           <ContentWrapper>
             <Fade bottom cascade>
               <QuestionMarkWrapper>
                 <QM src={QuestionMark} alt="question mark" />
               </QuestionMarkWrapper>
             </Fade>
-          </ContentWrapper>}
+          </ContentWrapper> : nftData && nftData.error ? <h2>{nftData.error}</h2> : null}
       </Wrap>
     </Container>
   )
@@ -473,9 +480,6 @@ const BlockWrapper = styled.div`
   
 } */
 
-`
-
-const BlockDiv = styled.div`
 `
 
 const P = styled.p`

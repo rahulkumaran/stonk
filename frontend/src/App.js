@@ -16,13 +16,14 @@ function App() {
 
   const supplyState = useSelector(state => state.supply)
 
-  useEffect(() => {
-    if (!supplyState.loading && supplyState.contract !== null) {
-      dispatch(fetchSupply())
-    }
-  }, [supplyState.contract])
-
-
+  useEffect(
+    () => {
+      if (supplyState.contract !== null) {
+        dispatch(fetchSupply())
+      }
+    },
+    [supplyState.contract]
+  )
 
   const [clicks, setClicks] = useState(0)
   const [BG, setBG] = useState('')

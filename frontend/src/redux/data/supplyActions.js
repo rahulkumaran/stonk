@@ -5,7 +5,7 @@ import SmartContract from '../../contracts/TTTTTT.json'
 // check supplly
 const fetchSupplyRequest = payload => {
   return {
-    type: 'CHECK_SUPPLY_REQUEST',
+    type: 'CHECK_SUPPLY_REQUEST'
   }
 }
 
@@ -27,7 +27,7 @@ const fetchSupplyFailed = payload => {
 
 const requestContract = () => {
   return {
-    type: 'REQUEST_CONTRACT',
+    type: 'REQUEST_CONTRACT'
   }
 }
 
@@ -53,7 +53,6 @@ export const fetchSupply = () => {
         .getState()
         .supply.contract.methods.totalSupply()
         .call()
-      //console.log(totalSupply)
       dispatch(
         fetchSupplySuccess({
           totalSupply
@@ -61,7 +60,11 @@ export const fetchSupply = () => {
       )
     } catch (err) {
       console.log(err)
-      dispatch(fetchSupplyFailed('Could not load supply data from contract.'))
+      dispatch(
+        fetchSupplyFailed(
+          'Oops! looks like there was a problem. Make sure you have Metamask installed before you proceed. Please refresh the page in case you already have it installed to retry.'
+        )
+      )
     }
   }
 }
@@ -70,26 +73,19 @@ export const fetchContract = () => {
   return async dispatch => {
     dispatch(requestContract())
     try {
-      const { ethereum } = window;
+      const { ethereum } = window
       let web3 = new Web3(ethereum)
 
-      const networkId = await ethereum.request({
-        method: 'net_version'
-      })
-
-      if (networkId == 0xfa2) {
-        const SmartContractObj = new web3.eth.Contract(
-          SmartContract,
-          "0xf86aA85CE16A665e581405Dab0d9b526Cb46e3cE"
-        )
-        console.log("sc---", SmartContractObj)
-        dispatch(
-          requestContractSuccess({
-            smartContract: SmartContractObj,
-            web3: web3
-          })
-        )
-      }
+      const SmartContractObj = new web3.eth.Contract(
+        SmartContract,
+        '0xf86aA85CE16A665e581405Dab0d9b526Cb46e3cE'
+      )
+      dispatch(
+        requestContractSuccess({
+          smartContract: SmartContractObj,
+          web3: web3
+        })
+      )
     } catch (err) {
       console.log(err)
       dispatch(requestContractFailed('Something went wrong!'))
