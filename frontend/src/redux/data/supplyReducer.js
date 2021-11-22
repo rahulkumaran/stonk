@@ -1,5 +1,6 @@
 const initialState = {
   loading: false,
+  contract: null,
   totalSupply: '',
   error: false,
   errorMsg: ''
@@ -7,15 +8,17 @@ const initialState = {
 
 const supplyReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    case 'REQUEST_CONTRACT':
     case 'CHECK_SUPPLY_REQUEST':
       return {
-        ...initialState,
+        ...state,
         loading: true
       }
 
     case 'CHECK_SUPPLY_SUCCESS':
       return {
-        ...initialState,
+        ...state,
         loading: false,
         totalSupply: action.payload.totalSupply
       }
@@ -26,6 +29,24 @@ const supplyReducer = (state = initialState, action) => {
         error: true,
         errorMsg: action.payload
       }
+
+    case 'REQUEST_CONTRACT_SUCCESS':
+      return {
+        ...state,
+        loading: false,
+        error: false,
+        contract: action.payload.smartContract
+      }
+
+    case 'REQUEST_CONTRACT_FAILED':
+      return {
+        ...initialState,
+        loading: false,
+        error: true,
+        errorMsg: action.payload
+      }
+
+
     default:
       return state
   }

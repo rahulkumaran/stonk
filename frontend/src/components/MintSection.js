@@ -7,13 +7,15 @@ import { fetchData } from '../redux/data/dataActions'
 import metaMaskLogo from './assets/metamask.svg'
 import CircularProgress from '@mui/material/CircularProgress'
 import WalletIcon from './assets/wallet-solid.svg'
+import { fetchSupply } from '../redux/data/supplyActions'
 
 //const startMintingProcess = () => {}
 
 function MintSection({ backgroundImg, location, EE }) {
   const dispatch = useDispatch()
-  const blockchain = useSelector(state => state.blockchain)
   const data = useSelector(state => state.data)
+  const blockchain = useSelector(state => state.blockchain)
+  const supply = useSelector(state => state.supply.totalSupply)
   console.log(data)
   const [feedback, setFeedback] = useState("Maybe it's your lucky day.")
   const [claimingNft, setClaimingNft] = useState(false)
@@ -52,6 +54,7 @@ function MintSection({ backgroundImg, location, EE }) {
         setFeedback('Congratulation, you now own a Stonks NFT!!')
         setClaimingNft(false)
         dispatch(fetchData(blockchain.account))
+        dispatch(fetchSupply())
       })
   }
 
@@ -96,14 +99,27 @@ function MintSection({ backgroundImg, location, EE }) {
               </Address>
             </ConnectedP>}
         </Fragment>
+
+        {/* first check if the account is connected, if yes then use supply from the data state.
+        If account is not connected then pick the supply from the supply state which doesnt require wallet connection.
+        If non of the above fetched the supply then show loader */}
         <Fragment>
-          {blockchain.account === '' || blockchain.smartContract === null
-            ? <H1Count>
-              <CircularProgress style={{ width: '40px' }} />&nbsp;/10 Minted!
-              </H1Count>
-            : <H1Count>
+          {(blockchain.account === '' || blockchain.smartContract !== null) ?
+            <H1Count>
               {data.totalSupply}/10 Minted
-              </H1Count>}
+            </H1Count> :
+            supply !== "" && supply !== null ?
+              <H1Count>
+                {supply}/10 Minted
+            </H1Count> :
+              (blockchain.account === '' || blockchain.smartContract !== null) ?
+                <H1Count>
+                  {data.totalSupply}/10 Minted
+                  </H1Count> :
+                <H1Count>
+                  <CircularProgress style={{ width: '40px' }} />&nbsp;/10 Minted!
+                </H1Count>
+          }
           <br />
           {(blockchain.account === '' || blockchain.smartContract === null) &&
             <ConnectButton

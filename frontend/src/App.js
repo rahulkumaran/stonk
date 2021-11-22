@@ -1,15 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
 import './App.css'
 import Header from './components/Header'
 import Home from './components/Home'
 import Attributes from './components/Attributes'
-import { fetchSupply } from './redux/data/supplyActions'
+import { fetchSupply, fetchContract } from './redux/data/supplyActions'
 import { useDispatch, useSelector } from 'react-redux'
 
 function App() {
   const dispatch = useDispatch()
-  // dispatch(fetchSupply())
+
+  useEffect(() => {
+    dispatch(fetchContract())
+  }, [])
+
+  const supplyState = useSelector(state => state.supply)
+
+  useEffect(() => {
+    if (!supplyState.loading && supplyState.contract !== null) {
+      dispatch(fetchSupply())
+    }
+  }, [supplyState.contract])
+
+
 
   const [clicks, setClicks] = useState(0)
   const [BG, setBG] = useState('')
