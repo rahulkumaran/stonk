@@ -7,13 +7,15 @@ import { fetchData } from '../redux/data/dataActions'
 import metaMaskLogo from './assets/metamask.svg'
 import CircularProgress from '@mui/material/CircularProgress'
 import WalletIcon from './assets/wallet-solid.svg'
+import { fetchSupply } from '../redux/data/supplyActions'
 
 //const startMintingProcess = () => {}
 
 function MintSection({ backgroundImg, location, EE }) {
   const dispatch = useDispatch()
-  const blockchain = useSelector(state => state.blockchain)
   const data = useSelector(state => state.data)
+  const blockchain = useSelector(state => state.blockchain)
+  const supply = useSelector(state => state.supply.totalSupply)
   console.log(data)
   const [feedback, setFeedback] = useState("Maybe it's your lucky day.")
   const [claimingNft, setClaimingNft] = useState(false)
@@ -52,6 +54,7 @@ function MintSection({ backgroundImg, location, EE }) {
         setFeedback('Congratulation, you now own a Stonks NFT!!')
         setClaimingNft(false)
         dispatch(fetchData(blockchain.account))
+        dispatch(fetchSupply())
       })
   }
 
@@ -70,11 +73,23 @@ function MintSection({ backgroundImg, location, EE }) {
     }
   }
   return (
-    <Wrap backgroundImg={backgroundImg} id={`${location}`} EE={EE} extendedHeight={isConnected}>
+    <Wrap
+      backgroundImg={backgroundImg}
+      id={`${location}`}
+      EE={EE}
+      extendedHeight={isConnected}
+    >
       <Fade in delay={300} appear>
         <Fragment>
           <ItemText>
-            <h2 style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>Mint your NFT!</h2>
+            <h2
+              style={{
+                color: '#ffa500',
+                animation: 'animateDown infinite 1.5s'
+              }}
+            >
+              Mint your NFT!
+            </h2>
             <br />
             <p style={{ color: '#66aff5' }}>
               Become a part of the stonk society! Lets pAmP it up!
@@ -96,13 +111,35 @@ function MintSection({ backgroundImg, location, EE }) {
               </Address>
             </ConnectedP>}
         </Fragment>
+
         <Fragment>
+          {/*OPTION 1: first check if the account is connected, if yes then use supply from the data state.
+        If account is not connected then pick the supply from the supply state which doesnt require wallet connection.
+        If non of the above fetched the supply then show loader */}
+
+          {/* {(blockchain.account === '' || blockchain.smartContract !== null) ?
+            <H1Count>
+              {data.totalSupply}/10 Minted
+            </H1Count> :
+            supply !== "" && supply !== null ?
+              <H1Count>
+                {supply}/10 Minted
+            </H1Count> :
+              (blockchain.account === '' || blockchain.smartContract !== null) ?
+                <H1Count>
+                  {data.totalSupply}/10 Minted
+                  </H1Count> :
+                <H1Count>
+                  <CircularProgress style={{ width: '40px' }} />&nbsp;/10 Minted!
+                </H1Count>
+          } */}
+          {/* OPTION 2 */}
           {blockchain.account === '' || blockchain.smartContract === null
             ? <H1Count>
-              <CircularProgress style={{ width: '40px' }} />&nbsp;/10 Minted!
+                <CircularProgress style={{ width: '40px' }} />&nbsp;/10 Minted!
               </H1Count>
             : <H1Count>
-              {data.totalSupply}/10 Minted
+                {data.totalSupply}/10 Minted
               </H1Count>}
           <br />
           {(blockchain.account === '' || blockchain.smartContract === null) &&
@@ -126,56 +163,56 @@ function MintSection({ backgroundImg, location, EE }) {
         <Fragment>
           {Number(data.totalSupply) === 6
             ? <H2>
-              The sale has ended! However, you can buy from our Paintswap
-              Collection!
+                The sale has ended! However, you can buy from our Paintswap
+                Collection!
               </H2>
             : isConnected
               ? <Fragment>
-                <ButtonsWrapper>
-                  <ButtonGroup>
-                    <CounterButton
-                      onClick={e => {
-                        if (mintCount > 1) {
-                          setMintCount(mintCount - 1)
-                        }
-                      }}
-                    >
-                      -
+                  <ButtonsWrapper>
+                    <ButtonGroup>
+                      <CounterButton
+                        onClick={e => {
+                          if (mintCount > 1) {
+                            setMintCount(mintCount - 1)
+                          }
+                        }}
+                      >
+                        -
                       </CounterButton>
 
-                    <MintInput
-                      disabled
-                      onChange={e => setMintCount(e.target.value)}
-                      value={mintCount}
-                      style={{ paddingLeft: '85px', fontSize: '40px' }}
-                    />
-                    <CounterButton
-                      onClick={e => {
-                        if (mintCount < 5) {
-                          setMintCount(mintCount + 1)
-                        }
-                      }}
-                    >
-                      +
+                      <MintInput
+                        disabled
+                        onChange={e => setMintCount(e.target.value)}
+                        value={mintCount}
+                        style={{ paddingLeft: '85px', fontSize: '40px' }}
+                      />
+                      <CounterButton
+                        onClick={e => {
+                          if (mintCount < 5) {
+                            setMintCount(mintCount + 1)
+                          }
+                        }}
+                      >
+                        +
                       </CounterButton>
-                  </ButtonGroup>
-                </ButtonsWrapper>
+                    </ButtonGroup>
+                  </ButtonsWrapper>
 
-                <ButtonsWrapper>
-                  <ButtonGroup>
-                    <RightButton
-                      disabled={claimingNft ? 1 : 0}
-                      onClick={e => {
-                        e.preventDefault()
-                        claimNFTs(mintCount)
-                        getData()
-                      }}
-                    >
-                      {claimingNft ? 'Minting......' : 'Mint Your Stonks'}
-                    </RightButton>
-                  </ButtonGroup>
-                </ButtonsWrapper>
-              </Fragment>
+                  <ButtonsWrapper>
+                    <ButtonGroup>
+                      <RightButton
+                        disabled={claimingNft ? 1 : 0}
+                        onClick={e => {
+                          e.preventDefault()
+                          claimNFTs(mintCount)
+                          getData()
+                        }}
+                      >
+                        {claimingNft ? 'Minting......' : 'Mint Your Stonks'}
+                      </RightButton>
+                    </ButtonGroup>
+                  </ButtonsWrapper>
+                </Fragment>
               : null}
         </Fragment>
       </Fade>
@@ -345,11 +382,12 @@ const CounterButton = styled.div`
   background-color: white;
 
   ${props =>
-    props.disabled ? `cursor: not-allowed; opacity: 0.4;}` : ''} ${props => !props.disabled &&
+    props.disabled ? `cursor: not-allowed; opacity: 0.4;}` : ''} ${props =>
+      !props.disabled &&
       `&:hover{
     opacity: 0.65;
   };`};
-  
+
   @media (max-width: 768px) {
     height: 80px;
     width: 70px;
