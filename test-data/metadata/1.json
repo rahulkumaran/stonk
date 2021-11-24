@@ -1,0 +1,55 @@
+{
+    "dna": "03800000110203040401203033",
+    "name": "Stonk #1",
+    "description": "3,333 unique Stonks living on the Fantom Blockchain, redefining the concept of Hold2Earn.",
+    "editionRarity": "legendary",
+    "image": "https://gateway.pinata.cloud/ipfs/QmcKrVvdzvBh28nnbwf14ffTDPNWR28kLKbtvrVcZeiTRy/1.png",
+    "edition": 1,
+    "date": 1637780852102,
+    "attributes": [
+        {
+            "trait_type": "Bg",
+            "value": "Araku Valley"
+        },
+        {
+            "trait_type": "Arrow",
+            "value": "Stonks Arrow"
+        },
+        {
+            "trait_type": "Body",
+            "value": "Original Stonks"
+        },
+        {
+            "trait_type": "Suit",
+            "value": "Rich Black Checks"
+        },
+        {
+            "trait_type": "Skin",
+            "value": "Tan"
+        },
+        {
+            "trait_type": "Tie",
+            "value": "Blue Tie & Gold Chain"
+        },
+        {
+            "trait_type": "Facial hair",
+            "value": "Black Ducktail"
+        },
+        {
+            "trait_type": "Mouth piece",
+            "value": "Pipe"
+        },
+        {
+            "trait_type": "Eye Wear",
+            "value": "3D Glasses"
+        },
+        {
+            "trait_type": "Earring",
+            "value": "Silver Edge Earring"
+        },
+        {
+            "trait_type": "Head Wear",
+            "value": "Bitcoin Magician Hat"
+        }
+    ]
+}

@@ -43,7 +43,7 @@ function MintSection({ backgroundImg, location, EE }) {
         gasLimit: '350000',
         to: '0xf86aA85CE16A665e581405Dab0d9b526Cb46e3cE',
         from: blockchain.account,
-        value: blockchain.web3.utils.toWei((1 * _amount).toString(), 'ether')
+        value: blockchain.web3.utils.toWei((2 * _amount).toString(), 'ether')
       })
       .once('error', err => {
         console.log(err)
@@ -136,10 +136,10 @@ function MintSection({ backgroundImg, location, EE }) {
           {/* OPTION 2 */}
           {blockchain.account === '' || blockchain.smartContract === null
             ? <H1Count>
-                <CircularProgress style={{ width: '40px' }} />&nbsp;/10 Minted!
+                <CircularProgress style={{ width: '40px' }} />&nbsp;/100 Minted!
               </H1Count>
             : <H1Count>
-                {data.totalSupply}/10 Minted
+                {data.totalSupply}/100 Minted
               </H1Count>}
           <br />
           {(blockchain.account === '' || blockchain.smartContract === null) &&

@@ -1261,13 +1261,13 @@ pragma solidity >=0.7.0 <0.9.0;
 
 
 
-contract Tester is ERC721Enumerable, Ownable {
+contract TheStonkSociety is ERC721Enumerable, Ownable {
   using Strings for uint256;
 
   string public baseURI;
   string public baseExtension = ".json";
-  uint256 public cost = 0.5 ether;
-  uint256 public maxSupply = 10;
+  uint256 public cost = 2 ether;
+  uint256 public maxSupply = 100;
   uint256 public maxMintAmount = 2;
   bool public paused = false;
   mapping(address => bool) public whitelisted;
