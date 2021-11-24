@@ -1,8 +1,7 @@
 import Web3 from 'web3'
-import SmartContract from '../../contracts/TTTTTT.json'
+import SmartContract from '../../contracts/test_contract.json'
 
 import { fetchData } from '../data/dataActions'
-
 
 const connectRequest = () => {
   console.log('Conn_req')
@@ -38,8 +37,8 @@ const updateAccountRequest = payload => {
 export const connect = () => {
   return async dispatch => {
     dispatch(connectRequest())
-    const { ethereum } = window;
-    const metamaskIsInstalled = ethereum && ethereum.isMetaMask;
+    const { ethereum } = window
+    const metamaskIsInstalled = ethereum && ethereum.isMetaMask
     if (metamaskIsInstalled) {
       let web3 = new Web3(ethereum)
 
@@ -54,7 +53,7 @@ export const connect = () => {
         if (networkId == 0xfa2) {
           const SmartContractObj = new web3.eth.Contract(
             SmartContract,
-            "0x4Cf054A9BF7b0f17dd6ac913C5f66E3fE976Baa9"
+            '0x4Cf054A9BF7b0f17dd6ac913C5f66E3fE976Baa9'
           )
           dispatch(
             connectSuccess({
