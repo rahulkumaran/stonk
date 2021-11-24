@@ -161,7 +161,7 @@ function MintSection({ backgroundImg, location, EE }) {
       <div />
       <Fade>
         <Fragment>
-          {Number(data.totalSupply) === 6
+          {Number(data.totalSupply) === 3333
             ? <H2>
                 The sale has ended! However, you can buy from our Paintswap
                 Collection!

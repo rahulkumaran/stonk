@@ -23,7 +23,7 @@ router.get('/:stonks_id', async (req, res) => {
     const searchLimit = parseInt(req.query.limit)
     var imgUrl
     const nft_id = req.params.stonks_id
-    resolvedPath = `${dir}/data/metadata_${nft_id}.json`
+    resolvedPath = `${dir}/data/${nft_id}_rarity.json`
 
     if (nft_id >= 1 && nft_id <= searchLimit) {
       imgUrl = `/nft-images/${nft_id}.png`
