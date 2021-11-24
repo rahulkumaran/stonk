@@ -17,7 +17,7 @@ function RoadmapSection({
       <Fade in delay={300} appear>
         <Fragment>
           <ItemText>
-            <h2 style={{ color: '#ffa500' }}>
+            <h2 style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>
               {title}
             </h2>
             <br />
@@ -165,7 +165,7 @@ function RoadmapSection({
             <ButtonsWrapper>
               <ButtonGroup>
                 <RightButton>
-                  <img src={Medium} alt="medium" />&nbsp;Medium
+                  <MediumIcom src={Medium} alt="medium" />&nbsp;Medium
                 </RightButton>
               </ButtonGroup>
             </ButtonsWrapper>
@@ -257,8 +257,8 @@ const RightButton = styled(LeftButton)`
   }`}
 
   @media (max-width: 768px) {
-          height: 30px;
-    width: 150px;
+    height: 50px;
+    width: 200px;
   }
 `
 
@@ -279,6 +279,11 @@ const TextContainer = styled.div`
     max-width: 1050px;
     font-size: 18px;
     line-height: 22px;
+  }
+
+  @media (max-width: 1204px) {
+    max-width: 600px;
+    font-size: 17px;
   }
 
   @media (max-width: 800px) {
@@ -427,4 +432,11 @@ const CenterLine = styled.div`
     background-repeat: no-repeat;
     background-position: left;
   }
+`
+const MediumIcom = styled.img`
+  @media (max-width: 768px) {
+    height: 40px;
+    width: 40px;
+  }
+
 `

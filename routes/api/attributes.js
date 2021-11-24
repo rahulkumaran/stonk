@@ -20,11 +20,12 @@ router.get('/', async (req, res) => {
 
 router.get('/:stonks_id', async (req, res) => {
   try {
+    const searchLimit = parseInt(req.query.limit)
     var imgUrl
     const nft_id = req.params.stonks_id
     resolvedPath = `${dir}/data/metadata_${nft_id}.json`
 
-    if (nft_id >= 1 && nft_id <= 10) {
+    if (nft_id >= 1 && nft_id <= searchLimit) {
       imgUrl = `/nft-images/${nft_id}.png`
 
       fs.readFile(resolvedPath, (err, data) => {
@@ -42,7 +43,7 @@ router.get('/:stonks_id', async (req, res) => {
         nft_id: null,
         metadata: null,
         image_src: null,
-        error: 'Please enter ID between 1 and 3333'
+        error: `Please enter ID between 1 and ${searchLimit}`
       })
     }
   } catch (err) {

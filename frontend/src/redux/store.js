@@ -4,10 +4,12 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import blockchainReducer from './blockchain/blockchainReducer'
 import dataReducer from './data/dataReducer'
+import supplyReducer from './data/supplyReducer'
 
 const rootReducer = combineReducers({
   blockchain: blockchainReducer,
-  data: dataReducer
+  data: dataReducer,
+  supply: supplyReducer
 })
 
 let composeEnhancers

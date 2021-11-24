@@ -11,7 +11,7 @@ function LastSection({ title, description, backgroundImg, location, EE }) {
     <Wrap backgroundImg={backgroundImg} id={`${location}`} EE={EE}>
       <Fade in delay={300} appear>
         <ItemText>
-          <h1 style={{ color: '#ffa500' }}>
+          <h1 style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>
             {title}
           </h1>
           <br />
@@ -79,7 +79,7 @@ const SocialsWrapper = styled.div`
 // BUT if we use flex-direction: column then the above flips (becomes vice-versa)
 const Wrap = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: auto;
   ${props =>
     props.backgroundImg ? `background-image: url(${props.backgroundImg})` : ''};
   ${props =>
@@ -113,12 +113,23 @@ const ItemText = styled.div`
     padding-top: 5vh;
     font-size: 20px;
   }
+
+  @media (max-width: 1204px) {
+    max-width: 700px;
+    font-size: 25px;
+  }
 `
 
 const CardWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1204px) {
+    max-width: 600px;
+    font-size: 25px;
+  }
+
+  @media (max-width: 760px) {
     flex-direction: column;
   }
 `

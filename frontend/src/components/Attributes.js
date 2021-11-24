@@ -1,28 +1,35 @@
 import React, { Fragment, useState, useEffect } from 'react'
+import {Navigate} from 'react-router-dom'
 import styled from 'styled-components'
 import Fade from 'react-reveal/Fade'
 import QuestionMark from '../components/assets/qm.gif'
 import StarBG from './assets/star1.gif'
 import SearchIcon from './assets/search.png'
+import {  useSelector } from 'react-redux'
 
 function Attributes() {
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState(0)
   const [nftData, setNftData] = useState(null)
   const [loading, setLoading] = useState(false)
 
-  // useEffect(() => {
-  //   fetch('/api/attributes/1').then(response => response.json()).then(data => {
-  //     setNftData(data)
-  //   })
-  // }, [])
 
-  // TODO: change range from 1-10 to 1-3333 on line 22, 33 and in backed api.
+  const supplyState = useSelector(state => state.supply)
+
+
+  if(supplyState.errorMsg){
+    console.count("test")
+    alert(supplyState.errorMsg)
+    return <Navigate to="/" />
+  }
+
+  const searchRange = parseInt(supplyState.totalSupply);
+
   const searchHandler = e => {
     e.preventDefault()
-    if (search !== '' && search >= 1 && search <= 10) {
+    if (search != 0 && search >= 1 && search <= searchRange) {
       setNftData(null)
       setLoading(true)
-      fetch(`/api/attributes/${search}`)
+      fetch(`/api/attributes/${search}?limit=${searchRange}`)
         .then(response => response.json())
         .then(data => {
           setTimeout(() => {
@@ -31,46 +38,42 @@ function Attributes() {
           }, 600)
         })
     } else {
-      alert('Please enter art number ranging between 1 and 10')
+      alert(`Please enter art number ranging between 1 and ${searchRange}`)
     }
-    console.log(search)
   }
+
   return (
     <Container>
       <Wrap nftData={nftData} backgroundImg={StarBG}>
-        <Fade in delay={300} appear>
-          <Fragment>
-            <ItemText>
-              <h2 style={{ color: '#ffa500' }}>Check Stonks Attributes</h2>
-              <br />
-              <p>Find out what attributes your unique art is made of</p>
-            </ItemText>
-            <ButtonsWrapper>
-              <ButtonGroup>
-                <SearchInput
-                  placeholder="Enter your Stonk number..."
-                  onChange={e => setSearch(e.target.value)}
-                />
-                <RightButton onClick={searchHandler}><img src={SearchIcon} style={{height:"25px", width:"25px"}} alt="search"/>&nbsp;Search</RightButton>
-              </ButtonGroup>
-            </ButtonsWrapper>
-          </Fragment>
-        </Fade>
+        <Fragment>
+          <ItemText>
+            <h2 style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>Check Stonks Attributes</h2>
+            <br />
+            <p>Find out what attributes your unique art is made of</p>
+          </ItemText>
+          <ButtonsWrapper>
+            <ButtonGroup>
+              <SearchInput
+                placeholder="Enter your Stonk number..."
+                onChange={e => setSearch(e.target.value)}
+              />
+              <RightButton onClick={searchHandler}><img src={SearchIcon} style={{ height: "25px", width: "25px" }} alt="search" />&nbsp;Search</RightButton>
+            </ButtonGroup>
+          </ButtonsWrapper>
+        </Fragment>
 
         {loading && <LoadingWrapper> LOADING.... </LoadingWrapper>}
-        {!loading &&
-          nftData &&
+        {!loading && nftData &&
+          nftData.error === null &&
           <Fragment>
-            <Fade>
-              <ItemText
-                nftTitle={true}
-                style={{ paddingTop: '50px', paddingBottom: '30px' }}
-              >
-                <h2 style={{ color: '#86dc3d' }}>
-                  Details for Stonk #{nftData.nft_id}
-                </h2>
-              </ItemText>
-            </Fade>
+            <ItemText
+              nftTitle={true}
+              style={{ paddingTop: '50px', paddingBottom: '30px' }}
+            >
+              <h2 style={{ color: '#86dc3d' }}>
+                Details for Stonk #{nftData.nft_id}
+              </h2>
+            </ItemText>
 
             <ContentWrapper>
               <AttributesWrapper>
@@ -88,108 +91,102 @@ function Attributes() {
                   <AttributesInfoWrapper>
                     <AttributesInfo>
                       <BlockWrapper flexCol={true}>
-                        <BlockDiv>
-                          <AttributeBlockOne>
-                            <PH>Edition</PH>
+                        <AttributeBlockOne>
+                          <PH>Edition</PH>
 
-                            <P>
-                              {' '}#{nftData.metadata.edition}
-                            </P>
-                          </AttributeBlockOne>{' '}
+                          <P>
+                            {' '}#{nftData.metadata.edition}
+                          </P>
+                        </AttributeBlockOne>{' '}
 
-                          <AttributeBlockOne>
-                            <PH> Edition Rarity</PH>
-                            <P rarity={nftData.metadata.editionRarity}>
-                              {nftData.metadata.editionRarity}
-                            </P>
-                          </AttributeBlockOne>{' '}
+                        <AttributeBlockOne>
+                          <PH> Edition Rarity</PH>
+                          <P rarity={nftData.metadata.editionRarity}>
+                            {nftData.metadata.editionRarity}
+                          </P>
+                        </AttributeBlockOne>{' '}
 
-                          <AttributeBlockOne>
-                            <PH>Background</PH>
-                            <P>
-                              {nftData.metadata.attributes[0].name}
+                        <AttributeBlockOne>
+                          <PH>Background</PH>
+                          <P>
+                            {nftData.metadata.attributes[0].name}
+                          </P>
+                          <P rarity={nftData.metadata.attributes[0].rarity}>
+                            ({nftData.metadata.attributes[0].rarity})
                             </P>
-                            <P rarity={nftData.metadata.attributes[0].rarity}>
-                              ({nftData.metadata.attributes[0].rarity})
-                            </P>
-                          </AttributeBlockOne>{' '}
+                        </AttributeBlockOne>{' '}
 
-                          <AttributeBlockOne>
-                            <PH>Overlay Arrow</PH>
-                            <P>
-                              {' '}{nftData.metadata.attributes[1].name}{' '}
+                        <AttributeBlockOne>
+                          <PH>Overlay Arrow</PH>
+                          <P>
+                            {' '}{nftData.metadata.attributes[1].name}{' '}
+                          </P>
+                          <P rarity={nftData.metadata.attributes[1].rarity}>
+                            ({nftData.metadata.attributes[1].rarity})
                             </P>
-                            <P rarity={nftData.metadata.attributes[1].rarity}>
-                              ({nftData.metadata.attributes[1].rarity})
-                            </P>
-                          </AttributeBlockOne>{' '}
+                        </AttributeBlockOne>{' '}
 
-                          <AttributeBlockOne> 
+                        <AttributeBlockOne>
                           <PH>Body</PH>
-                            <P>
+                          <P>
                             {nftData.metadata.attributes[2].name}
-                            </P>
-                            <P rarity={nftData.metadata.attributes[2]?.rarity}>
+                          </P>
+                          <P rarity={nftData.metadata.attributes[2]?.rarity}>
                             ({nftData.metadata.attributes[2]?.rarity})
                             </P>
-                            </AttributeBlockOne>{' '}
-                        </BlockDiv>
+                        </AttributeBlockOne>{' '}
 
-                        <BlockDiv>
-                          <AttributeBlockOne> 
-                            <PH>Suit</PH>
-                            <P> {nftData.metadata.attributes[3].name} </P>
-                            <P rarity={nftData.metadata.attributes[3].rarity}>({nftData.metadata.attributes[3].rarity})</P>
-                          </AttributeBlockOne>
+                        <AttributeBlockOne>
+                          <PH>Suit</PH>
+                          <P> {nftData.metadata.attributes[3].name} </P>
+                          <P rarity={nftData.metadata.attributes[3].rarity}>({nftData.metadata.attributes[3].rarity})</P>
+                        </AttributeBlockOne>
 
-                          <AttributeBlockOne> 
-                            <PH>Skin Tone</PH>
-                            <P> {nftData.metadata.attributes[4].name} </P>
-                            <P rarity={nftData.metadata.attributes[4].rarity}>({nftData.metadata.attributes[4].rarity})</P>
-                          </AttributeBlockOne>
+                        <AttributeBlockOne>
+                          <PH>Skin Tone</PH>
+                          <P> {nftData.metadata.attributes[4].name} </P>
+                          <P rarity={nftData.metadata.attributes[4].rarity}>({nftData.metadata.attributes[4].rarity})</P>
+                        </AttributeBlockOne>
 
-                          <AttributeBlockOne> 
-                            <PH>Tie</PH>
-                            <P>{nftData.metadata.attributes[5].name}</P>
-                            <P rarity={nftData.metadata.attributes[5].rarity}>({nftData.metadata.attributes[5].rarity})</P>
-                          </AttributeBlockOne>
+                        <AttributeBlockOne>
+                          <PH>Tie</PH>
+                          <P>{nftData.metadata.attributes[5].name}</P>
+                          <P rarity={nftData.metadata.attributes[5].rarity}>({nftData.metadata.attributes[5].rarity})</P>
+                        </AttributeBlockOne>
 
-                          <AttributeBlockOne> 
-                          <PH>Facial Hair</PH> 
-                            <P>{nftData.metadata.attributes[6].name}</P>
-                            <P rarity={nftData.metadata.attributes[6].rarity}>({nftData.metadata.attributes[6].rarity})</P>
-                          </AttributeBlockOne>
+                        <AttributeBlockOne>
+                          <PH>Facial Hair</PH>
+                          <P>{nftData.metadata.attributes[6].name}</P>
+                          <P rarity={nftData.metadata.attributes[6].rarity}>({nftData.metadata.attributes[6].rarity})</P>
+                        </AttributeBlockOne>
 
-                          <AttributeBlockOne>
-                            <PH>Mouth Piece</PH>
-                            <P>{nftData.metadata.attributes[7].name}</P>
-                            <P rarity={nftData.metadata.attributes[7].rarity}>({nftData.metadata.attributes[7].rarity})</P>
-                          </AttributeBlockOne>
-                        </BlockDiv>
+                        <AttributeBlockOne>
+                          <PH>Mouth Piece</PH>
+                          <P>{nftData.metadata.attributes[7].name}</P>
+                          <P rarity={nftData.metadata.attributes[7].rarity}>({nftData.metadata.attributes[7].rarity})</P>
+                        </AttributeBlockOne>
 
-                        <BlockDiv>
-                          <AttributeBlockOne> 
-                            <PH>Eyes/Eye wear</PH>
-                            <P>{nftData.metadata.attributes[8].name}</P>
-                            <P rarity={nftData.metadata.attributes[8].rarity}>({nftData.metadata.attributes[8].rarity})</P>
-                          </AttributeBlockOne>
-                          
-                          <AttributeBlockOne>
-                            <PH>Earring</PH>
-                            <P>{nftData.metadata.attributes[9].name}</P>
-                            <P rarity={nftData.metadata.attributes[9].rarity}>({nftData.metadata.attributes[9].rarity})</P>
-                          </AttributeBlockOne>
+                        <AttributeBlockOne>
+                          <PH>Eyes/Eye wear</PH>
+                          <P>{nftData.metadata.attributes[8].name}</P>
+                          <P rarity={nftData.metadata.attributes[8].rarity}>({nftData.metadata.attributes[8].rarity})</P>
+                        </AttributeBlockOne>
+
+                        <AttributeBlockOne>
+                          <PH>Earring</PH>
+                          <P>{nftData.metadata.attributes[9].name}</P>
+                          <P rarity={nftData.metadata.attributes[9].rarity}>({nftData.metadata.attributes[9].rarity})</P>
+                        </AttributeBlockOne>
 
 
-                          <AttributeBlockOne>
-                            <PH>Hair/Head Wear</PH>
-                            <P>{nftData.metadata.attributes[10].name}</P>
-                            <P rarity={nftData.metadata.attributes[10].rarity}>({nftData.metadata.attributes[10].rarity})</P>
-                          </AttributeBlockOne>
+                        <AttributeBlockOne>
+                          <PH>Hair/Head Wear</PH>
+                          <P>{nftData.metadata.attributes[10].name}</P>
+                          <P rarity={nftData.metadata.attributes[10].rarity}>({nftData.metadata.attributes[10].rarity})</P>
+                        </AttributeBlockOne>
 
-                        </BlockDiv>
                       </BlockWrapper>
-                     
+
                     </AttributesInfo>
                   </AttributesInfoWrapper>
                 </Fade>
@@ -197,15 +194,15 @@ function Attributes() {
             </ContentWrapper>
           </Fragment>}
 
-        {!nftData &&
-          !loading &&
+        {!nftData && 
+          !loading ?
           <ContentWrapper>
             <Fade bottom cascade>
               <QuestionMarkWrapper>
                 <QM src={QuestionMark} alt="question mark" />
               </QuestionMarkWrapper>
             </Fade>
-          </ContentWrapper>}
+          </ContentWrapper> : nftData && nftData.error ? <h2>{nftData.error}</h2> : null}
       </Wrap>
     </Container>
   )
@@ -220,7 +217,7 @@ const Container = styled.div`height: 100vh;`
 // BUT if we use flex-direction: column then the above flips (becomes vice-versa)
 const Wrap = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: ${props => props.nftData ? "auto;" : "100vh;"};
   ${props =>
     props.backgroundImg ? `background-image: url(${props.backgroundImg})` : ''};
   // background-color:black;
@@ -235,7 +232,7 @@ const Wrap = styled.div`
   }
 
   @media (max-width: 1024px) {
-    height: 100vh;
+    ${props => (props.nftData ? 'height: auto;' : 'height: 100vh;')};
   }
 
   @media (max-width: 800px) {
@@ -335,9 +332,11 @@ const RightButton = styled(LeftButton)`
 `
 
 const ContentWrapper = styled.div`
+  max-width: 1200px;
   display: flex;
   justify-content: center;
   padding-bottom: 20px;
+  /* padding-left: 100px; */
 
   @media (max-width: 1204px) {
     padding-bottom: 0px;
@@ -372,18 +371,26 @@ const AttributesWrapper = styled.div`
   }
 `
 
-const AttributesImageWrapper = styled.div`justify-content: flex-start;
+const AttributesImageWrapper = styled.div`
+justify-content: flex-start;
+padding-left: 70px;
+
+@media (max-width: 1204px) {
+  padding:0;
+  }
 `
 
 const AttributesInfoWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
   width: 100%;
-  padding-left: 50px;
+  /* padding-left: 50px; */
   line-height: 30px;
 
   @media (max-width: 550px) {
     padding: 0;
+    justify-content: flex-end;
+    justify-content: center;
   }
 
 `
@@ -391,6 +398,7 @@ const AttributesInfoWrapper = styled.div`
 const AttributesInfo = styled.div`
   width: 100%;
   display: flex;
+
 `
 
 const SearchInput = styled.input`
@@ -398,7 +406,7 @@ const SearchInput = styled.input`
   border-radius: 10px;
 
   background-color: rgba(255, 215, 0, 0.2);
-  width: 100%;
+  width: 250px;
   height: 40px;
 `
 const IMG = styled.img`border: 2px solid #ffa500;
@@ -410,13 +418,13 @@ const IMG = styled.img`border: 2px solid #ffa500;
 }
 
 @media (max-width: 800px) {
-  width: 300px;
+  width: 250px;
   height: 300px;
 }
 `
 const QM = styled.img`
   border: 2px solid #ffa500;
-  width: 300px;
+  width: 250px;
   height: 300;
 
   @media (max-width: 1280px) {
@@ -455,28 +463,39 @@ const AttributeBlockOne = styled.div`
     `&:hover{
     opacity: 0.65;
   }`};
+
+@media (max-width: 550px) {
+    width: 140px;
+  }
 `
 const BlockWrapper = styled.div`
   width: 100%;
   display: flex;
+  flex-wrap:wrap;
+  justify-content: center;
 
+/* 
   @media (max-width: 550px) {
-  ${props => (props.flexCol ? "flex-direction:column; align-items:center; justify-content:center;" : '')};
+  ${props => (props.flexCol ? "flex-wrap:wrap; align-items:center; justify-content:center;" : '')};
   
-}
-
-`
-
-const BlockDiv = styled.div`
+} */
 
 `
 
 const P = styled.p`
   color: white;
   font-size: 15px;
-  color : ${props => props.rarity && props.rarity ==="common" ? "#86dc3d" : props.rarity ==="uncommon" ? "#66aff5" : props.rarity === "rare" ? "#a95aec" : props.rarity === "legendary" ? "#fcc201" : "" }
+  color : ${props => props.rarity && props.rarity === "common" ? "#86dc3d" : props.rarity === "uncommon" ? "#66aff5" : props.rarity === "rare" ? "#a95aec" : props.rarity === "legendary" ? "#fcc201" : ""};
+
+  @media (max-width: 550px) {
+    font-size: 12px;
+  }
 `
 const PH = styled.p`
   color: white;
   font-size: 15px;
+
+  @media (max-width: 550px) {
+    font-size: 12px;
+  }
 `

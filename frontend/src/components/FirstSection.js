@@ -1,4 +1,4 @@
-import React, { Fragment,} from 'react'
+import React, { Fragment, } from 'react'
 import Fade from 'react-reveal/Fade'
 import styled from 'styled-components'
 import Slider from './slider/Slider'
@@ -11,7 +11,7 @@ function FirstSection({
   backgroundImg,
   location,
   sellOut,
-  seventyFiveSold, 
+  seventyFiveSold,
   EE
 }) {
 
@@ -19,7 +19,7 @@ function FirstSection({
     <Wrap backgroundImg={backgroundImg} EE={EE} id={`${location}`}>
       <Fade in delay={300} appear>
         <ItemText>
-          <h2 style={{ color: '#ffa500' }}>
+          <h2 style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>
             {/* {title} */}
             The Stonk Society
           </h2>
@@ -49,10 +49,10 @@ function FirstSection({
             <ButtonGroup>
               {!sellOut &&
                 <a href="#mint">
-                  <RightButton><img src={MintLogo} style={{height:"30px", width:"30px"}} alt="paintswap"/>&nbsp;Mint Now!</RightButton>{' '}
+                  <RightButton><img src={MintLogo} style={{ height: "30px", width: "30px" }} alt="mint" />&nbsp;Mint Now!</RightButton>{' '}
                 </a>}
               <RightButton disabled={!seventyFiveSold}>
-                <img src={PaintSwapLogo} style={{height:"30px", width:"30px"}} alt="paintswap"/>&nbsp;PaintSwap</RightButton>{' '}
+                <img src={PaintSwapLogo} style={{ height: "30px", width: "30px" }} alt="paintswap" />&nbsp;PaintSwap</RightButton>{' '}
             </ButtonGroup>
           </ButtonsWrapper>
           {/* {!seventyFiveSold &&
@@ -84,7 +84,7 @@ const Wrap = styled.div`
       : ''};
   ${props =>
     props.EE
-      ?  `background-size: cover;
+      ? `background-size: cover;
       background-repeat: no-repeat;`
       : ''};
   display: flex;
@@ -116,6 +116,11 @@ const ItemText = styled.div`
     padding: 0;
     padding-top: 12vh;
     font-size: 18px;
+  }
+
+  @media (max-width: 1204px) {
+    max-width: 700px;
+    font-size: 25px;
   }
 `
 
@@ -161,8 +166,8 @@ const RightButton = styled(LeftButton)`
   }`}
 
   @media (max-width: 768px) {
-    height: 30px;
-    width: 150px;
+    height: 50px;
+    width: 170px;
   }
 `
 
