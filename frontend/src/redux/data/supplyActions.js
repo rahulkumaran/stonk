@@ -46,7 +46,7 @@ const requestContractFailed = payload => {
 }
 
 const updateSupply = _totalSupply => {
-  fetch('/update-supply-snapshot', {
+  fetch('/api/attributes/update-supply-snapshot', {
     method: 'POST',
 
     body: JSON.stringify({
@@ -56,7 +56,7 @@ const updateSupply = _totalSupply => {
     headers: {
       'Content-type': 'application/json; charset=UTF-8'
     }
-  }).then(response => console.log(response))
+  })
 }
 
 export const fetchSupply = () => {

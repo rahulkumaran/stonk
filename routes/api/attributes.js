@@ -86,16 +86,16 @@ router.get('meta/:stonks_id', async (req, res) => {
   }
 })
 
-router.get('/nft-images/:art', (req, res) => {
+router.get('/nft-images/:art', async (req, res) => {
   try {
-    const supply = Supply.findOne({ purpose: 'supply-tracking' })
+    const supply = await Supply.findOne({ purpose: 'supply-tracking' })
     const currentSupply = supply.currentSupply
-    const searchRange = Number(currentSupply)
+    const searchRange = parseInt(currentSupply)
 
     const artNumber = parseInt(req.params.art)
 
     if (artNumber <= searchRange) {
-      res.sendFile(path.resolve(root, 'images', `${artNumber}.png`))
+      res.sendFile(path.resolve('images', `${artNumber}.png`))
     } else {
       res.json({ response: 'NFT not minted yet' })
     }
@@ -107,12 +107,11 @@ router.get('/nft-images/:art', (req, res) => {
 router.post('/update-supply-snapshot', async (req, res) => {
   try {
     const { currentSupply } = req.body
-
     const filter = { purpose: 'supply-tracking' }
     const update = { currentSupply: currentSupply }
 
     let updatedSupply = await Supply.findOneAndUpdate(filter, update)
-    updatedSupply.save()
+    await updatedSupply.save()
 
     res.json({ updatedSupply: JSON.stringify(currentSupply) })
   } catch (err) {
