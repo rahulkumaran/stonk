@@ -11,12 +11,14 @@ function LastSection({ title, description, backgroundImg, location, EE }) {
     <Wrap backgroundImg={backgroundImg} id={`${location}`} EE={EE}>
       <Fade in delay={300} appear>
         <ItemText>
-          <h1 style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>
-            {title}
+          <h1
+            style={{ color: '#ffa500', animation: 'animateDown infinite 1.5s' }}
+          >
+            Team
           </h1>
           <br />
           <p style={{ color: '#66aff5' }}>
-            {description}
+            We are one among you. Together with you, we make the Stonk Society!
           </p>
         </ItemText>
 
@@ -33,14 +35,17 @@ function LastSection({ title, description, backgroundImg, location, EE }) {
         </Wrapper>
 
         <SocialsWrapper>
-          <SocialAnchor href="#" target="_blank">
+          <SocialAnchor
+            href="https://twitter.com/FTMStonkSociety/"
+            target="_blank"
+          >
             <img
               src={twitterLogo}
               alt="twitter"
               style={{ height: '50px', width: '50px' }}
             />
           </SocialAnchor>
-          <SocialAnchor href="#" target="_blank">
+          <SocialAnchor href="https://discord.gg/9CubZShGJv" target="_blank">
             <img
               src={discordLogo}
               alt="discord"
@@ -109,14 +114,14 @@ const ItemText = styled.div`
   text-align: center;
   font-size: 25px;
 
-  @media (max-width: 768px) {
-    padding-top: 5vh;
-    font-size: 20px;
-  }
-
   @media (max-width: 1204px) {
     max-width: 700px;
     font-size: 25px;
+  }
+
+  @media (max-width: 768px) {
+    padding-top: 8vh;
+    font-size: 18px;
   }
 `
 

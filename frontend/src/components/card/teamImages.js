@@ -1,8 +1,8 @@
 const teamImages = [
-  'images/team/rahul_stonks.png',
-  'images/team/adeesh_stonks.png',
-  'images/team/ashar_stonks.png',
-  'images/team/aaryan_stonks.png'
+  'images/team/rahul_stonked.png',
+  'images/team/adeesh_stonked.png',
+  'images/team/ashar_stonked.png',
+  'images/team/aaryan_stonked.png'
 ]
 
 export default teamImages

@@ -122,6 +122,12 @@ const ItemText = styled.div`
     max-width: 700px;
     font-size: 25px;
   }
+  @media (max-width: 768px) {
+    padding-top: 12vh;
+    font-size: 18px;
+  }
+
+
 `
 
 const RarityItemText = styled.div`
@@ -166,6 +172,7 @@ const RightButton = styled(LeftButton)`
   }`}
 
   @media (max-width: 768px) {
+    font-size: 16px;
     height: 50px;
     width: 170px;
   }
