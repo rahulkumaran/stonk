@@ -26,7 +26,7 @@ router.get('/:stonks_id', async (req, res) => {
     resolvedPath = `${dir}/data/${nft_id}_rarity.json`
 
     if (nft_id >= 1 && nft_id <= searchLimit) {
-      imgUrl = `/nft-images/${nft_id}.png`
+      imgUrl = `/nft-images-test/${nft_id}`
 
       fs.readFile(resolvedPath, (err, data) => {
         if (err) throw err
