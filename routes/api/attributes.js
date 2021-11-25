@@ -19,91 +19,94 @@ router.get('/', async (req, res) => {
 //@desc GET details of a stonks NFT
 //@access Public
 
-router.get('raritymeta/:stonks_id', async (req, res) => {
-  try {
-    const searchLimit = parseInt(req.query.limit)
-    var imgUrl
-    const nft_id = req.params.stonks_id
-    resolvedPath = `${dir}/data/${nft_id}_rarity.json`
-
-    if (nft_id >= 1 && nft_id <= searchLimit) {
-      imgUrl = `/nft-images/${nft_id}`
-
-      fs.readFile(resolvedPath, (err, data) => {
-        if (err) throw err
-        let metadata = JSON.parse(data)
-        res.json({
-          nft_id,
-          metadata,
-          image_src: imgUrl,
-          error: null
-        })
-      })
-    } else {
-      res.json({
-        nft_id: null,
-        metadata: null,
-        image_src: null,
-        error: `Please enter ID between 1 and ${searchLimit}`
-      })
-    }
-  } catch (err) {
-    console.log(err.message)
-    res.status(500).send('Internal Server Error')
-  }
-})
-
-router.get('meta/:stonks_id', async (req, res) => {
-  try {
-    var imgUrl
-    const nft_id = req.params.stonks_id
-    resolvedPath = `${dir}/metadata/${nft_id}.json`
-
-    if (nft_id >= 1 && nft_id <= 100) {
-      imgUrl = `/nft-images/${nft_id}`
-
-      fs.readFile(resolvedPath, (err, data) => {
-        if (err) throw err
-        let metadata = JSON.parse(data)
-        res.json({
-          nft_id,
-          metadata,
-          image_src: imgUrl,
-          error: null
-        })
-      })
-    } else {
-      res.json({
-        nft_id: null,
-        metadata: null,
-        image_src: null,
-        error: `Please enter ID between 1 and ${searchLimit}`
-      })
-    }
-  } catch (err) {
-    console.log(err.message)
-    res.status(500).send('Internal Server Error')
-  }
-})
-
-router.get('/nft-images/:art', async (req, res) => {
+// metadata with rarity attributes
+router.get('/nft-rarity-metadata/:stonks_id', async (req, res) => {
   try {
     const supply = await Supply.findOne({ purpose: 'supply-tracking' })
     const currentSupply = supply.currentSupply
     const searchRange = parseInt(currentSupply)
 
-    const artNumber = parseInt(req.params.art)
+    // const searchLimit = parseInt(req.query.limit)
+    var imgUrl
+    const nft_id = req.params.stonks_id
 
-    if (artNumber <= searchRange) {
-      res.sendFile(path.resolve('images', `${artNumber}.png`))
+    if (nft_id >= 1 && nft_id <= searchRange) {
+      const resolvedPath = `${dir}/data/${nft_id}_rarity.json`
+      imgUrl = `/nft-images/${nft_id}`
+
+      fs.readFile(resolvedPath, (err, data) => {
+        if (err) throw err
+        let metadata = JSON.parse(data)
+        res.json({
+          nft_id,
+          metadata,
+          image_src: imgUrl,
+          error: null
+        })
+      })
     } else {
-      res.json({ response: 'NFT not minted yet' })
+      res.json({ response: 'NO NAUGHTY! ;) This NFT has not been minted yet!' })
+    }
+  } catch (err) {
+    console.log(err.message)
+    res.status(500).send('Internal Server Error')
+  }
+})
+
+// original metadata without rarity
+router.get('/nft-metadata/:stonks_id', async (req, res) => {
+  try {
+    const supply = await Supply.findOne({ purpose: 'supply-tracking' })
+    const currentSupply = supply.currentSupply
+    const searchRange = parseInt(currentSupply)
+
+    var imgUrl
+    const nft_id = req.params.stonks_id
+
+    if (nft_id >= 1 && nft_id <= searchRange) {
+      const resolvedPath = `${dir}/metadata/${nft_id}.json`
+
+      imgUrl = `https://alphatest.thestonksociety.com/api/attributes/nft-images/${nft_id}`
+
+      fs.readFile(resolvedPath, (err, data) => {
+        if (err) throw err
+        let metadata = JSON.parse(data)
+        res.json({
+          nft_id,
+          metadata,
+          image_src: imgUrl,
+          error: null
+        })
+      })
+    } else {
+      res.json({ response: 'NO NAUGHTY! ;) This NFT has not been minted yet!' })
+    }
+  } catch (err) {
+    console.log(err.message)
+    res.status(500).send('Internal Server Error')
+  }
+})
+
+// api to get the nft images <= minted
+router.get('/nft-images/:stonks_id', async (req, res) => {
+  try {
+    const supply = await Supply.findOne({ purpose: 'supply-tracking' })
+    const currentSupply = supply.currentSupply
+    const searchRange = parseInt(currentSupply)
+
+    const nft_id = parseInt(req.params.stonks_id)
+
+    if (nft_id <= searchRange) {
+      res.sendFile(path.resolve('images', `${nft_id}.png`))
+    } else {
+      res.json({ response: 'NO NAUGHTY! ;) This NFT has not been minted yet!' })
     }
   } catch (err) {
     res.json({ response: 'Internal Server Error, Try after some time!' })
   }
 })
 
+// api to update the supply in db to keep track for fetching metadata and images
 router.post('/update-supply-snapshot', async (req, res) => {
   try {
     const { currentSupply } = req.body
