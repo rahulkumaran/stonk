@@ -53,8 +53,8 @@ function MintSection({ backgroundImg, location, EE }) {
       .then(receipt => {
         setFeedback('Congratulation, you now own a Stonks NFT!!')
         setClaimingNft(false)
-        dispatch(fetchData(blockchain.account))
         dispatch(fetchSupply())
+        dispatch(fetchData(blockchain.account))
       })
   }
 
