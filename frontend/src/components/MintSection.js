@@ -258,6 +258,10 @@ const ItemText = styled.div`
     max-width: 700px;
     font-size: 25px;
   }
+  @media (max-width: 768px) {
+    padding-top: 8vh;
+    font-size: 20px;
+  }
 `
 
 const ConnectedP = styled.p`
@@ -355,7 +359,9 @@ const H2 = styled.h2`color: #66aff5;`
 
 const Address = styled.p`
   @media (max-width: 550px) {
-    font-size: 10px;
+    font-size: 18px;
+    max-width: 280px;
+    overflow-x: scroll;
   }
   color: white;
 `
@@ -398,8 +404,8 @@ const WalletImg = styled.img`
   width: 60px;
 
   @media (max-width: 550px) {
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
     padding-right: 5px;
   }
 `

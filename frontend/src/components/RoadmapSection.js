@@ -17,7 +17,12 @@ function RoadmapSection({
       <Fade in delay={300} appear>
         <Fragment>
           <ItemText>
-            <h2 style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>
+            <h2
+              style={{
+                color: '#ffa500',
+                animation: 'animateDown infinite 1.5s'
+              }}
+            >
               {title}
             </h2>
             <br />
@@ -282,11 +287,11 @@ const TextContainer = styled.div`
   }
 
   @media (max-width: 1204px) {
-    max-width: 600px;
+    // max-width: 600px;
     font-size: 17px;
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 820px) {
     max-width: 600px;
     font-size: 17px;
   }
@@ -434,9 +439,6 @@ const CenterLine = styled.div`
   }
 `
 const MediumIcom = styled.img`
-  @media (max-width: 768px) {
-    height: 40px;
-    width: 40px;
-  }
-
+  height: 40px;
+  width: 40px;
 `

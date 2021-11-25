@@ -474,7 +474,7 @@ const AttributeBlockOne = styled.div`
 
   @media (max-width: 550px) {
       min-width:0;
-      width: 1px;
+      width: 150px;
     }
 `
 const BlockWrapper = styled.div`

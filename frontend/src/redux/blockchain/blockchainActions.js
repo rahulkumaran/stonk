@@ -84,7 +84,7 @@ export const connect = () => {
         dispatch(connectFailed('Something went wrong.'))
       }
     } else {
-      alert('Please Install Metamask To Continue Using This Website')
+      alert('Please Install Metamask on your device.')
       dispatch(connectFailed('Install Metamask.'))
     }
   }

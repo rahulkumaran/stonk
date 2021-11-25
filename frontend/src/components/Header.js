@@ -126,7 +126,7 @@ function Header({ handleEasterEgg }) {
                 justifyContent: 'center'
               }}
             >
-              <span>Stonk</span>{' '}
+              <span style={{ color: '#ffa500' }}>Stonk</span>{' '}
               <img
                 style={{
                   height: '30px',
@@ -139,7 +139,7 @@ function Header({ handleEasterEgg }) {
                 alt="logo"
               />
               {''}
-              <span>Society</span>
+              <span style={{ color: '#66aff5' }}>Society</span>
             </Link>
             <Menu showNav={colorChange}>
               <Link to="/">Back to Home</Link>
@@ -147,14 +147,17 @@ function Header({ handleEasterEgg }) {
           </Fragment>}
       <RightMenu>
         <SocialsWrapper>
-          <SocialAnchor href="#" target="_blank">
+          <SocialAnchor
+            href="https://twitter.com/FTMStonkSociety/"
+            target="_blank"
+          >
             <img
               src={twitterLogo}
               alt="twitter"
               style={{ height: '40px', width: '40px' }}
             />
           </SocialAnchor>
-          <SocialAnchor href="#" target="_blank">
+          <SocialAnchor href="https://discord.gg/9CubZShGJv" target="_blank">
             <img
               src={discordLogo}
               alt="discord"

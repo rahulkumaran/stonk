@@ -38,8 +38,6 @@ function Home({ BG, EE }) {
         EE={EE}
       />
       <LastSection
-        title="Team"
-        description="We are one among you. Together with you, we make the Stonk Society!"
         backgroundImg={BG !== '' ? BG : StarBG}
         location="team"
         EE={EE}
