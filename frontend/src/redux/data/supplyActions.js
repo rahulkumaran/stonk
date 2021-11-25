@@ -45,6 +45,20 @@ const requestContractFailed = payload => {
   }
 }
 
+const updateSupply = _totalSupply => {
+  fetch('/update-supply-snap', {
+    method: 'POST',
+
+    body: JSON.stringify({
+      currentSupply: _totalSupply
+    }),
+
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8'
+    }
+  }).then(response => console.log(response))
+}
+
 export const fetchSupply = () => {
   return async dispatch => {
     dispatch(fetchSupplyRequest())
@@ -53,6 +67,9 @@ export const fetchSupply = () => {
         .getState()
         .supply.contract.methods.totalSupply()
         .call()
+
+      updateSupply(totalSupply)
+
       dispatch(
         fetchSupplySuccess({
           totalSupply
