@@ -1,8 +1,12 @@
+const colors = require('colors')
 const environment = require('./helpers/environment.js')
+const connectDB = require('./helpers/connectDB.js')
 const path = require('path')
+const fs = require('fs')
 const express = require('express')
 
 environment()
+connectDB()
 
 const app = express()
 
@@ -31,5 +35,5 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.listen(PORT, () => {
-  console.log(`server starting on port ${PORT}`)
+  console.log(`server running on port ${PORT}`.yellow.bold)
 })
