@@ -68,7 +68,7 @@ export default function CardComponent() {
                 >
                   {member.about}
                 </Typography>
-                <a href={member.twitter} target="_blank">
+                <a href={member.twitter} target="_blank" rel="noreferrer">
                   <IconButton aria-label="twitter" >
                     <img src={TwitterIcon} alt="twitter" style={{ height: "30px", width: "30px" }} />
                   </IconButton>

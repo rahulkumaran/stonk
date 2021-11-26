@@ -1,11 +1,11 @@
-import React, { Fragment, useState, useEffect } from 'react'
-import {Navigate} from 'react-router-dom'
+import React, { Fragment, useState } from 'react'
+import { Navigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Fade from 'react-reveal/Fade'
 import QuestionMark from '../components/assets/qm.gif'
 import StarBG from './assets/star1.gif'
 import SearchIcon from './assets/search.png'
-import {  useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 function Attributes() {
   const [search, setSearch] = useState(0)
@@ -16,21 +16,20 @@ function Attributes() {
   const supplyState = useSelector(state => state.supply)
 
 
-  if(supplyState.errorMsg){
+  if (supplyState.errorMsg) {
     console.count("test")
     alert(supplyState.errorMsg)
     return <Navigate to="/" />
   }
 
   const searchRange = parseInt(supplyState.totalSupply);
-  console.log("range---", searchRange)
 
   const searchHandler = e => {
     e.preventDefault()
-    if (search != 0 && search >= 1 && search <= searchRange) {
+    if (search !== 0 && search >= 1 && search <= searchRange) {
       setNftData(null)
       setLoading(true)
-      fetch(`/api/attributes/${search}?limit=${searchRange}`)
+      fetch(`/api/attributes/nft-rarity-metadata/${search}`)
         .then(response => response.json())
         .then(data => {
           setTimeout(() => {
@@ -87,7 +86,7 @@ function Attributes() {
                   </AttributesImageWrapper>
                 </Fade>
 
-                <Fade delay={800}>
+                <Fade delay={500}>
                   <AttributesInfoWrapper>
                     <AttributesInfo>
                       <BlockWrapper flexCol={true}>
@@ -194,14 +193,14 @@ function Attributes() {
             </ContentWrapper>
           </Fragment>}
 
-        {!nftData && 
+        {!nftData &&
           !loading ?
           <ContentWrapper>
-            <Fade bottom cascade>
-              <QuestionMarkWrapper>
+            <QuestionMarkWrapper>
+              <Fade right>
                 <QM src={QuestionMark} alt="question mark" />
-              </QuestionMarkWrapper>
-            </Fade>
+              </Fade>
+            </QuestionMarkWrapper>
           </ContentWrapper> : nftData && nftData.error ? <h2>{nftData.error}</h2> : null}
       </Wrap>
     </Container>
@@ -404,6 +403,7 @@ const AttributesInfo = styled.div`
 const SearchInput = styled.input`
   border: 1px solid #ffa500;
   border-radius: 10px;
+  padding-left: 20px;
 
   background-color: rgba(255, 215, 0, 0.2);
   width: 250px;

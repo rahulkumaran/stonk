@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import Fade from 'react-reveal/Fade'
 import styled from 'styled-components'
 import poweredBy from '../components/assets/powered-by-fantom.png'
