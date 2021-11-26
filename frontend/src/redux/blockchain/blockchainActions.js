@@ -3,6 +3,7 @@ import SmartContract from '../../contracts/test_contract.json'
 
 import { fetchData } from '../data/dataActions'
 
+
 const connectRequest = () => {
   console.log('Conn_req')
   return {
@@ -31,6 +32,12 @@ const updateAccountRequest = payload => {
   return {
     type: 'UPDATE_ACCOUNT',
     payload: payload
+  }
+}
+
+export const disconnect = () => {
+  return {
+    type: 'DISCONNECT'
   }
 }
 

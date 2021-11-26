@@ -9,7 +9,7 @@ import ArrowLogo from './assets/ArrowLogo.png'
 import twitterLogo from '../components/assets/twitter.jpg'
 import discordLogo from '../components/assets/discord.jpg'
 import { useDispatch, useSelector } from 'react-redux'
-import { connect } from '../redux/blockchain/blockchainActions'
+import { connect, disconnect } from '../redux/blockchain/blockchainActions'
 import { fetchData } from '../redux/data/dataActions'
 
 //ds
@@ -24,9 +24,15 @@ const WalletCard = () => {
     () => {
       if (blockchain.account !== '' && blockchain.smartContract !== null) {
         dispatch(fetchData(blockchain.account))
-        setConnButtonText(
-          account.substring(0, 4) + '___' + account.substring(38, 42)
-        )
+
+        if (account) {
+          setConnButtonText(
+            account.substring(0, 4) + '___' + account.substring(38, 42)
+          )
+        } else {
+          dispatch(disconnect())
+        }
+
       }
     },
     [blockchain.smartContract, blockchain.account, dispatch, account]
@@ -39,16 +45,21 @@ const WalletCard = () => {
     if (blockchain.account === '' || blockchain.smartContract === null) {
       dispatch(connect())
     } else {
-      alert(
-        `You are already connected with wallet ${account}. If you wish to change it please use metamask.`
-      )
+      if (account) {
+        alert(
+          `You are already connected with wallet ${account}. If you wish to change it please use metamask.`
+        )
+      }
+      else {
+        dispatch(connect())
+      }
     }
   }
 
   return (
     <ConnectButton
       isConnected={
-        blockchain.account === '' || blockchain.smartContract !== null
+        account && (blockchain.account === '' || blockchain.smartContract !== null)
       }
       onClick={handleConnectClick}
     >

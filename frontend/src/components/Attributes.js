@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Fade from 'react-reveal/Fade'
@@ -8,24 +8,33 @@ import SearchIcon from './assets/search.png'
 import { useSelector } from 'react-redux'
 
 function Attributes() {
+
   const [search, setSearch] = useState(0)
+  const [supply, setSupply] = useState(null)
   const [nftData, setNftData] = useState(null)
   const [loading, setLoading] = useState(false)
 
-
   const supplyState = useSelector(state => state.supply)
 
+  useEffect(() => {
+    fetch('/api/attributes/get-supply-snapshot')
+      .then(response => response.json())
+      .then(data => setSupply(data.currentSupply))
+  }, [supplyState])
 
-  if (supplyState.errorMsg) {
-    console.count("test")
-    alert(supplyState.errorMsg)
-    return <Navigate to="/" />
-  }
 
-  const searchRange = parseInt(supplyState.totalSupply);
+  // TODO: Test this
+  // if (supplyState.errorMsg) {
+  //   alert(supplyState.errorMsg)
+  //   return <Navigate to="/" />
+  // }
+
+  // pick supply from snapshot, if fails pick from the contract
+  const searchRange = supply || parseInt(supplyState.totalSupply);
 
   const searchHandler = e => {
     e.preventDefault()
+
     if (search !== 0 && search >= 1 && search <= searchRange) {
       setNftData(null)
       setLoading(true)
@@ -40,6 +49,7 @@ function Attributes() {
     } else {
       alert(`You cannot get details for the edition that hasn't been minted yet. Please enter edition number ranging between 1 and ${searchRange}.`)
     }
+
   }
 
   return (

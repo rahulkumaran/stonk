@@ -31,7 +31,7 @@ function MintSection({ backgroundImg, location, EE }) {
   )
 
   var isConnected =
-    blockchain.account === '' || blockchain.smartContract !== null
+    blockchain.account == '' || blockchain.smartContract !== null
 
   const claimNFTs = _amount => {
     if (_amount <= 0) {

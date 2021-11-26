@@ -32,6 +32,15 @@ const blockchainReducer = (state = initialState, action) => {
         ...state,
         account: action.payload.account,
       };
+
+    case "DISCONNECT":
+      return {
+        loading: false,
+        account: null,
+        smartContract: null,
+        web3: null,
+        errorMsg: "",
+      }
     default:
       return state;
   }
