@@ -146,21 +146,19 @@ function MintSection({ backgroundImg, location, EE }) {
               </H1Count>}
           <br />
           {(blockchain.account === '' || blockchain.smartContract === null) &&
-            <Fragment>
-              <ConnectButton
-                isConnected={
-                  blockchain.account === '' || blockchain.smartContract !== null
-                }
-                onClick={handleConnect}
-              >
-                <img
-                  src={metaMaskLogo}
-                  alt="metamask"
-                  style={{ width: '50px' }}
-                />
-                Connect Wallet
-              </ConnectButton>
-            </Fragment>}
+            <ConnectButton
+              isConnected={
+                blockchain.account === '' || blockchain.smartContract !== null
+              }
+              onClick={handleConnect}
+            >
+              <img
+                src={metaMaskLogo}
+                alt="metamask"
+                style={{ width: '50px' }}
+              />
+              Connect Wallet
+            </ConnectButton>}
         </Fragment>
       </Fade>
       <div />

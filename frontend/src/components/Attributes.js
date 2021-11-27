@@ -443,7 +443,7 @@ const IMG = styled.img`border: 2px solid #ffa500;
 }
 
 @media (max-width: 800px) {
-  width: 250px;
+  width: 300px;
   height: 300px;
 }
 `
@@ -525,6 +525,7 @@ const P = styled.p`
 const PH = styled.p`
   color: #ffa500;
   font-size: 15px;
+  text-align: center;
 
   @media (max-width: 550px) {
     font-size: 12px;
