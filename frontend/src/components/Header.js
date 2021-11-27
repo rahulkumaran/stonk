@@ -30,9 +30,9 @@ const WalletCard = () => {
             account.substring(0, 4) + '___' + account.substring(38, 42)
           )
         } else {
+          setConnButtonText('Connect')
           dispatch(disconnect())
         }
-
       }
     },
     [blockchain.smartContract, blockchain.account, dispatch, account]
@@ -49,8 +49,7 @@ const WalletCard = () => {
         alert(
           `You are already connected with wallet ${account}. If you wish to change it please use metamask.`
         )
-      }
-      else {
+      } else {
         dispatch(connect())
       }
     }
@@ -59,7 +58,8 @@ const WalletCard = () => {
   return (
     <ConnectButton
       isConnected={
-        account && (blockchain.account === '' || blockchain.smartContract !== null)
+        account &&
+        (blockchain.account === '' || blockchain.smartContract !== null)
       }
       onClick={handleConnectClick}
     >
@@ -96,66 +96,66 @@ function Header({ handleEasterEgg }) {
     <Container showNav={colorChange}>
       {location.pathname === '/'
         ? <Fragment>
-          <a
-            href="#"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          >
-            <span style={{ color: '#ffa500' }}>Stonk</span>{' '}
-            <img
+            <a
+              href="#"
               style={{
-                height: '30px',
-                width: '30px',
-                position: 'relative',
-                marginBottom: '10px',
-                marginLeft: '4px'
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
               }}
-              src={ArrowLogo}
-              alt="logo"
-              onClick={handleEasterEgg}
-            />
-            {''}
-            <span style={{ color: '#66aff5' }}>Society</span>
-          </a>
-          <Menu showNav={colorChange}>
-            <Link to="/attributes">Attributes</Link>
-            <a href="/#mint">Mint</a>
-            <a href="/#plan">Plan</a>
-            <a href="/#roadmap">Roadmap</a>
-            <a href="/#team">Team</a>
-          </Menu>
-        </Fragment>
+            >
+              <span style={{ color: '#ffa500' }}>Stonk</span>{' '}
+              <img
+                style={{
+                  height: '30px',
+                  width: '30px',
+                  position: 'relative',
+                  marginBottom: '10px',
+                  marginLeft: '4px'
+                }}
+                src={ArrowLogo}
+                alt="logo"
+                onClick={handleEasterEgg}
+              />
+              {''}
+              <span style={{ color: '#66aff5' }}>Society</span>
+            </a>
+            <Menu showNav={colorChange}>
+              <Link to="/attributes">Attributes</Link>
+              <a href="/#mint">Mint</a>
+              <a href="/#plan">Plan</a>
+              <a href="/#roadmap">Roadmap</a>
+              <a href="/#team">Team</a>
+            </Menu>
+          </Fragment>
         : <Fragment>
-          <Link
-            to="/"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          >
-            <span style={{ color: '#ffa500' }}>Stonk</span>{' '}
-            <img
+            <Link
+              to="/"
               style={{
-                height: '30px',
-                width: '30px',
-                position: 'relative',
-                marginBottom: '10px',
-                marginLeft: '4px'
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
               }}
-              src={ArrowLogo}
-              alt="logo"
-            />
-            {''}
-            <span style={{ color: '#66aff5' }}>Society</span>
-          </Link>
-          <Menu showNav={colorChange}>
-            <Link to="/">Back to Home</Link>
-          </Menu>
-        </Fragment>}
+            >
+              <span style={{ color: '#ffa500' }}>Stonk</span>{' '}
+              <img
+                style={{
+                  height: '30px',
+                  width: '30px',
+                  position: 'relative',
+                  marginBottom: '10px',
+                  marginLeft: '4px'
+                }}
+                src={ArrowLogo}
+                alt="logo"
+              />
+              {''}
+              <span style={{ color: '#66aff5' }}>Society</span>
+            </Link>
+            <Menu showNav={colorChange}>
+              <Link to="/">Back to Home</Link>
+            </Menu>
+          </Fragment>}
       <RightMenu>
         <SocialsWrapper>
           <SocialAnchor
@@ -188,27 +188,27 @@ function Header({ handleEasterEgg }) {
         </CustomCloseWrapper>
         {location.pathname === '/'
           ? <Fragment>
-            <li>
-              <Link to="/attributes">Attributes</Link>
-            </li>
-            <li>
-              <a href="/#mint">Mint</a>
-            </li>
-            <li>
-              <a href="/#plan">Plan</a>
-            </li>
-            <li>
-              <a href="/#roadmap">Roadmap</a>
-            </li>
-            <li>
-              <a href="/#team">Team</a>
-            </li>
-          </Fragment>
+              <li>
+                <Link to="/attributes">Attributes</Link>
+              </li>
+              <li>
+                <a href="/#mint">Mint</a>
+              </li>
+              <li>
+                <a href="/#plan">Plan</a>
+              </li>
+              <li>
+                <a href="/#roadmap">Roadmap</a>
+              </li>
+              <li>
+                <a href="/#team">Team</a>
+              </li>
+            </Fragment>
           : <Fragment>
-            <li>
-              <Link to="/">Back to Home</Link>
-            </li>
-          </Fragment>}
+              <li>
+                <Link to="/">Back to Home</Link>
+              </li>
+            </Fragment>}
       </BurgerNav>
     </Container>
   )

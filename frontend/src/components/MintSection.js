@@ -1,4 +1,5 @@
 import React, { useEffect, useState, Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import Fade from 'react-reveal/Fade'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
@@ -19,7 +20,7 @@ function MintSection({ backgroundImg, location, EE }) {
   // const supply = useSelector(state => state.supply.totalSupply)
 
   console.log(data)
-  const [feedback, setFeedback] = useState("Maybe it's your lucky day.")
+  const [feedback, setFeedback] = useState("Maybe it's your lucky day!")
   const [claimingNft, setClaimingNft] = useState(false)
   const [mintCount, setMintCount] = useState(1)
 
@@ -37,7 +38,7 @@ function MintSection({ backgroundImg, location, EE }) {
     if (_amount <= 0) {
       return
     }
-    setFeedback('Minting your Stonks...')
+    setFeedback('Minting your Stonks >>>')
     setClaimingNft(true)
     blockchain.smartContract.methods
       .mint(blockchain.account, _amount)
@@ -49,7 +50,7 @@ function MintSection({ backgroundImg, location, EE }) {
       })
       .once('error', err => {
         console.log(err)
-        setFeedback('Sorry, something went wrong please try again later.')
+        setFeedback('Sorry, something went wrong. Try Again?')
         setClaimingNft(false)
       })
       .then(receipt => {
@@ -138,26 +139,28 @@ function MintSection({ backgroundImg, location, EE }) {
           {/* OPTION 2 */}
           {blockchain.account === '' || blockchain.smartContract === null
             ? <H1Count>
-              <CircularProgress style={{ width: '40px' }} />&nbsp;/100 Minted!
+                <CircularProgress style={{ width: '40px' }} />&nbsp;/100 Minted!
               </H1Count>
             : <H1Count>
-              {data.totalSupply}/100 Minted
+                {data.totalSupply}/100 Minted
               </H1Count>}
           <br />
           {(blockchain.account === '' || blockchain.smartContract === null) &&
-            <ConnectButton
-              isConnected={
-                blockchain.account === '' || blockchain.smartContract !== null
-              }
-              onClick={handleConnect}
-            >
-              <img
-                src={metaMaskLogo}
-                alt="metamask"
-                style={{ width: '50px' }}
-              />
-              Connect Wallet
-            </ConnectButton>}
+            <Fragment>
+              <ConnectButton
+                isConnected={
+                  blockchain.account === '' || blockchain.smartContract !== null
+                }
+                onClick={handleConnect}
+              >
+                <img
+                  src={metaMaskLogo}
+                  alt="metamask"
+                  style={{ width: '50px' }}
+                />
+                Connect Wallet
+              </ConnectButton>
+            </Fragment>}
         </Fragment>
       </Fade>
       <div />
@@ -165,56 +168,64 @@ function MintSection({ backgroundImg, location, EE }) {
         <Fragment>
           {Number(data.totalSupply) === 3333
             ? <H2>
-              The sale has ended! However, you can buy from our Paintswap
-              Collection!
+                The sale has ended! However, you can buy from our Paintswap
+                Collection!
               </H2>
             : isConnected
               ? <Fragment>
-                <ButtonsWrapper>
-                  <ButtonGroup>
-                    <CounterButton
-                      onClick={e => {
-                        if (mintCount > 1) {
-                          setMintCount(mintCount - 1)
-                        }
-                      }}
-                    >
-                      -
+                  <ButtonsWrapper>
+                    <ButtonGroup>
+                      <CounterButton
+                        onClick={e => {
+                          if (mintCount > 1) {
+                            setMintCount(mintCount - 1)
+                          }
+                        }}
+                      >
+                        -
                       </CounterButton>
 
-                    <MintInput
-                      disabled
-                      onChange={e => setMintCount(e.target.value)}
-                      value={mintCount}
-                      style={{ paddingLeft: '85px', fontSize: '40px' }}
-                    />
-                    <CounterButton
-                      onClick={e => {
-                        if (mintCount < 5) {
-                          setMintCount(mintCount + 1)
-                        }
-                      }}
-                    >
-                      +
+                      <MintInput
+                        disabled
+                        onChange={e => setMintCount(e.target.value)}
+                        value={mintCount}
+                        style={{ paddingLeft: '85px', fontSize: '40px' }}
+                      />
+                      <CounterButton
+                        onClick={e => {
+                          if (mintCount < 5) {
+                            setMintCount(mintCount + 1)
+                          }
+                        }}
+                      >
+                        +
                       </CounterButton>
-                  </ButtonGroup>
-                </ButtonsWrapper>
+                    </ButtonGroup>
+                  </ButtonsWrapper>
 
-                <ButtonsWrapper>
-                  <ButtonGroup>
-                    <RightButton
-                      disabled={claimingNft ? 1 : 0}
-                      onClick={e => {
-                        e.preventDefault()
-                        claimNFTs(mintCount)
-                        getData()
-                      }}
-                    >
-                      {claimingNft ? 'Minting......' : 'Mint Your Stonks'}
-                    </RightButton>
-                  </ButtonGroup>
-                </ButtonsWrapper>
-              </Fragment>
+                  <ButtonsWrapper>
+                    <ButtonGroup>
+                      <RightButton
+                        disabled={claimingNft ? 1 : 0}
+                        onClick={e => {
+                          e.preventDefault()
+                          claimNFTs(mintCount)
+                          getData()
+                        }}
+                      >
+                        {claimingNft ? 'Minting......' : 'Mint Your Stonks'}
+                      </RightButton>
+                    </ButtonGroup>
+                    <p style={{ textAlign: 'center', color: '#86dc3d' }}>
+                      {feedback}
+                    </p>
+                    {feedback ===
+                      'Congratulation, you now own a Stonks NFT!!' &&
+                      <CheckItOut>
+                        <Link to="/attributes">Check it out here!</Link>
+                      </CheckItOut>}
+                  </ButtonsWrapper>
+                </Fragment>
               : null}
         </Fragment>
       </Fade>
@@ -230,7 +241,7 @@ export default MintSection
 const Wrap = styled.div`
   width: 100vw;
   height: 100vh;
-  max-height: 110vh;
+  max-height: auto;
   ${props =>
     props.backgroundImg ? `background-image: url(${props.backgroundImg})` : ''};
   ${props =>
@@ -240,14 +251,14 @@ const Wrap = styled.div`
       : ''};
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   border-bottom: 1px solid #ffa500;
 `
 
 const ItemText = styled.div`
   padding: 20px;
-  padding-top: 15vh;
+  padding-top: 7vh;
   line-height: 35px;
   text-align: center;
   font-size: 25px;
@@ -285,8 +296,8 @@ flex-direction: column */
 
 const ButtonGroup = styled.div`
   display: flex;
-  margin-top: 60px;
-  margin-bottom: 60px;
+  margin-top: 0px;
+  margin-bottom: 50px;
   justify-content: center;
   align-items: center;
 
@@ -327,6 +338,15 @@ const RightButton = styled(LeftButton)`
   @media (max-width: 768px) {
     height: 60px;
     width: 250px;
+  }
+`
+
+const CheckItOut = styled.p`
+  text-align: center;
+  color: #ffa500;
+  line-height: 30px;
+  &:hover {
+    opacity: 0.65;
   }
 `
 

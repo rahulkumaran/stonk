@@ -169,9 +169,15 @@ function RoadmapSection({
             <br />
             <ButtonsWrapper>
               <ButtonGroup>
-                <RightButton>
-                  <MediumIcom src={Medium} alt="medium" />&nbsp;Medium
-                </RightButton>
+                <a
+                  href="https://medium.com/@thestonksociety"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <RightButton>
+                    <MediumIcom src={Medium} alt="medium" />&nbsp;Medium
+                  </RightButton>
+                </a>
               </ButtonGroup>
             </ButtonsWrapper>
           </TextContainer>
