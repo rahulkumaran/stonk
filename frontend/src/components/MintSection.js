@@ -8,6 +8,7 @@ import { fetchData } from '../redux/data/dataActions'
 import metaMaskLogo from './assets/metamask.svg'
 import CircularProgress from '@mui/material/CircularProgress'
 import WalletIcon from './assets/wallet-solid.svg'
+import PaintSwapLogo from './assets/paintswap.png'
 import { fetchSupply } from '../redux/data/supplyActions'
 
 //const startMintingProcess = () => {}
@@ -76,14 +77,14 @@ function MintSection({ backgroundImg, location, EE }) {
     }
   }
   return (
-    <Wrap
-      backgroundImg={backgroundImg}
-      id={`${location}`}
-      EE={EE}
-      extendedHeight={isConnected}
-    >
-      <Fade in delay={300} appear>
-        <Fragment>
+    <Fragment>
+      <Wrap
+        backgroundImg={backgroundImg}
+        id={`${location}`}
+        EE={EE}
+        extendedHeight={isConnected}
+      >
+        <Fade in delay={300} appear>
           <ItemText>
             <h2
               style={{
@@ -98,136 +99,185 @@ function MintSection({ backgroundImg, location, EE }) {
               Become a part of the stonk society! Lets pAmP it up!
             </p>
           </ItemText>
-          <br />
-          {isConnected &&
-            <ConnectedP
-              style={{
-                color: '#ffa500',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-              <WalletImg src={WalletIcon} alt="wallet address" />
-              <Address>
-                {blockchain.account}
-              </Address>
-            </ConnectedP>}
-        </Fragment>
+          <Fragment>
+            {isConnected &&
+              <ConnectedP
+                style={{
+                  color: '#ffa500',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <WalletImg src={WalletIcon} alt="wallet address" />
+                <Address>
+                  {blockchain.account}
+                </Address>
+              </ConnectedP>}
+          </Fragment>
+        </Fade>
+        {blockchain.loading || data.loading
+          ? 'Processing..'
+          : <Fragment>
+              <Fade in delay={300} appear>
+                <Fragment>
+                  {/*OPTION 1: first check if the account is connected, if yes then use supply from the data state.
+      If account is not connected then pick the supply from the supply state which doesnt require wallet connection.
+      If non of the above fetched the supply then show loader */}
 
-        <Fragment>
-          {/*OPTION 1: first check if the account is connected, if yes then use supply from the data state.
-        If account is not connected then pick the supply from the supply state which doesnt require wallet connection.
-        If non of the above fetched the supply then show loader */}
-
-          {/* {(blockchain.account === '' || blockchain.smartContract !== null) ?
+                  {/* {(blockchain.account === '' || blockchain.smartContract !== null) ?
+          <H1Count>
+            {data.totalSupply}/10 Minted
+          </H1Count> :
+          supply !== "" && supply !== null ?
             <H1Count>
-              {data.totalSupply}/10 Minted
-            </H1Count> :
-            supply !== "" && supply !== null ?
+              {supply}/10 Minted
+          </H1Count> :
+            (blockchain.account === '' || blockchain.smartContract !== null) ?
               <H1Count>
-                {supply}/10 Minted
-            </H1Count> :
-              (blockchain.account === '' || blockchain.smartContract !== null) ?
-                <H1Count>
-                  {data.totalSupply}/10 Minted
-                  </H1Count> :
-                <H1Count>
-                  <CircularProgress style={{ width: '40px' }} />&nbsp;/10 Minted!
-                </H1Count>
-          } */}
-          {/* OPTION 2 */}
-          {blockchain.account === '' || blockchain.smartContract === null
-            ? <H1Count>
-                <CircularProgress style={{ width: '40px' }} />&nbsp;/100 Minted!
+                {data.totalSupply}/10 Minted
+                </H1Count> :
+              <H1Count>
+                <CircularProgress style={{ width: '40px' }} />&nbsp;/10 Minted!
               </H1Count>
-            : <H1Count>
-                {data.totalSupply}/100 Minted
-              </H1Count>}
-          <br />
-          {(blockchain.account === '' || blockchain.smartContract === null) &&
-            <ConnectButton
-              isConnected={
-                blockchain.account === '' || blockchain.smartContract !== null
-              }
-              onClick={handleConnect}
-            >
-              <img
-                src={metaMaskLogo}
-                alt="metamask"
-                style={{ width: '50px' }}
-              />
-              Connect Wallet
-            </ConnectButton>}
-        </Fragment>
-      </Fade>
-      <div />
-      <Fade>
-        <Fragment>
-          {Number(data.totalSupply) === 3333
-            ? <H2>
-                The sale has ended! However, you can buy from our Paintswap
-                Collection!
-              </H2>
-            : isConnected
-              ? <Fragment>
-                  <ButtonsWrapper>
-                    <ButtonGroup>
-                      <CounterButton
-                        onClick={e => {
-                          if (mintCount > 1) {
-                            setMintCount(mintCount - 1)
-                          }
-                        }}
-                      >
-                        -
-                      </CounterButton>
-
-                      <MintInput
-                        disabled
-                        onChange={e => setMintCount(e.target.value)}
-                        value={mintCount}
-                        style={{ paddingLeft: '85px', fontSize: '40px' }}
+        } */}
+                  {/* OPTION 2 */}
+                  {blockchain.account === '' ||
+                  blockchain.smartContract === null
+                    ? <H1Count>
+                        <CircularProgress style={{ width: '40px' }} />&nbsp;/100
+                        Minted!
+                      </H1Count>
+                    : <H1Count>
+                        {data.totalSupply}/100 Minted
+                      </H1Count>}
+                  <br />
+                  {(blockchain.account === '' ||
+                    blockchain.smartContract === null) &&
+                    <ConnectButton
+                      isConnected={
+                        blockchain.account === '' ||
+                        blockchain.smartContract !== null
+                      }
+                      onClick={handleConnect}
+                    >
+                      <img
+                        src={metaMaskLogo}
+                        alt="metamask"
+                        style={{ width: '50px' }}
                       />
-                      <CounterButton
-                        onClick={e => {
-                          if (mintCount < 5) {
-                            setMintCount(mintCount + 1)
-                          }
-                        }}
-                      >
-                        +
-                      </CounterButton>
-                    </ButtonGroup>
-                  </ButtonsWrapper>
-
-                  <ButtonsWrapper>
-                    <ButtonGroup>
-                      <RightButton
-                        disabled={claimingNft ? 1 : 0}
-                        onClick={e => {
-                          e.preventDefault()
-                          claimNFTs(mintCount)
-                          getData()
-                        }}
-                      >
-                        {claimingNft ? 'Minting......' : 'Mint Your Stonks'}
-                      </RightButton>
-                    </ButtonGroup>
-                    <p style={{ textAlign: 'center', color: '#86dc3d' }}>
-                      {feedback}
-                    </p>
-                    {feedback ===
-                      'Congratulation, you now own a Stonks NFT!!' &&
-                      <CheckItOut>
-                        <Link to="/attributes">Check it out here!</Link>
-                      </CheckItOut>}
-                  </ButtonsWrapper>
+                      Connect Wallet
+                    </ConnectButton>}
                 </Fragment>
-              : null}
-        </Fragment>
-      </Fade>
-    </Wrap>
+              </Fade>
+              <div />
+              <Fade>
+                <Fragment>
+                  {Number(data.totalSupply) === 3333
+                    ? <Fragment>
+                        <ButtonsWrapper>
+                          <ButtonGroup>
+                            <RightButton>
+                              <img
+                                src={PaintSwapLogo}
+                                style={{ height: '30px', width: '30px' }}
+                                alt="paintswap"
+                              />&nbsp;PaintSwap
+                            </RightButton>
+                          </ButtonGroup>
+                        </ButtonsWrapper>
+                        <H2>
+                          The sale has ended! However, you can buy from our
+                          Paintswap Collection!
+                        </H2>
+                      </Fragment>
+                    : isConnected
+                      ? <Fragment>
+                          <ButtonsWrapper>
+                            <ButtonGroup>
+                              <CounterButton
+                                disabled={claimingNft ? 1 : 0}
+                                onClick={e => {
+                                  if (!claimingNft) {
+                                    if (mintCount > 1) {
+                                      setMintCount(mintCount - 1)
+                                    }
+                                  } else {
+                                    alert(
+                                      'You already have a pending transaction. Please check metamask!'
+                                    )
+                                  }
+                                }}
+                              >
+                                -
+                              </CounterButton>
+
+                              <MintInput
+                                disabled
+                                shadowInput={claimingNft ? 1 : 0}
+                                onChange={e => setMintCount(e.target.value)}
+                                value={mintCount}
+                                style={{
+                                  paddingLeft: '85px',
+                                  fontSize: '40px'
+                                }}
+                              />
+                              <CounterButton
+                                disabled={claimingNft ? 1 : 0}
+                                onClick={e => {
+                                  if (!claimingNft) {
+                                    if (mintCount < 5) {
+                                      setMintCount(mintCount + 1)
+                                    }
+                                  } else {
+                                    alert(
+                                      'You already have a pending transaction. Please check metamask!'
+                                    )
+                                  }
+                                }}
+                              >
+                                +
+                              </CounterButton>
+                            </ButtonGroup>
+                          </ButtonsWrapper>
+
+                          <ButtonsWrapper>
+                            <ButtonGroup>
+                              <RightButton
+                                disabled={claimingNft ? 1 : 0}
+                                onClick={e => {
+                                  if (!claimingNft) {
+                                    e.preventDefault()
+                                    claimNFTs(mintCount)
+                                    getData()
+                                  } else {
+                                    alert(
+                                      'You already have a pending transaction. Please check metamask!'
+                                    )
+                                  }
+                                }}
+                              >
+                                {claimingNft ? 'Minting' : 'Mint Your Stonks'}
+                              </RightButton>
+                            </ButtonGroup>
+                            <p
+                              style={{ textAlign: 'center', color: '#86dc3d' }}
+                            >
+                              {feedback}
+                            </p>
+                            {feedback ===
+                              'Congratulation, you now own a Stonks NFT!!' &&
+                              <CheckItOut>
+                                <Link to="/attributes">Check it out here!</Link>
+                              </CheckItOut>}
+                          </ButtonsWrapper>
+                        </Fragment>
+                      : null}
+                </Fragment>
+              </Fade>
+            </Fragment>}
+      </Wrap>
+    </Fragment>
   )
 }
 
@@ -386,6 +436,7 @@ const Address = styled.p`
   color: white;
 `
 const MintInput = styled.input`
+  ${props => (props.shadowInput ? `opacity: 0.4;}` : '')};
   border: 1px solid #ffa500;
 
   background-color: rgba(255, 215, 0, 0.2);
