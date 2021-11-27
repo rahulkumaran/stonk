@@ -113,21 +113,6 @@ const ItemText = styled.div`
   }
 `
 
-const ButtonsWrapper = styled.div`
-  /* can use these if text align center is removed in app.css for .app */
-  /* display: flex;
-flex-direction: column */
-`
-
-const ButtonGroup = styled.div`
-  display: flex;
-  margin-bottom: 30px;
-  justify-content: center;
-
-  @media (max-width: 768px) {
-    flex: column;
-  }
-`
 
 const LeftButton = styled.div`
   background-color: rgba(23, 26, 32, 0.8);
@@ -210,30 +195,5 @@ const H3 = styled.h3`
     width: 4rem;
     background: orange;
     margin: 10px 0;
-  }
-`
-
-const H3P = styled.h3`
-  color: #86dc3d;
-
-  &:after {
-    content: "";
-    display: block;
-    height: 2px;
-    width: 10rem;
-    background: orange;
-    margin: 10px 0;
-    margin-left: -23px;
-  }
-
-  @media (max-width: 550px) {
-    &:after {
-      content: "";
-      display: block;
-      height: 2px;
-      width: 4rem;
-      background: orange;
-      margin: 10px 0;
-    }
   }
 `

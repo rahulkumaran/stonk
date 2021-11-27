@@ -32,7 +32,7 @@ router.get('/nft-rarity-metadata/:stonks_id', async (req, res) => {
 
     if (nft_id >= 1 && nft_id <= searchRange) {
       const resolvedPath = `${dir}/data/${nft_id}_rarity.json`
-      imgUrl = `/nft-images/${nft_id}`
+      imgUrl = `https://alphatest.thestonksociety.com/api/attributes/nft-images/${nft_id}`
 
       fs.readFile(resolvedPath, (err, data) => {
         if (err) throw err
@@ -40,7 +40,7 @@ router.get('/nft-rarity-metadata/:stonks_id', async (req, res) => {
         res.json({
           nft_id,
           metadata,
-          image_src: imgUrl,
+          image: imgUrl,
           error: null
         })
       })
@@ -74,7 +74,7 @@ router.get('/nft-metadata/:stonks_id', async (req, res) => {
         res.json({
           nft_id,
           metadata,
-          image_src: imgUrl,
+          image: imgUrl,
           error: null
         })
       })
@@ -109,6 +109,9 @@ router.get('/nft-images/:stonks_id', async (req, res) => {
 // api to update the supply in db to keep track for fetching metadata and images
 router.post('/update-supply-snapshot', async (req, res) => {
   try {
+    let saveSupply = ''
+    fs.writeFileSync('./supplySnapshot.json', saveSupply)
+
     const { currentSupply } = req.body
     const filter = { purpose: 'supply-tracking' }
     const update = { currentSupply: currentSupply }
@@ -116,9 +119,30 @@ router.post('/update-supply-snapshot', async (req, res) => {
     let updatedSupply = await Supply.findOneAndUpdate(filter, update)
     await updatedSupply.save()
 
+    saveSupply = JSON.stringify([currentSupply])
+    fs.writeFileSync('./supplySnapshot.json', saveSupply)
+
     res.json({ updatedSupply: JSON.stringify(currentSupply) })
   } catch (err) {
     res.json({ response: 'Internal Server Error, Try after some time!' })
+  }
+})
+
+//api to get the snapshot of the current supply from the database
+router.get('/get-supply-snapshot', async (req, res) => {
+  try {
+    const filter = { purpose: 'supply-tracking' }
+
+    const supplyObj = await Supply.findOne(filter)
+    const currentSupply = supplyObj.currentSupply
+
+    res.json({ currentSupply: currentSupply })
+  } catch (err) {
+    let readCurrentSupply = fs.readFileSync('./supplySnapshot.json')
+    const supplyFromFile = JSON.parse(readCurrentSupply)
+    backupSupply = supplyFromFile[0]
+
+    res.json({ currentSupply: backupSupply })
   }
 })
 

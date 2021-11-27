@@ -15,7 +15,9 @@ function MintSection({ backgroundImg, location, EE }) {
   const dispatch = useDispatch()
   const data = useSelector(state => state.data)
   const blockchain = useSelector(state => state.blockchain)
-  const supply = useSelector(state => state.supply.totalSupply)
+
+  // const supply = useSelector(state => state.supply.totalSupply)
+
   console.log(data)
   const [feedback, setFeedback] = useState("Maybe it's your lucky day.")
   const [claimingNft, setClaimingNft] = useState(false)
@@ -29,7 +31,7 @@ function MintSection({ backgroundImg, location, EE }) {
   )
 
   var isConnected =
-    blockchain.account === '' || blockchain.smartContract !== null
+    blockchain.account == '' || blockchain.smartContract !== null
 
   const claimNFTs = _amount => {
     if (_amount <= 0) {
@@ -136,10 +138,10 @@ function MintSection({ backgroundImg, location, EE }) {
           {/* OPTION 2 */}
           {blockchain.account === '' || blockchain.smartContract === null
             ? <H1Count>
-                <CircularProgress style={{ width: '40px' }} />&nbsp;/100 Minted!
+              <CircularProgress style={{ width: '40px' }} />&nbsp;/100 Minted!
               </H1Count>
             : <H1Count>
-                {data.totalSupply}/100 Minted
+              {data.totalSupply}/100 Minted
               </H1Count>}
           <br />
           {(blockchain.account === '' || blockchain.smartContract === null) &&
@@ -163,56 +165,56 @@ function MintSection({ backgroundImg, location, EE }) {
         <Fragment>
           {Number(data.totalSupply) === 3333
             ? <H2>
-                The sale has ended! However, you can buy from our Paintswap
-                Collection!
+              The sale has ended! However, you can buy from our Paintswap
+              Collection!
               </H2>
             : isConnected
               ? <Fragment>
-                  <ButtonsWrapper>
-                    <ButtonGroup>
-                      <CounterButton
-                        onClick={e => {
-                          if (mintCount > 1) {
-                            setMintCount(mintCount - 1)
-                          }
-                        }}
-                      >
-                        -
+                <ButtonsWrapper>
+                  <ButtonGroup>
+                    <CounterButton
+                      onClick={e => {
+                        if (mintCount > 1) {
+                          setMintCount(mintCount - 1)
+                        }
+                      }}
+                    >
+                      -
                       </CounterButton>
 
-                      <MintInput
-                        disabled
-                        onChange={e => setMintCount(e.target.value)}
-                        value={mintCount}
-                        style={{ paddingLeft: '85px', fontSize: '40px' }}
-                      />
-                      <CounterButton
-                        onClick={e => {
-                          if (mintCount < 5) {
-                            setMintCount(mintCount + 1)
-                          }
-                        }}
-                      >
-                        +
+                    <MintInput
+                      disabled
+                      onChange={e => setMintCount(e.target.value)}
+                      value={mintCount}
+                      style={{ paddingLeft: '85px', fontSize: '40px' }}
+                    />
+                    <CounterButton
+                      onClick={e => {
+                        if (mintCount < 5) {
+                          setMintCount(mintCount + 1)
+                        }
+                      }}
+                    >
+                      +
                       </CounterButton>
-                    </ButtonGroup>
-                  </ButtonsWrapper>
+                  </ButtonGroup>
+                </ButtonsWrapper>
 
-                  <ButtonsWrapper>
-                    <ButtonGroup>
-                      <RightButton
-                        disabled={claimingNft ? 1 : 0}
-                        onClick={e => {
-                          e.preventDefault()
-                          claimNFTs(mintCount)
-                          getData()
-                        }}
-                      >
-                        {claimingNft ? 'Minting......' : 'Mint Your Stonks'}
-                      </RightButton>
-                    </ButtonGroup>
-                  </ButtonsWrapper>
-                </Fragment>
+                <ButtonsWrapper>
+                  <ButtonGroup>
+                    <RightButton
+                      disabled={claimingNft ? 1 : 0}
+                      onClick={e => {
+                        e.preventDefault()
+                        claimNFTs(mintCount)
+                        getData()
+                      }}
+                    >
+                      {claimingNft ? 'Minting......' : 'Mint Your Stonks'}
+                    </RightButton>
+                  </ButtonGroup>
+                </ButtonsWrapper>
+              </Fragment>
               : null}
         </Fragment>
       </Fade>

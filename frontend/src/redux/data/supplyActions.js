@@ -3,7 +3,7 @@ import Web3 from 'web3'
 import SmartContract from '../../contracts/test_contract.json'
 
 // check supplly
-const fetchSupplyRequest = payload => {
+export const fetchSupplyRequest = payload => {
   return {
     type: 'CHECK_SUPPLY_REQUEST'
   }

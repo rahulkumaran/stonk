@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, Fragment } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import MenuIcon from '@material-ui/icons/Menu'
@@ -9,27 +9,33 @@ import ArrowLogo from './assets/ArrowLogo.png'
 import twitterLogo from '../components/assets/twitter.jpg'
 import discordLogo from '../components/assets/discord.jpg'
 import { useDispatch, useSelector } from 'react-redux'
-import { connect } from '../redux/blockchain/blockchainActions'
+import { connect, disconnect } from '../redux/blockchain/blockchainActions'
 import { fetchData } from '../redux/data/dataActions'
 
 //ds
 const WalletCard = () => {
-  const [userBalance, setUserBalance] = useState(null)
+  // const [userBalance, setUserBalance] = useState(null)
   const [connButtonText, setConnButtonText] = useState('Connect')
   const dispatch = useDispatch()
   const blockchain = useSelector(state => state.blockchain)
-  const data = useSelector(state => state.data)
+  // const data = useSelector(state => state.data)
   const account = blockchain.account
   useEffect(
     () => {
       if (blockchain.account !== '' && blockchain.smartContract !== null) {
         dispatch(fetchData(blockchain.account))
-        setConnButtonText(
-          account.substring(0, 4) + '___' + account.substring(38, 42)
-        )
+
+        if (account) {
+          setConnButtonText(
+            account.substring(0, 4) + '___' + account.substring(38, 42)
+          )
+        } else {
+          dispatch(disconnect())
+        }
+
       }
     },
-    [blockchain.smartContract, blockchain.account, dispatch]
+    [blockchain.smartContract, blockchain.account, dispatch, account]
   )
 
   //setConnButtonText(data.name?.substring(0, 4) + "___" + data.name?.substring(38, 42));
@@ -39,16 +45,21 @@ const WalletCard = () => {
     if (blockchain.account === '' || blockchain.smartContract === null) {
       dispatch(connect())
     } else {
-      alert(
-        `You are already connected with wallet ${account}. If you wish to change it please use metamask.`
-      )
+      if (account) {
+        alert(
+          `You are already connected with wallet ${account}. If you wish to change it please use metamask.`
+        )
+      }
+      else {
+        dispatch(connect())
+      }
     }
   }
 
   return (
     <ConnectButton
       isConnected={
-        blockchain.account === '' || blockchain.smartContract !== null
+        account && (blockchain.account === '' || blockchain.smartContract !== null)
       }
       onClick={handleConnectClick}
     >
@@ -83,68 +94,68 @@ function Header({ handleEasterEgg }) {
 
   return (
     <Container showNav={colorChange}>
-      {location.pathname == '/'
+      {location.pathname === '/'
         ? <Fragment>
-            <a
-              href="#"
+          <a
+            href="#"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <span style={{ color: '#ffa500' }}>Stonk</span>{' '}
+            <img
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
+                height: '30px',
+                width: '30px',
+                position: 'relative',
+                marginBottom: '10px',
+                marginLeft: '4px'
               }}
-            >
-              <span style={{ color: '#ffa500' }}>Stonk</span>{' '}
-              <img
-                style={{
-                  height: '30px',
-                  width: '30px',
-                  position: 'relative',
-                  marginBottom: '10px',
-                  marginLeft: '4px'
-                }}
-                src={ArrowLogo}
-                alt="logo"
-                onClick={handleEasterEgg}
-              />
-              {''}
-              <span style={{ color: '#66aff5' }}>Society</span>
-            </a>
-            <Menu showNav={colorChange}>
-              <Link to="/attributes">Attributes</Link>
-              <a href="/#mint">Mint</a>
-              <a href="/#plan">Plan</a>
-              <a href="/#roadmap">Roadmap</a>
-              <a href="/#team">Team</a>
-            </Menu>
-          </Fragment>
+              src={ArrowLogo}
+              alt="logo"
+              onClick={handleEasterEgg}
+            />
+            {''}
+            <span style={{ color: '#66aff5' }}>Society</span>
+          </a>
+          <Menu showNav={colorChange}>
+            <Link to="/attributes">Attributes</Link>
+            <a href="/#mint">Mint</a>
+            <a href="/#plan">Plan</a>
+            <a href="/#roadmap">Roadmap</a>
+            <a href="/#team">Team</a>
+          </Menu>
+        </Fragment>
         : <Fragment>
-            <Link
-              to="/"
+          <Link
+            to="/"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <span style={{ color: '#ffa500' }}>Stonk</span>{' '}
+            <img
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
+                height: '30px',
+                width: '30px',
+                position: 'relative',
+                marginBottom: '10px',
+                marginLeft: '4px'
               }}
-            >
-              <span style={{ color: '#ffa500' }}>Stonk</span>{' '}
-              <img
-                style={{
-                  height: '30px',
-                  width: '30px',
-                  position: 'relative',
-                  marginBottom: '10px',
-                  marginLeft: '4px'
-                }}
-                src={ArrowLogo}
-                alt="logo"
-              />
-              {''}
-              <span style={{ color: '#66aff5' }}>Society</span>
-            </Link>
-            <Menu showNav={colorChange}>
-              <Link to="/">Back to Home</Link>
-            </Menu>
-          </Fragment>}
+              src={ArrowLogo}
+              alt="logo"
+            />
+            {''}
+            <span style={{ color: '#66aff5' }}>Society</span>
+          </Link>
+          <Menu showNav={colorChange}>
+            <Link to="/">Back to Home</Link>
+          </Menu>
+        </Fragment>}
       <RightMenu>
         <SocialsWrapper>
           <SocialAnchor
@@ -175,29 +186,29 @@ function Header({ handleEasterEgg }) {
         <CustomCloseWrapper>
           <CustomClose onClick={toggleBurger} isOpen={burgerOpen} />
         </CustomCloseWrapper>
-        {location.pathname == '/'
+        {location.pathname === '/'
           ? <Fragment>
-              <li>
-                <Link to="/attributes">Attributes</Link>
-              </li>
-              <li>
-                <a href="/#mint">Mint</a>
-              </li>
-              <li>
-                <a href="/#plan">Plan</a>
-              </li>
-              <li>
-                <a href="/#roadmap">Roadmap</a>
-              </li>
-              <li>
-                <a href="/#team">Team</a>
-              </li>
-            </Fragment>
+            <li>
+              <Link to="/attributes">Attributes</Link>
+            </li>
+            <li>
+              <a href="/#mint">Mint</a>
+            </li>
+            <li>
+              <a href="/#plan">Plan</a>
+            </li>
+            <li>
+              <a href="/#roadmap">Roadmap</a>
+            </li>
+            <li>
+              <a href="/#team">Team</a>
+            </li>
+          </Fragment>
           : <Fragment>
-              <li>
-                <Link to="/">Back to Home</Link>
-              </li>
-            </Fragment>}
+            <li>
+              <Link to="/">Back to Home</Link>
+            </li>
+          </Fragment>}
       </BurgerNav>
     </Container>
   )

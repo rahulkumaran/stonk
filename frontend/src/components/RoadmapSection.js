@@ -303,19 +303,6 @@ const TextContainer = styled.div`
   }
 `
 
-const H3 = styled.h3`
-  color: #86dc3d;
-
-  &:after {
-    content: "";
-    display: block;
-    height: 2px;
-    width: 4rem;
-    background: orange;
-    margin: 10px 0;
-  }
-`
-
 const H3P = styled.h3`
   color: #86dc3d;
   line-height: 0;

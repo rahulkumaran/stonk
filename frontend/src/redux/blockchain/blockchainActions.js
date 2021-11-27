@@ -34,14 +34,20 @@ const updateAccountRequest = payload => {
   }
 }
 
+export const disconnect = () => {
+  return {
+    type: 'DISCONNECT'
+  }
+}
+
 export const connect = () => {
   return async dispatch => {
     dispatch(connectRequest())
     const { ethereum } = window
     const metamaskIsInstalled = ethereum && ethereum.isMetaMask
+
     if (metamaskIsInstalled) {
       let web3 = new Web3(ethereum)
-
       try {
         const accounts = await ethereum.request({
           method: 'eth_requestAccounts'

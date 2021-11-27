@@ -76,7 +76,8 @@ export default FirstSection
 // BUT if we use flex-direction: column then the above flips (becomes vice-versa)
 const Wrap = styled.div`
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
 
  ${props =>
     props.backgroundImg
@@ -112,17 +113,13 @@ const ItemText = styled.div`
   line-height: 30px;
   text-align: center;
   font-size: 25px;
-  @media (max-width: 768px) {
-    padding: 0;
-    padding-top: 12vh;
-    font-size: 18px;
-  }
 
   @media (max-width: 1204px) {
     max-width: 700px;
     font-size: 25px;
   }
   @media (max-width: 768px) {
+    padding: 0;
     padding-top: 12vh;
     font-size: 18px;
   }
