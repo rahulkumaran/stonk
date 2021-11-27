@@ -40,7 +40,7 @@ router.get('/nft-rarity-metadata/:stonks_id', async (req, res) => {
         res.json({
           nft_id,
           metadata,
-          image_src: imgUrl,
+          image: imgUrl,
           error: null
         })
       })
@@ -74,7 +74,7 @@ router.get('/nft-metadata/:stonks_id', async (req, res) => {
         res.json({
           nft_id,
           metadata,
-          image_src: imgUrl,
+          image: imgUrl,
           error: null
         })
       })
@@ -109,8 +109,8 @@ router.get('/nft-images/:stonks_id', async (req, res) => {
 // api to update the supply in db to keep track for fetching metadata and images
 router.post('/update-supply-snapshot', async (req, res) => {
   try {
-    let saveSupply = ""
-    fs.writeFileSync('../../supplySnapshot.json', saveSupply)
+    let saveSupply = ''
+    fs.writeFileSync('./supplySnapshot.json', saveSupply)
 
     const { currentSupply } = req.body
     const filter = { purpose: 'supply-tracking' }
@@ -136,13 +136,13 @@ router.get('/get-supply-snapshot', async (req, res) => {
     const supplyObj = await Supply.findOne(filter)
     const currentSupply = supplyObj.currentSupply
 
-    let readCurrentSupply = fs.writeFileSync('../../supplySnapshot.json')
-    const supplyFromFile = JSON.parse(readCurrentSupply)
-    console.log("supply from file---", supplyFromFile)
-
-    res.json({ currentSupply })
+    res.json({ currentSupply: currentSupply })
   } catch (err) {
-    res.json({ response: 'Internal Server Error, Try after some time!', errorCode: 500 })
+    let readCurrentSupply = fs.readFileSync('./supplySnapshot.json')
+    const supplyFromFile = JSON.parse(readCurrentSupply)
+    backupSupply = supplyFromFile[0]
+
+    res.json({ currentSupply: backupSupply })
   }
 })
 

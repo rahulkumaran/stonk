@@ -3,7 +3,6 @@ import SmartContract from '../../contracts/test_contract.json'
 
 import { fetchData } from '../data/dataActions'
 
-
 const connectRequest = () => {
   console.log('Conn_req')
   return {
@@ -46,9 +45,9 @@ export const connect = () => {
     dispatch(connectRequest())
     const { ethereum } = window
     const metamaskIsInstalled = ethereum && ethereum.isMetaMask
+
     if (metamaskIsInstalled) {
       let web3 = new Web3(ethereum)
-
       try {
         const accounts = await ethereum.request({
           method: 'eth_requestAccounts'

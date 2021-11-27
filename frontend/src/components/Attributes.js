@@ -13,29 +13,38 @@ function Attributes() {
   const [supply, setSupply] = useState(null)
   const [nftData, setNftData] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [gotResponse, setGotResponse] = useState(false)
 
   const supplyState = useSelector(state => state.supply)
 
   useEffect(() => {
     fetch('/api/attributes/get-supply-snapshot')
       .then(response => response.json())
-      .then(data => setSupply(data.currentSupply))
+      .then(data => {
+        setSupply(data.currentSupply)
+        setGotResponse(true)
+      })
   }, [supplyState])
 
 
-  // TODO: Test this
-  // if (supplyState.errorMsg) {
-  //   alert(supplyState.errorMsg)
-  //   return <Navigate to="/" />
-  // }
+  // if api call was successful and supply was returned as null/undefined and couldnt get supply from contract then redirect
+  if (gotResponse && (supply===null || supply ===undefined) && !supplyState.loading && supplyState.errorMsg) {
+    alert(supplyState.errorMsg)
+    return <Navigate to="/" />
+  }
 
   // pick supply from snapshot, if fails pick from the contract
-  const searchRange = supply || parseInt(supplyState.totalSupply);
+  const searchRange =  parseInt(supply) || parseInt(supplyState.totalSupply);
 
   const searchHandler = e => {
     e.preventDefault()
 
-    if (search !== 0 && search >= 1 && search <= searchRange) {
+    if(search>3333){
+      alert(`You can only search between 1 and 3333`)
+      return;
+    }
+
+    if (searchRange && search > 0 && search <= searchRange) {
       setNftData(null)
       setLoading(true)
       fetch(`/api/attributes/nft-rarity-metadata/${search}`)
@@ -46,10 +55,11 @@ function Attributes() {
             setLoading(false)
           }, 600)
         })
+    }else if(search> searchRange && search <=3333){
+      alert(`NFT #${search} has not been minted yet.`)      
     } else {
       alert(`You cannot get details for the edition that hasn't been minted yet. Please enter edition number ranging between 1 and ${searchRange}.`)
     }
-
   }
 
   return (
@@ -90,7 +100,7 @@ function Attributes() {
                 <Fade right delay={100} cascade>
                   <AttributesImageWrapper>
                     <IMG
-                      src={nftData.image_src}
+                      src={nftData.image}
                       alt="test"
                     />
                   </AttributesImageWrapper>
@@ -229,7 +239,7 @@ const Wrap = styled.div`
   height: ${props => props.nftData ? "auto;" : "100vh;"};
   ${props =>
     props.backgroundImg ? `background-image: url(${props.backgroundImg})` : ''};
-  // background-color:black;
+  background-color:black;
   display: flex;
   flex-direction: column;
   // justify-content: space-between;
