@@ -28,18 +28,18 @@ function Attributes() {
 
 
   // if api call was successful and supply was returned as null/undefined and couldnt get supply from contract then redirect
-  if (gotResponse && (supply===null || supply ===undefined) && !supplyState.loading && supplyState.errorMsg) {
+  if (gotResponse && (supply === null || supply === undefined) && !supplyState.loading && supplyState.errorMsg) {
     alert(supplyState.errorMsg)
     return <Navigate to="/" />
   }
 
   // pick supply from snapshot, if fails pick from the contract
-  const searchRange =  parseInt(supply) || parseInt(supplyState.totalSupply);
+  const searchRange = parseInt(supply) || parseInt(supplyState.totalSupply);
 
   const searchHandler = e => {
     e.preventDefault()
 
-    if(search>3333){
+    if (search > 3333) {
       alert(`You can only search between 1 and 3333`)
       return;
     }
@@ -55,10 +55,16 @@ function Attributes() {
             setLoading(false)
           }, 600)
         })
-    }else if(search> searchRange && search <=3333){
-      alert(`NFT #${search} has not been minted yet.`)      
+    } else if (search > searchRange && search <= 3333) {
+      alert(`NFT #${search} has not been minted yet.`)
     } else {
       alert(`You cannot get details for the edition that hasn't been minted yet. Please enter edition number ranging between 1 and ${searchRange}.`)
+    }
+  }
+
+  const handleEnter = (event) => {
+    if (event.key === "Enter") {
+      searchHandler(event)
     }
   }
 
@@ -74,6 +80,7 @@ function Attributes() {
           <ButtonsWrapper>
             <ButtonGroup>
               <SearchInput
+                onKeyDown={handleEnter}
                 placeholder="Enter your Stonk number..."
                 onChange={e => setSearch(e.target.value)}
               />

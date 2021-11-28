@@ -198,6 +198,9 @@ const Wrap = styled.div`
 
   ${props =>
     props.backgroundImg ? `background-image: url(${props.backgroundImg})` : ''};
+
+  background-color:black;
+
   ${props =>
     props.EE
       ? `background-size: cover;

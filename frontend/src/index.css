@@ -8,6 +8,7 @@
 html {
   scroll-behavior: smooth;
   cursor: url("./components/assets/cursor.png"), auto;
+  background-color:black;
 }
 
 * {
@@ -34,7 +35,7 @@ a {
 
 /*main page scroll bar*/
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 3px;
   height: 6px;
 }
 
@@ -46,7 +47,7 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-  background: #a2a2a2;
+  background:black;
 }
 /*main page scroll bar*/
 

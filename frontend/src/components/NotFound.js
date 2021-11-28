@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Fade from 'react-reveal/Fade'
 import styled from 'styled-components'
 import StarBG from './assets/star1.gif'
@@ -7,9 +8,17 @@ function NotFound() {
   return (
     <Wrap backgroundImg={StarBG}>
       <Fade in delay={300} appear>
-        <ItemText>
-          <h1 style={{ color: '#ffa500' }}>404: Page Not Found!</h1>
-        </ItemText>
+        <Wrapper>
+          <div style={{ height: "25vh" }}></div>
+          <ItemText>
+            <h1 style={{ color: '#ffa500' }}>404: Page Not Found!</h1>
+          </ItemText>
+          <div style={{ height: "25vh" }}>
+            <center>
+              <Link to="/"><Back style={{ padding: "20px", border: "1px solid #ffa500", width: "200px" }}>GO BACK</Back></Link>
+            </center>
+          </div>
+        </Wrapper>
       </Fade>
     </Wrap>
   )
@@ -23,27 +32,21 @@ export default NotFound
 const Wrap = styled.div`
   width: 100vw;
   height: 100vh;
+
   ${props =>
     props.backgroundImg ? `background-image: url(${props.backgroundImg})` : ''};
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #ffa500;
-
-  @media (max-width: 768px) {
-    height: auto;
-  }
-
-  @media (max-width: 1280px) {
-    height: auto;
-  }
 `
 
 const ItemText = styled.div`
   padding: 20px;
   padding-top: 15vh;
-  line-height: 35px;
+  line-height: 50px;
   text-align: center;
   font-size: 25px;
 
@@ -55,5 +58,21 @@ const ItemText = styled.div`
   @media (max-width: 768px) {
     padding-top: 8vh;
     font-size: 18px;
+  }
+`
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction:column;
+  justify-content: space-between;
+`
+
+const Back = styled.p`
+  padding: 20px;
+  border: 1px solid #ffa500;
+  width: 200px;
+  border-radius:5px;
+  
+  &:hover{
+    opacity: 0.65;
   }
 `
