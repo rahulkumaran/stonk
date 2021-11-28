@@ -89,6 +89,9 @@ min-height: 100vh
 height: auto;
   ${props =>
     props.backgroundImg ? `background-image: url(${props.backgroundImg})` : ''};
+  
+  background-color:black;
+
   ${props =>
     props.EE
       ? `background-size: cover;
