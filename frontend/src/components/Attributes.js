@@ -97,7 +97,7 @@ function Attributes() {
 
             <ContentWrapper>
               <AttributesWrapper>
-                <Fade right delay={100} cascade>
+                <Fade right delay={100}>
                   <AttributesImageWrapper>
                     <IMG
                       src={nftData.image}

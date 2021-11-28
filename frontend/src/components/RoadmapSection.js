@@ -293,7 +293,7 @@ const TextContainer = styled.div`
   }
 
   @media (max-width: 1204px) {
-    // max-width: 600px;
+    max-width: 600px;
     font-size: 17px;
   }
 

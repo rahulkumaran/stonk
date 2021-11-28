@@ -6,10 +6,10 @@ import CardComponent from '../components/card/Card'
 import twitterLogo from '../components/assets/twitter.jpg'
 import discordLogo from '../components/assets/discord.jpg'
 
-function LastSection({ title, description, backgroundImg, location, EE }) {
+function LastSection({ backgroundImg, location, EE }) {
   return (
     <Wrap backgroundImg={backgroundImg} id={`${location}`} EE={EE}>
-      <Fade in delay={300} appear>
+      <Fade in delay={300}>
         <ItemText>
           <h1
             style={{ color: '#ffa500', animation: 'animateDown infinite 1.5s' }}
@@ -83,8 +83,10 @@ const SocialsWrapper = styled.div`
 // justify-content is for horizontal alignments
 // BUT if we use flex-direction: column then the above flips (becomes vice-versa)
 const Wrap = styled.div`
-  width: 100vw;
-  height: auto;
+width: 100vw;
+max-width: 100vw;
+min-height: 100vh
+height: auto;
   ${props =>
     props.backgroundImg ? `background-image: url(${props.backgroundImg})` : ''};
   ${props =>
