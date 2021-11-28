@@ -2,6 +2,7 @@ import React, { useEffect, useState, Fragment } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import MenuIcon from '@material-ui/icons/Menu'
+import HomeIcon from '@material-ui/icons/Home'
 import CloseIcon from '@material-ui/icons/Close'
 import StarBG from './assets/star1.gif'
 import metaMaskLogo from './assets/metamask.svg'
@@ -177,39 +178,41 @@ function Header({ handleEasterEgg }) {
           </SocialAnchor>
         </SocialsWrapper>
         <WalletCard />
-        <CustomMenuWrapper>
-          <CustomMenu onClick={toggleBurger} />{' '}
-        </CustomMenuWrapper>
+        {location.pathname === '/'
+          ? <CustomMenuWrapper>
+              <CustomMenu onClick={toggleBurger} />{' '}
+            </CustomMenuWrapper>
+          : <Link to="/" style={{ padding: '0' }}>
+              <HomeWrapper>
+                <Home />
+              </HomeWrapper>
+            </Link>}
       </RightMenu>
 
-      <BurgerNav show={burgerOpen} backgroundImg={StarBG}>
-        <CustomCloseWrapper>
-          <CustomClose onClick={toggleBurger} isOpen={burgerOpen} />
-        </CustomCloseWrapper>
-        {location.pathname === '/'
-          ? <Fragment>
-              <li>
-                <Link to="/attributes">Attributes</Link>
-              </li>
-              <li>
-                <a href="/#mint">Mint</a>
-              </li>
-              <li>
-                <a href="/#plan">Plan</a>
-              </li>
-              <li>
-                <a href="/#roadmap">Roadmap</a>
-              </li>
-              <li>
-                <a href="/#team">Team</a>
-              </li>
-            </Fragment>
-          : <Fragment>
-              <li>
-                <Link to="/">Back to Home</Link>
-              </li>
-            </Fragment>}
-      </BurgerNav>
+      {location.pathname === '/' &&
+        <BurgerNav show={burgerOpen}>
+          <CustomCloseWrapper>
+            <CustomClose onClick={toggleBurger} isOpen={burgerOpen} />
+          </CustomCloseWrapper>
+
+          <Fragment>
+            <li onClick={toggleBurger}>
+              <Link to="/attributes">Attributes</Link>
+            </li>
+            <li onClick={toggleBurger}>
+              <a href="/#mint">Mint</a>
+            </li>
+            <li onClick={toggleBurger}>
+              <a href="/#plan">Plan</a>
+            </li>
+            <li onClick={toggleBurger}>
+              <a href="/#roadmap">Roadmap</a>
+            </li>
+            <li onClick={toggleBurger}>
+              <a href="/#team">Team</a>
+            </li>
+          </Fragment>
+        </BurgerNav>}
     </Container>
   )
 }
@@ -217,6 +220,7 @@ function Header({ handleEasterEgg }) {
 export default Header
 
 const Container = styled.div`
+  width: 100vw;
   max-width: 100vw;
   min-height: 60px;
   position: fixed;
@@ -339,14 +343,30 @@ const CustomMenu = styled(MenuIcon)`
     display: none !important;
   }
 `
+
+const HomeWrapper = styled.div`
+display: flex:
+padding-right: 10px;
+
+`
+const Home = styled(HomeIcon)`
+  cursor: pointer;
+
+  @media (min-width: 1280px) {
+    display: none !important;
+  }
+`
 const BurgerNav = styled.div`
+  height: 100vh;
+  width: 300px;
   position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
   ${props =>
-    props.backgroundImg ? `background-image: url(${props.backgroundImg})` : ''};
-  width: 300px;
+    props.backgroundImg
+      ? `background-image: url(${props.backgroundImg})`
+      : `background-color: black;`};
   list-style: none;
   padding: 20px;
   display: flex;
@@ -355,7 +375,8 @@ const BurgerNav = styled.div`
   transform: ${props => (props.show ? 'translateX(0)' : 'translateX(100%)')};
   transition: transform 0.2s ease-in;
   border-left: 1px solid #ffa500;
-  /* z-index:10; */
+  z-index: 9999;
+
   li {
     padding: 15px 0;
     border-bottom: 1px solid rgba(0, 0, 0, .2);

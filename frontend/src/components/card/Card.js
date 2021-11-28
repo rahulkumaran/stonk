@@ -42,8 +42,9 @@ export default function CardComponent() {
 
   return (<>
     {team.map((member, index) => (
-      <Fade direction={index % 2 === 0 ? "left" : "right"} delay={index === 0 ? "500" : index === 1 ? "600" : index === 2 ? "700" : "800"} cascade>
-        <CustomCard sx={{ maxWidth: 345 }} key={index}>
+      <CardWrapper>
+      <Fade direction={index % 2 === 0 ? "left" : "right"} delay={index === 0 ? "500" : index === 1 ? "600" : index === 2 ? "700" : "800"} >
+        <CustomCard key={index}>
           <CardActionArea>
             <CardMedia
               component="img"
@@ -78,12 +79,14 @@ export default function CardComponent() {
           </CardActionArea>
         </CustomCard>
       </Fade>
-
-
+      </CardWrapper>
     ))}
   </>)
 }
 
+const CardWrapper= styled.div`
+z-index:0;
+`
 const CustomCard = styled(Card)`
 background-color: #dedede !important;
 border: 2px solid #ffa500;
