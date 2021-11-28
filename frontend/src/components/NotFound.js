@@ -9,13 +9,15 @@ function NotFound() {
     <Wrap backgroundImg={StarBG}>
       <Fade in delay={300} appear>
         <Wrapper>
-          <div style={{ height: "25vh" }}></div>
+          <div style={{ height: '25vh' }} />
           <ItemText>
             <h1 style={{ color: '#ffa500' }}>404: Page Not Found!</h1>
           </ItemText>
-          <div style={{ height: "25vh" }}>
+          <div style={{ height: '25vh' }}>
             <center>
-              <Link to="/"><Back style={{ padding: "20px", border: "1px solid #ffa500", width: "200px" }}>GO BACK</Back></Link>
+              <Link to="/">
+                <Back>GO BACK</Back>
+              </Link>
             </center>
           </div>
         </Wrapper>
@@ -62,7 +64,7 @@ const ItemText = styled.div`
 `
 const Wrapper = styled.div`
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   justify-content: space-between;
 `
 
@@ -70,9 +72,9 @@ const Back = styled.p`
   padding: 20px;
   border: 1px solid #ffa500;
   width: 200px;
-  border-radius:5px;
-  
-  &:hover{
+  border-radius: 5px;
+
+  &:hover {
     opacity: 0.65;
   }
 `
