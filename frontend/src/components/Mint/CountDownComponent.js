@@ -4,16 +4,11 @@ import timer from './Timer'
 import FTM from '../assets/ftm.svg'
 
 const CountDownComponent = ({ backgroundImg, location, EE }) => {
-
-  timer("Dec 15, 2021 15:30:00", "presale")
-  timer("Dec 15, 2021 16:00:00", "publicsale")
+  timer('Dec 15, 2021 15:30:00', 'mintpresale')
+  timer('Dec 15, 2021 16:00:00', 'mintpublicsale')
 
   return (
-    <Wrap
-      backgroundImg={backgroundImg}
-      id={`${location}`}
-      EE={EE}>
-
+    <Wrap backgroundImg={backgroundImg} id={`${location}`} EE={EE}>
       <ItemText>
         <h2
           style={{
@@ -22,34 +17,37 @@ const CountDownComponent = ({ backgroundImg, location, EE }) => {
           }}
         >
           Are you ready to MINT?
-       </h2>
+        </h2>
       </ItemText>
 
       <ButtonsWrapper>
         <ButtonGroup>
           <BlockContainer>
             <SaleTitle>Pre Sale</SaleTitle>
-            <RightButton><TimeContainer id="presale" ></TimeContainer></RightButton>
+            <RightButton>
+              <TimeContainer id="mintpresale" />
+            </RightButton>
           </BlockContainer>
 
           <BlockContainer>
             <SaleTitle>Public Sale</SaleTitle>
-            <RightButton><TimeContainer id="publicsale" ></TimeContainer></RightButton>
+            <RightButton>
+              <TimeContainer id="mintpublicsale" />
+            </RightButton>
           </BlockContainer>
         </ButtonGroup>
       </ButtonsWrapper>
 
       <BottomTextContainer>
-        <H2 style={{ display: "inline-flex", alignItems: "center" }}>🚀 LOAD YOUR <FTMImg src={FTM} alt="ftm" /> BAGS. LFG! 🚀</H2>
+        <H2 style={{ display: 'inline-flex', alignItems: 'center' }}>
+          🚀 LOAD YOUR <FTMImg src={FTM} alt="ftm" /> BAGS. LFG! 🚀
+        </H2>
       </BottomTextContainer>
-
-
     </Wrap>
   )
 }
 
 export default CountDownComponent
-
 
 const Wrap = styled.div`
   width: 100vw;
@@ -73,35 +71,32 @@ const Wrap = styled.div`
 `
 
 const FTMImg = styled.img`
+  height: 60px;
+  width: 60px;
 
- height: 60px;
- width: 60px;
-
-   @media (max-width: 500px) {
+  @media (max-width: 500px) {
     height: 60px;
     weight: 60px;
   }
 `
 
 const BlockContainer = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content:center;
-padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 50px;
 `
 const SaleTitle = styled.p`
- font-size: 25px;
- color: #66aff5;
-
+  font-size: 25px;
+  color: #66aff5;
 `
 
 const TimeContainer = styled.div`
+  color: black;
+  font-size: 30px;
 
-color: black;
-font-size: 30px; 
-
-@media (max-width: 374px) {
+  @media (max-width: 374px) {
     font-size: 25px;
   }
 `
@@ -141,9 +136,7 @@ const ConnectedP = styled.p`
   }
 `
 
-const ButtonsWrapper = styled.div`
-
-`
+const ButtonsWrapper = styled.div``
 
 const ButtonGroup = styled.div`
   display: flex;
@@ -151,8 +144,7 @@ const ButtonGroup = styled.div`
   margin-bottom: 50px;
   justify-content: center;
   align-items: center;
-  flex-wrap:wrap;
-
+  flex-wrap: wrap;
 
   @media (max-width: 768px) {
     flex: column;
@@ -199,11 +191,7 @@ const RightButton = styled(LeftButton)`
   }
 `
 
-const BottomTextContainer = styled.div`
-   @media (max-width: 375px) {
-
-  }
-`
+const BottomTextContainer = styled.div`@media (max-width: 375px) {}`
 
 const CheckItOut = styled.p`
   text-align: center;
@@ -241,9 +229,10 @@ const H1Count = styled.h1`
   color: #86dc3d;
 `
 
-const H2 = styled.h2`color: #66aff5;
-white-space: pre;
-@media (max-width: 500px) {
+const H2 = styled.h2`
+  color: #66aff5;
+  white-space: pre;
+  @media (max-width: 500px) {
     font-size: 18px;
   }
 `

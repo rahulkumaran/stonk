@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Slider from './slider/Slider'
 import PaintSwapLogo from './assets/paintswap.png'
 import MintLogo from './assets/mint.png'
+import timer from './Mint/Timer'
 
 function FirstSection({
   title,
@@ -16,6 +17,9 @@ function FirstSection({
 }) {
 
   const saleCountDown = true
+
+  timer('Dec 15, 2021 15:30:00', 'presale')
+  timer('Dec 15, 2021 16:00:00', 'publicsale')
 
   return (
     <Wrap backgroundImg={backgroundImg} EE={EE} id={`${location}`}>
