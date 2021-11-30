@@ -15,16 +15,18 @@ function FirstSection({
   EE
 }) {
 
+  const saleCountDown = true
+
   return (
     <Wrap backgroundImg={backgroundImg} EE={EE} id={`${location}`}>
       <Fade in delay={300} appear>
         <ItemText>
-          <h2 style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>
+          <Heading style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>
             {/* {title} */}
             The Stonk Society
-          </h2>
+          </Heading>
           <br />
-          <Text>3,333 unique & randomly generated Stonks living on the Fantom Blockchain, looking to disrupt the 
+          <Text>3,333 unique & randomly generated Stonks living on the Fantom Blockchain, looking to disrupt the
           NFT ecosystem with frequent airdrops for holding Stonks!
           </Text>
         </ItemText>
@@ -37,7 +39,7 @@ function FirstSection({
           </SliderWrapper>
 
           <RarityItemText>
-          It's raining rewards! <span style={{ color: '#86dc3d' }}>Hold-</span><span style={{ color: '#66aff5' }}>Vote-</span><span style={{ color: '#a95aec' }}>Rewards-</span><span style={{ color: '#fcc201' }}>Repeat</span> #StonksForAII 
+            It's raining rewards! <span style={{ color: '#86dc3d' }}>Hold-</span><span style={{ color: '#66aff5' }}>Vote-</span><span style={{ color: '#a95aec' }}>Rewards-</span><span style={{ color: '#fcc201' }}>Repeat</span> #StonksForAII
 
           </RarityItemText>
 
@@ -46,22 +48,35 @@ function FirstSection({
 
       <Fade in delay={300} appear>
         <>
+          {
+            saleCountDown ?
+              <ButtonsWrapper>
+                <ButtonGroup>
+                  <BlockContainer>
+                    <SaleTitle>Pre Sale</SaleTitle>
+                    <RightButton><TimeContainer id="presale" ></TimeContainer></RightButton>
+                  </BlockContainer>
 
-          <ButtonsWrapper>
-            <ButtonGroup>
-              {!sellOut &&
-                <a href="#mint">
-                  <RightButton><img src={MintLogo} style={{ height: "30px", width: "30px" }} alt="mint" />&nbsp;Mint Now!</RightButton>{' '}
-                </a>}
-              <RightButton disabled={!seventyFiveSold}>
-                <img src={PaintSwapLogo} style={{ height: "30px", width: "30px" }} alt="paintswap" />&nbsp;PaintSwap</RightButton>{' '}
-            </ButtonGroup>
-          </ButtonsWrapper>
-          {/* {!seventyFiveSold &&
-          <small style={{ color: 'red', padding: '10px' }}>
-            Collection will be available on PaintSwap once 2500 pieces are
-            minted!
-          </small>} */}
+                  <BlockContainer>
+                    <SaleTitle>Public Sale</SaleTitle>
+                    <RightButton><TimeContainer id="publicsale" ></TimeContainer></RightButton>
+                  </BlockContainer>
+                </ButtonGroup>
+              </ButtonsWrapper>
+              :
+              <ButtonsWrapper>
+                <ButtonGroup>
+                  {!sellOut &&
+                    <a href="#mint">
+                      <RightButton><img src={MintLogo} style={{ height: "30px", width: "30px" }} alt="mint" />&nbsp;Mint Now!</RightButton>{' '}
+                    </a>}
+                  <RightButton disabled={!seventyFiveSold}>
+                    <img src={PaintSwapLogo} style={{ height: "30px", width: "30px" }} alt="paintswap" />&nbsp;PaintSwap</RightButton>{' '}
+                </ButtonGroup>
+              </ButtonsWrapper>
+
+          }
+
           <DownArrowWrapper>
             <DownArrow src="/images/down-arrow.svg" />
           </DownArrowWrapper>
@@ -73,6 +88,15 @@ function FirstSection({
 
 export default FirstSection
 
+const Heading = styled.p`
+font-weight: bold;
+font-size: 2em;
+
+@media (max-width: 550px) {
+   font-size: 1.5em;
+  }
+
+`
 // align-items is for vertical alignments
 // justify-content is for horizontal alignments
 // BUT if we use flex-direction: column then the above flips (becomes vice-versa)
@@ -119,6 +143,11 @@ const ItemText = styled.div`
   font-size: 25px;
   max-width: 1200px;
 
+  @media (max-width: 1280px) {
+    max-width: 1000px;
+    font-size: 20px;
+  }
+
 
   @media (max-width: 1204px) {
     max-width: 700px;
@@ -132,7 +161,7 @@ const ItemText = styled.div`
   }
 `
 
-const Text= styled.p`
+const Text = styled.p`
 text-align: justify;
 
  @media (max-width: 550px) {
@@ -212,5 +241,31 @@ const ButtonGroup = styled.div`
   @media (max-width: 768px) {
     align-items: center;
     margin-bottom: 10px;
+  }
+`
+
+const BlockContainer = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content:center;
+padding-top: 25px;
+`
+const SaleTitle = styled.p`
+ font-size: 25px;
+ color: #ffa500;
+
+ @media (max-width: 375px) {
+  font-size: 20px;
+  }
+
+`
+
+const TimeContainer = styled.div`
+color: black;
+font-size: 20px; 
+
+@media (max-width: 375px) {
+    font-size: 15px;
   }
 `

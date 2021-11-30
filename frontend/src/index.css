@@ -68,3 +68,9 @@ a {
     transform: translateY(3px);
   }
 }
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
