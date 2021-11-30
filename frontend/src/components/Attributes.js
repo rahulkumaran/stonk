@@ -14,6 +14,7 @@ function Attributes() {
   const [nftData, setNftData] = useState(null)
   const [loading, setLoading] = useState(false)
   const [gotResponse, setGotResponse] = useState(false)
+  const [searchedValue, setSearchedValue] = useState(0)
 
   const supplyState = useSelector(state => state.supply)
 
@@ -45,6 +46,8 @@ function Attributes() {
     }
 
     if (searchRange && search > 0 && search <= searchRange) {
+
+      if(searchedValue!== search){
       setNftData(null)
       setLoading(true)
       fetch(`/api/attributes/nft-rarity-metadata/${search}`)
@@ -53,14 +56,17 @@ function Attributes() {
           setTimeout(() => {
             setNftData(data)
             setLoading(false)
+            setSearchedValue(search)
           }, 600)
         })
+      }
     } else if (search > searchRange && search <= 3333) {
       alert(`NFT #${search} has not been minted yet.`)
     } else {
       alert(`You cannot get details for the edition that hasn't been minted yet. Please enter edition number ranging between 1 and ${searchRange}.`)
     }
   }
+
 
   const handleEnter = (event) => {
     if (event.key === "Enter") {
@@ -73,9 +79,9 @@ function Attributes() {
       <Wrap nftData={nftData} backgroundImg={StarBG}>
         <Fragment>
           <ItemText>
-            <h2 style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>Check Stonks Attributes</h2>
+            <h2 style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>Check Stonks</h2>
             <br />
-            <p>Find out what attributes your unique art is made of</p>
+            <p>Find out what attributes every unique Stonk is made up of!</p>
           </ItemText>
           <ButtonsWrapper>
             <ButtonGroup>

@@ -192,7 +192,7 @@ function Header({ handleEasterEgg }) {
       {location.pathname === '/' &&
         <BurgerNav show={burgerOpen}>
           <CustomCloseWrapper>
-            <CustomClose onClick={toggleBurger} isOpen={burgerOpen} />
+            <CustomClose onClick={toggleBurger} />
           </CustomCloseWrapper>
 
           <Fragment>

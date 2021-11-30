@@ -95,9 +95,11 @@ function MintSection({ backgroundImg, location, EE }) {
               Mint your NFT!
             </h2>
             <br />
-            <p style={{ color: '#66aff5' }}>
-              Become a part of the stonk society! Lets pAmP it up!
-            </p>
+            <Text>
+              If you love cool art, holding an NFT and literally letting your
+              NFT work for you to receive monthly airdrops, then you'd not wanna
+              miss out! Mint your Stonks now before it's too late.{' '}
+            </Text>
           </ItemText>
           <Fragment>
             {isConnected &&
@@ -293,7 +295,7 @@ const Wrap = styled.div`
   ${props =>
     props.backgroundImg ? `background-image: url(${props.backgroundImg})` : ''};
 
-  background-color:black;
+  background-color: black;
 
   ${props =>
     props.EE
@@ -313,19 +315,22 @@ const ItemText = styled.div`
   line-height: 35px;
   text-align: center;
   font-size: 25px;
-  @media (max-width: 768px) {
-    padding: 4vh;
-    font-size: 18px;
-  }
+
+  max-width: 1200px;
 
   @media (max-width: 1204px) {
     max-width: 700px;
     font-size: 25px;
   }
   @media (max-width: 768px) {
-    padding-top: 8vh;
-    font-size: 20px;
+    padding: 4vh;
+    font-size: 18px;
   }
+
+  // @media (max-width: 768px) {
+  //   padding-top: 8vh;
+  //   font-size: 20px;
+  // }
 `
 
 const ConnectedP = styled.p`
@@ -481,5 +486,12 @@ const WalletImg = styled.img`
     height: 40px;
     width: 40px;
     padding-right: 5px;
+  }
+`
+const Text = styled.p`
+  text-align: justify;
+  color: #66aff5;
+  @media (max-width: 550px) {
+    font-size: 15px;
   }
 `

@@ -24,7 +24,9 @@ function FirstSection({
             The Stonk Society
           </h2>
           <br />
-          <span style={{ color: '#ffa500' }}>3333 </span>unique pieces of the Stonks Man. It is more than just an ART!
+          <Text>3,333 unique & randomly generated Stonks living on the Fantom Blockchain, looking to disrupt the 
+          NFT ecosystem with frequent airdrops for holding Stonks!
+          </Text>
         </ItemText>
       </Fade>
 
@@ -35,7 +37,7 @@ function FirstSection({
           </SliderWrapper>
 
           <RarityItemText>
-            Hold2Earn NFTs! Just <span style={{ color: '#86dc3d' }}>Hold-</span><span style={{ color: '#66aff5' }}>Vote-</span><span style={{ color: '#a95aec' }}>Profit-</span><span style={{ color: '#fcc201' }}>Repeat</span> until stonks!
+          It's raining rewards! <span style={{ color: '#86dc3d' }}>Hold-</span><span style={{ color: '#66aff5' }}>Vote-</span><span style={{ color: '#a95aec' }}>Rewards-</span><span style={{ color: '#fcc201' }}>Repeat</span> #StonksForAII 
 
           </RarityItemText>
 
@@ -112,21 +114,31 @@ const SliderWrapper = styled.div`width: 80vw;
 const ItemText = styled.div`
   padding: 20px;
   padding-top: 15vh;
-  line-height: 30px;
+  line-height: 35px;
   text-align: center;
   font-size: 25px;
+  max-width: 1200px;
+
 
   @media (max-width: 1204px) {
     max-width: 700px;
     font-size: 25px;
   }
+
   @media (max-width: 768px) {
     padding: 0;
     padding-top: 12vh;
     font-size: 18px;
   }
+`
 
+const Text= styled.p`
+text-align: justify;
 
+ @media (max-width: 550px) {
+    max-width: 300px;
+    font-size: 15px;
+  }
 `
 
 const RarityItemText = styled.div`
