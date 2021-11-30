@@ -40,7 +40,13 @@ const CountDownComponent = ({ backgroundImg, location, EE }) => {
 
       <BottomTextContainer>
         <H2 style={{ display: 'inline-flex', alignItems: 'center' }}>
-          🚀 LOAD YOUR <FTMImg src={FTM} alt="ftm" /> BAGS. LFG! 🚀
+          <span style={{ animation: 'rocket  infinite 5s', color: '#ffa500' }}>
+            🚀{' '}
+          </span>
+          LOAD YOUR <FTMImg src={FTM} alt="ftm" /> BAGS. LFG!{' '}
+          <span style={{ animation: 'rocket  infinite 5s', color: '#ffa500' }}>
+            🚀
+          </span>
         </H2>
       </BottomTextContainer>
     </Wrap>
