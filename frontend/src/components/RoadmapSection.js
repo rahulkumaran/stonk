@@ -39,7 +39,7 @@ function RoadmapSection({
                     <div>
                       <H3P>Phase 0</H3P>
                       <br />
-                      <p
+                      <div
                         style={{
                           maxWidth: '500px',
                           border: '1px solid #ffa500',
@@ -48,10 +48,23 @@ function RoadmapSection({
                           backgroundColor: 'rgba(255,215,0, 0.2)'
                         }}
                       >
-                        The community will be at the heart of The Stonk Society
-                        project! Even before launch, we will ensure that we
-                        build a soid community.
-                      </p>
+                        <ul style={{ marginLeft: '10px' }}>
+                          <li>
+                            Generate art, create minting site and secure
+                            metadata
+                          </li>
+                          <br />
+                          <li>
+                            Collab with existing Projects on Fantom net for
+                            giveaways
+                          </li>
+                          <br />
+                          <li>
+                            Launch marketing drive to build Discord & Twitter
+                            engagement{' '}
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </RightPhasesWrapper>
                 </Fade>
@@ -64,7 +77,7 @@ function RoadmapSection({
                     <div>
                       <H3P leftPhase={true}>Phase 1</H3P>
                       <br />
-                      <p
+                      <div
                         style={{
                           maxWidth: '500px',
                           border: '1px solid #ffa500',
@@ -73,13 +86,21 @@ function RoadmapSection({
                           backgroundColor: 'rgba(255,215,0, 0.2)'
                         }}
                       >
-                        Once we have a solid community, our next aim will be to
-                        launch our collection and push for a sell-out, so that
-                        our community’s interests can be protected in the
-                        secondary markets. We will also be working with
-                        Paintswap during this phase to get our collection
-                        whitelisted.
-                      </p>
+                        <ul style={{ marginLeft: '10px' }}>
+                          <li>
+                            Launch website & fix on a minting price and a mint
+                            date
+                          </li>
+                          <br />
+                          <li>Start minting & sell out</li>
+                          <br />
+                          <li>Get collection verified on Paintswap</li>
+                          <br />
+                          <li>
+                            Integrate Paintswap Sales Bot to our Discord server
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </LeftPhasesWrapper>
                 </Fade>
@@ -91,7 +112,7 @@ function RoadmapSection({
                     <div>
                       <H3P>Phase 2</H3P>
                       <br />
-                      <p
+                      <div
                         style={{
                           maxWidth: '500px',
                           border: '1px solid #ffa500',
@@ -100,11 +121,20 @@ function RoadmapSection({
                           backgroundColor: 'rgba(255,215,0, 0.2)'
                         }}
                       >
-                        Get holders on the Discord server verified and award
-                        special roles to holders that will grant them access to
-                        “Top Secret” channels to discuss Investment Strategies
-                        on our Discord server.
-                      </p>
+                        <ul style={{ marginLeft: '10px' }}>
+                          <li>
+                            Add Discord-Metamask verification bot to verify
+                            holders on Discord
+                          </li>
+                          <br />
+                          <li>
+                            Create “Top secret” channels for holders to have
+                            “Secret Discussions”
+                          </li>
+                          <br />
+                          <li>Create airdrop tool for rewards airdrop</li>
+                        </ul>
+                      </div>
                     </div>
                   </RightPhasesWrapper>
                 </Fade>
@@ -116,7 +146,7 @@ function RoadmapSection({
                     <div>
                       <H3P leftPhase={true}>Phase 3</H3P>
                       <br />
-                      <p
+                      <div
                         style={{
                           maxWidth: '500px',
                           border: '1px solid #ffa500',
@@ -125,9 +155,21 @@ function RoadmapSection({
                           backgroundColor: 'rgba(255,215,0, 0.2)'
                         }}
                       >
-                        After sell-out, we will be rolling out our Hold2Earn
-                        feature. Read more about this in our Medium article.
-                      </p>
+                        <ul style={{ marginLeft: '10px' }}>
+                          <li>
+                            Launch treasury & devise rules to protect treasury
+                          </li>
+                          <br />
+                          <li>
+                            Integrate with Snapshot for voting & choose from
+                            available voting strategies
+                          </li>
+                          <br />
+                          <li>
+                            Put forward strategies for first voting process
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </LeftPhasesWrapper>
                 </Fade>
@@ -139,7 +181,7 @@ function RoadmapSection({
                     <div>
                       <H3P>Phase 4</H3P>
                       <br />
-                      <p
+                      <div
                         style={{
                           maxWidth: '500px',
                           border: '1px solid #ffa500',
@@ -150,7 +192,7 @@ function RoadmapSection({
                       >
                         Secret Features.....Ssshhhhhh! Stay Tuned on our discord
                         to stay updated!
-                      </p>
+                      </div>
                     </div>
                   </RightPhasesWrapper>
                 </Fade>
@@ -162,10 +204,10 @@ function RoadmapSection({
           <TextContainer>
             <br />
             <br />
-            <p style={{ color: '#66aff5' }}>
+            <div style={{ color: '#66aff5' }}>
               Please read the Medium article to understand the micro-goals that
               will be achieved during Phase 0 and Phase 1.
-            </p>
+            </div>
             <br />
             <ButtonsWrapper>
               <ButtonGroup>
@@ -199,7 +241,7 @@ const Wrap = styled.div`
   ${props =>
     props.backgroundImg ? `background-image: url(${props.backgroundImg})` : ''};
 
-  background-color:black;
+  background-color: black;
 
   ${props =>
     props.EE

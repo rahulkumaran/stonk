@@ -110,8 +110,9 @@ router.get('/nft-images/:stonks_id', async (req, res) => {
 router.post('/update-supply-snapshot', async (req, res) => {
   try {
     let saveSupply = ''
-    fs.writeFileSync('./supplySnapshot.json', saveSupply)
+    // fs.writeFileSync('./supplySnapshot.json', saveSupply)
 
+    // to db
     const { currentSupply } = req.body
     const filter = { purpose: 'supply-tracking' }
     const update = { currentSupply: currentSupply }
@@ -119,8 +120,13 @@ router.post('/update-supply-snapshot', async (req, res) => {
     let updatedSupply = await Supply.findOneAndUpdate(filter, update)
     await updatedSupply.save()
 
+    // to backup file 
     saveSupply = JSON.stringify([currentSupply])
-    fs.writeFileSync('./supplySnapshot.json', saveSupply)
+    fs.writeFile('./supplySnapshot.json', saveSupply, (err) => {
+      if (err) {
+        console.log("Error Writing Data!")
+      }
+    })
 
     res.json({ updatedSupply: JSON.stringify(currentSupply) })
   } catch (err) {
@@ -131,6 +137,7 @@ router.post('/update-supply-snapshot', async (req, res) => {
 //api to get the snapshot of the current supply from the database
 router.get('/get-supply-snapshot', async (req, res) => {
   try {
+    //from db
     const filter = { purpose: 'supply-tracking' }
 
     const supplyObj = await Supply.findOne(filter)
@@ -138,11 +145,18 @@ router.get('/get-supply-snapshot', async (req, res) => {
 
     res.json({ currentSupply: currentSupply })
   } catch (err) {
-    let readCurrentSupply = fs.readFileSync('./supplySnapshot.json')
-    const supplyFromFile = JSON.parse(readCurrentSupply)
-    backupSupply = supplyFromFile[0]
 
-    res.json({ currentSupply: backupSupply })
+    // from backup file
+    fs.readFile('./supplySnapshot.json', (err, data) => {
+      if (err) {
+        res.json({ response: err })
+      }
+
+      const supplyFromFile = JSON.parse(data)
+      const backupSupply = supplyFromFile[0]
+      res.json({ currentSupply: backupSupply })
+    })
+
   }
 })
 

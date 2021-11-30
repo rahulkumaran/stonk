@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Slider from './slider/Slider'
 import PaintSwapLogo from './assets/paintswap.png'
 import MintLogo from './assets/mint.png'
+import timer from './Mint/Timer'
 
 function FirstSection({
   title,
@@ -15,16 +16,23 @@ function FirstSection({
   EE
 }) {
 
+  const saleCountDown = true
+
+  timer('Dec 15, 2021 15:30:00', 'presale')
+  timer('Dec 15, 2021 16:00:00', 'publicsale')
+
   return (
     <Wrap backgroundImg={backgroundImg} EE={EE} id={`${location}`}>
       <Fade in delay={300} appear>
         <ItemText>
-          <h2 style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>
+          <Heading style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>
             {/* {title} */}
             The Stonk Society
-          </h2>
+          </Heading>
           <br />
-          <span style={{ color: '#ffa500' }}>3333 </span>unique pieces of the Stonks Man. It is more than just an ART!
+          <Text>3,333 unique & randomly generated Stonks living on the Fantom Blockchain, looking to disrupt the
+          NFT ecosystem with frequent airdrops for holding Stonks!
+          </Text>
         </ItemText>
       </Fade>
 
@@ -35,7 +43,7 @@ function FirstSection({
           </SliderWrapper>
 
           <RarityItemText>
-            Hold2Earn NFTs! Just <span style={{ color: '#86dc3d' }}>Hold-</span><span style={{ color: '#66aff5' }}>Vote-</span><span style={{ color: '#a95aec' }}>Profit-</span><span style={{ color: '#fcc201' }}>Repeat</span> until stonks!
+            It's raining rewards! <span style={{ color: '#86dc3d' }}>Hold-</span><span style={{ color: '#66aff5' }}>Vote-</span><span style={{ color: '#a95aec' }}>Rewards-</span><span style={{ color: '#fcc201' }}>Repeat</span> #StonksForAII
 
           </RarityItemText>
 
@@ -44,22 +52,35 @@ function FirstSection({
 
       <Fade in delay={300} appear>
         <>
+          {
+            saleCountDown ?
+              <ButtonsWrapper>
+                <ButtonGroup>
+                  <BlockContainer>
+                    <SaleTitle>Pre Sale</SaleTitle>
+                    <RightButton><TimeContainer id="presale" ></TimeContainer></RightButton>
+                  </BlockContainer>
 
-          <ButtonsWrapper>
-            <ButtonGroup>
-              {!sellOut &&
-                <a href="#mint">
-                  <RightButton><img src={MintLogo} style={{ height: "30px", width: "30px" }} alt="mint" />&nbsp;Mint Now!</RightButton>{' '}
-                </a>}
-              <RightButton disabled={!seventyFiveSold}>
-                <img src={PaintSwapLogo} style={{ height: "30px", width: "30px" }} alt="paintswap" />&nbsp;PaintSwap</RightButton>{' '}
-            </ButtonGroup>
-          </ButtonsWrapper>
-          {/* {!seventyFiveSold &&
-          <small style={{ color: 'red', padding: '10px' }}>
-            Collection will be available on PaintSwap once 2500 pieces are
-            minted!
-          </small>} */}
+                  <BlockContainer>
+                    <SaleTitle>Public Sale</SaleTitle>
+                    <RightButton><TimeContainer id="publicsale" ></TimeContainer></RightButton>
+                  </BlockContainer>
+                </ButtonGroup>
+              </ButtonsWrapper>
+              :
+              <ButtonsWrapper>
+                <ButtonGroup>
+                  {!sellOut &&
+                    <a href="#mint">
+                      <RightButton><img src={MintLogo} style={{ height: "30px", width: "30px" }} alt="mint" />&nbsp;Mint Now!</RightButton>{' '}
+                    </a>}
+                  <RightButton disabled={!seventyFiveSold}>
+                    <img src={PaintSwapLogo} style={{ height: "30px", width: "30px" }} alt="paintswap" />&nbsp;PaintSwap</RightButton>{' '}
+                </ButtonGroup>
+              </ButtonsWrapper>
+
+          }
+
           <DownArrowWrapper>
             <DownArrow src="/images/down-arrow.svg" />
           </DownArrowWrapper>
@@ -71,6 +92,15 @@ function FirstSection({
 
 export default FirstSection
 
+const Heading = styled.p`
+font-weight: bold;
+font-size: 2em;
+
+@media (max-width: 550px) {
+   font-size: 1.5em;
+  }
+
+`
 // align-items is for vertical alignments
 // justify-content is for horizontal alignments
 // BUT if we use flex-direction: column then the above flips (becomes vice-versa)
@@ -112,21 +142,36 @@ const SliderWrapper = styled.div`width: 80vw;
 const ItemText = styled.div`
   padding: 20px;
   padding-top: 15vh;
-  line-height: 30px;
+  line-height: 35px;
   text-align: center;
   font-size: 25px;
+  max-width: 1200px;
+
+  @media (max-width: 1280px) {
+    max-width: 1000px;
+    font-size: 20px;
+  }
+
 
   @media (max-width: 1204px) {
     max-width: 700px;
     font-size: 25px;
   }
+
   @media (max-width: 768px) {
     padding: 0;
     padding-top: 12vh;
     font-size: 18px;
   }
+`
 
+const Text = styled.p`
+text-align: justify;
 
+ @media (max-width: 550px) {
+    max-width: 300px;
+    font-size: 15px;
+  }
 `
 
 const RarityItemText = styled.div`
@@ -200,5 +245,31 @@ const ButtonGroup = styled.div`
   @media (max-width: 768px) {
     align-items: center;
     margin-bottom: 10px;
+  }
+`
+
+const BlockContainer = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content:center;
+padding-top: 25px;
+`
+const SaleTitle = styled.p`
+ font-size: 25px;
+ color: #ffa500;
+
+ @media (max-width: 375px) {
+  font-size: 20px;
+  }
+
+`
+
+const TimeContainer = styled.div`
+color: black;
+font-size: 20px; 
+
+@media (max-width: 375px) {
+    font-size: 15px;
   }
 `

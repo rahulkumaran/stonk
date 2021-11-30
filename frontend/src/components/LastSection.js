@@ -17,7 +17,7 @@ function LastSection({ backgroundImg, location, EE }) {
             Team
           </h1>
           <br />
-          <p style={{ color: '#66aff5' }}>
+          <p style={{ color: '#66aff5', textAlign: 'justify' }}>
             We are one among you. Together with you, we make the Stonk Society!
           </p>
         </ItemText>

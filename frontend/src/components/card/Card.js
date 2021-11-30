@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography'
 import { CardActionArea } from '@mui/material'
 import teamImages from './teamImages'
 import Fade from 'react-reveal/Fade';
-import IconButton from '@mui/material/IconButton';
 import TwitterIcon from '../assets/twitter-brands.svg';
 
 
@@ -42,8 +41,8 @@ export default function CardComponent() {
 
   return (<>
     {team.map((member, index) => (
-      <CardWrapper>
-      <Fade direction={index % 2 === 0 ? "left" : "right"} delay={index === 0 ? "500" : index === 1 ? "600" : index === 2 ? "700" : "800"} >
+      <CardWrapper key={index}>
+      <Fade right delay={index === 0 ? 500 : index === 1 ? 600 : index === 2 ? 700 : 800} >
         <CustomCard key={index}>
           <CardActionArea>
             <CardMedia
@@ -70,9 +69,9 @@ export default function CardComponent() {
                   {member.about}
                 </Typography>
                 <a href={member.twitter} target="_blank" rel="noreferrer">
-                  <IconButton aria-label="twitter" >
-                    <img src={TwitterIcon} alt="twitter" style={{ height: "30px", width: "30px" }} />
-                  </IconButton>
+                  <TwitterDiv aria-label="twitter" >
+                    <img src={TwitterIcon} alt="twitter" style={{ height: "30px", width: "30px", cursor:"pointer" }} />
+                  </TwitterDiv>
                 </a>
               </CustomDiv>
             </CardContent>
@@ -94,13 +93,15 @@ margin: 20px;
 height:350px;
 width: 250px;
 
-
-&:hover{
- opacity: 0.7
-}
 `
 const CustomDiv = styled.div`
 display:flex;
 justify-content: space-between;
 align-items: center;
+`
+const TwitterDiv = styled.div`
+cursor: pointer;
+&:hover{
+  opacity:0.65;
+}
 `

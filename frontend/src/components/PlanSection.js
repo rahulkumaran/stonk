@@ -16,7 +16,12 @@ function PlanSection({
       <Fade in delay={300} appear>
         <Fragment>
           <ItemText>
-            <h2 style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>
+            <h2
+              style={{
+                color: '#ffa500',
+                animation: 'animateDown infinite 1.5s'
+              }}
+            >
               {title}
             </h2>
             <br />
@@ -28,36 +33,37 @@ function PlanSection({
           <Fragment>
             <br />
             <TextContainer>
-              <H3>Launch Investment Fund</H3>
+              <H3>Launch Treasury Fund</H3>
               <br />
               <p>
-                During minting, 50% of the mint cost goes into an “Investment
-                Fund”. The purpose of this fund is to make secure investments to
-                generate monthly returns which will be split amongst holders at
-                the end of every month.
+                During minting, 50% of the mint cost goes into the treasury. The
+                purpose of this treasury is to choose secure farms, staking
+                pools and/or other strategies to generate rewards from the
+                existing that will be airdropped each month to Stonk holders.
               </p>
               <br />
               <br />
-              <H3>Vote & Decide Investment Strategies</H3>
+              <H3>Vote & Decide Allocation Strategies</H3>
               <br />
 
               <p>
-                The power of choosing the investment lies at the hands of all
+                The power of choosing these strategies lies at the hands of all
                 holders. At the start of every month, every holder will vote on
-                investment options. Once the vote concludes, the team will
-                invest the amount into the option with the highest votes.
+                strategies. Once the vote concludes, the team will go ahead with
+                the strategy with the highest votes.
               </p>
               <br />
               <br />
 
-              <H3>Hold Stonks & Get A Piece Of The Sweet Profits Pie</H3>
+              <H3>Hold Stonks & Get Airdrops</H3>
               <br />
 
               <p>
-                At the end of every month, the team will remove the investment
-                in order to disperse the profits to all the holders. Profits
-                will be equally split among each NFT. The more Stonks you hold,
-                the more your monthly returns will be!
+                At the end of every month, the team will remove the treasury
+                fund in order to airdrop the rewards from the strategies to all
+                the holders. The airdrop amount will be equally split among each
+                NFT. The more Stonks you hold, the more you will receive from
+                monthly airdrops!
               </p>
               <br />
               <br />
@@ -66,8 +72,8 @@ function PlanSection({
               <br />
               <p>
                 All you need to do is hold a Stonks, tell us what to do each
-                month and receive the profits recursively! Be a part of our
-                Hold-Vote-Profit-Repeat strategy!
+                month and receive airdrops forever! Be a part of our
+                Vote-Hold-Receive Airdrops-Repeat strategy!
               </p>
               <br />
               <br />
@@ -90,7 +96,7 @@ const Wrap = styled.div`
   ${props =>
     props.backgroundImg ? `background-image: url(${props.backgroundImg})` : ''};
 
-  background-color:black;
+  background-color: black;
 
   ${props =>
     props.EE
@@ -115,7 +121,6 @@ const ItemText = styled.div`
     font-size: 18px;
   }
 `
-
 
 const LeftButton = styled.div`
   background-color: rgba(23, 26, 32, 0.8);
@@ -155,7 +160,7 @@ const RightButton = styled(LeftButton)`
 const TextContainer = styled.div`
   max-width: 1050px;
   margin: 0 auto;
-  line-height: 25px;
+  line-height: 35px;
   font-size: 20px;
   text-align: justify;
 
