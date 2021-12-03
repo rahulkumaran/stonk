@@ -2,10 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import timer from './Timer'
 import FTM from '../assets/ftm.svg'
+import { presaleTimestamp, publicsaleTimestamp } from './mintdates'
 
 const CountDownComponent = ({ backgroundImg, location, EE }) => {
-  timer('Dec 15, 2021 15:30:00', 'mintpresale')
-  timer('Dec 15, 2021 16:00:00', 'mintpublicsale')
+  timer(presaleTimestamp, 'mintpresale')
+  timer(publicsaleTimestamp, 'mintpublicsale')
 
   return (
     <Wrap backgroundImg={backgroundImg} id={`${location}`} EE={EE}>

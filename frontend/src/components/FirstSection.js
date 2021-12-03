@@ -5,6 +5,8 @@ import Slider from './slider/Slider'
 import PaintSwapLogo from './assets/paintswap.png'
 import MintLogo from './assets/mint.png'
 import timer from './Mint/Timer'
+import { presaleTimestamp, publicsaleTimestamp } from './Mint/mintdates'
+
 
 function FirstSection({
   title,
@@ -18,8 +20,8 @@ function FirstSection({
 
   const saleCountDown = true
 
-  timer('Dec 15, 2021 15:30:00', 'presale')
-  timer('Dec 15, 2021 16:00:00', 'publicsale')
+  timer(presaleTimestamp, 'presale')
+  timer(publicsaleTimestamp, 'publicsale')
 
   return (
     <Wrap backgroundImg={backgroundImg} EE={EE} id={`${location}`}>
@@ -167,6 +169,7 @@ const ItemText = styled.div`
 
 const Text = styled.p`
 text-align: justify;
+color: #66aff5;
 
  @media (max-width: 550px) {
     max-width: 300px;
