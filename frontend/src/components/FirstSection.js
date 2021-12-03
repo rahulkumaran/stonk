@@ -5,6 +5,8 @@ import Slider from './slider/Slider'
 import PaintSwapLogo from './assets/paintswap.png'
 import MintLogo from './assets/mint.png'
 import timer from './Mint/Timer'
+import { presaleTimestamp, publicsaleTimestamp } from './Mint/mintdates'
+
 
 function FirstSection({
   title,
@@ -16,17 +18,37 @@ function FirstSection({
   EE
 }) {
 
-  const saleCountDown = true
+  const timerDisabled = false
 
-  timer('Dec 15, 2021 15:30:00', 'presale')
-  timer('Dec 15, 2021 16:00:00', 'publicsale')
+  // only use the timer if timer flag is true
+  if (!timerDisabled) {
+    var now = new Date().getTime()
+    var presaleTime = new Date(presaleTimestamp).getTime();
+    var presaleIsLive = presaleTime - now < 0;
+
+    var publicsaleTime = new Date(publicsaleTimestamp).getTime();
+    var publicsaleIsLive = publicsaleTime - now < 0;
+
+    if (!presaleIsLive) {
+      timer(presaleTimestamp, 'presale')
+    } else {
+      // console.log("first section - presale timer disabled")
+    }
+
+    if (!publicsaleIsLive) {
+      timer(publicsaleTimestamp, 'publicsale')
+    } else {
+      // console.log("first section - publicsale timer disabled")
+    }
+  } else {
+    // console.log("first section - timer feature disabled")
+  }
 
   return (
     <Wrap backgroundImg={backgroundImg} EE={EE} id={`${location}`}>
       <Fade in delay={300} appear>
         <ItemText>
           <Heading style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>
-            {/* {title} */}
             The Stonk Society
           </Heading>
           <br />
@@ -43,7 +65,11 @@ function FirstSection({
           </SliderWrapper>
 
           <RarityItemText>
-            It's raining rewards! <span style={{ color: '#86dc3d' }}>Hold-</span><span style={{ color: '#66aff5' }}>Vote-</span><span style={{ color: '#a95aec' }}>Rewards-</span><span style={{ color: '#fcc201' }}>Repeat</span> #StonksForAII
+            It's raining rewards! <span style={{ color: '#86dc3d' }}>Hold-</span>
+            <span style={{ color: '#66aff5' }}>Vote-</span>
+            <span style={{ color: '#a95aec' }}>Rewards-</span>
+            <span style={{ color: '#fcc201' }}>Repeat</span>{' '}
+             #StonksForAII
 
           </RarityItemText>
 
@@ -53,7 +79,7 @@ function FirstSection({
       <Fade in delay={300} appear>
         <>
           {
-            saleCountDown ?
+            !timerDisabled && (!presaleIsLive && !publicsaleIsLive) || (presaleIsLive && !publicsaleIsLive) ?
               <ButtonsWrapper>
                 <ButtonGroup>
                   <BlockContainer>
@@ -72,10 +98,10 @@ function FirstSection({
                 <ButtonGroup>
                   {!sellOut &&
                     <a href="#mint">
-                      <RightButton><img src={MintLogo} style={{ height: "30px", width: "30px" }} alt="mint" />&nbsp;Mint Now!</RightButton>{' '}
+                      <RightButton><img src={MintLogo} style={{ height: "30px", width: "30px" }} alt="mint" />&nbsp;Mint Now!</RightButton>
                     </a>}
                   <RightButton disabled={!seventyFiveSold}>
-                    <img src={PaintSwapLogo} style={{ height: "30px", width: "30px" }} alt="paintswap" />&nbsp;PaintSwap</RightButton>{' '}
+                    <img src={PaintSwapLogo} style={{ height: "30px", width: "30px" }} alt="paintswap" />&nbsp;PaintSwap</RightButton>
                 </ButtonGroup>
               </ButtonsWrapper>
 
@@ -167,6 +193,7 @@ const ItemText = styled.div`
 
 const Text = styled.p`
 text-align: justify;
+color: #66aff5;
 
  @media (max-width: 550px) {
     max-width: 300px;
