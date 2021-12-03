@@ -11,21 +11,39 @@ import timer from './Mint/Timer'
 
 function MintSection({ backgroundImg, location, EE }) {
 
-  const [mintPrompt, setMintPrompt] = useState(null)
+  const [presaleMintPrompt, setPresaleMintPrompt] = useState(null)
+  const [publicSaleMintPrompt, setPublicsaleMintPrompt] = useState(null)
 
-  var now = new Date().getTime()
-  var presaleTime = new Date(presaleTimestamp).getTime();
-  var presaleIsLive = presaleTime - now < 0;
+  const timerDisabled = false
+  var publicsaleIsLive
+  var presaleIsLive
 
-  var publicsaleTime = new Date(publicsaleTimestamp).getTime();
-  var publicsaleIsLive = publicsaleTime - now < 0;
+  // use timer feature based on flag
+  if (!timerDisabled) {
+    var now = new Date().getTime()
+    var presaleTime = new Date(presaleTimestamp).getTime();
+    presaleIsLive = presaleTime - now < 0;
 
-  console.log("diff---", publicsaleTime - presaleTime)
-  if (!presaleIsLive) {
-    console.log("timer active")
-    timer(presaleTimestamp, "pass", setMintPrompt);
+    var publicsaleTime = new Date(publicsaleTimestamp).getTime();
+    publicsaleIsLive = publicsaleTime - now < 0;
+
+    if (!presaleIsLive) {
+      timer(presaleTimestamp, "pass", setPresaleMintPrompt);
+    } else {
+      // console.log("mint section presale timer disabled")
+    }
+
+    if (!publicsaleIsLive) {
+      timer(publicsaleTimestamp, "pass", setPublicsaleMintPrompt);
+    } else {
+      // console.log("mint section - publicsale timer disabled")
+    }
   } else {
-    console.log("timer disabled")
+    // console.log("mint section - timer feature disabled")
+
+    // to show mint section by default
+    presaleIsLive = true
+    publicsaleIsLive = true
   }
 
 
@@ -33,14 +51,28 @@ function MintSection({ backgroundImg, location, EE }) {
 
   useEffect(() => {
 
-  }, [mintPrompt])
+  }, [presaleMintPrompt, publicSaleMintPrompt])
+
+
+  const showPresale = () => {
+    return <PreSale backgroundImg={backgroundImg} location={location} EE={EE} />
+  }
+
+  const showPublicSale = () => {
+    return <PublicSale backgroundImg={backgroundImg} location={location} EE={EE} />
+  }
+
+  const showCountdown = () => {
+    return <CountDownComponent backgroundImg={backgroundImg} location={location} EE={EE} />
+
+  }
 
   return (
     <Fragment>
-      {presaleIsLive && !publicsaleIsLive ?
-        <PreSale backgroundImg={backgroundImg} location={location} EE={EE} /> : presaleIsLive && publicsaleIsLive ?
-          <PublicSale backgroundImg={backgroundImg} location={location} EE={EE} /> : !presaleIsLive && !publicsaleIsLive && currentlocation.pathname == "/" ?
-            <CountDownComponent backgroundImg={backgroundImg} location={location} EE={EE} /> : ''
+      {presaleIsLive && !publicsaleIsLive ? showPresale()
+        : presaleIsLive && publicsaleIsLive ?
+          showPublicSale() : !presaleIsLive && !publicsaleIsLive && currentlocation.pathname == "/" ?
+            showCountdown() : <h1>OOPS! There was some problem! Please refresh.</h1>
       }
 
     </Fragment>

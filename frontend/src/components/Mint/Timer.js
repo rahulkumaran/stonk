@@ -22,14 +22,13 @@ const timer = (deadline, element, setMintPrompt = null) => {
 
     if (document.getElementById(element) || skip) {
 
-      if (distance < 0 && distance >= -200 && setMintPrompt) {
+      if (distance < 0 && distance >= -500 && setMintPrompt) {
         console.log("time up")
         setMintPrompt(true)
       }
 
       if (distance < 0) {
-        document.getElementById(element).innerHTML = "Sale is LIVE"
-
+        if (element !== "pass") document.getElementById(element).innerHTML = "00:00:00"
       } else {
         if (document.getElementById(element))
           document.getElementById(element).innerHTML = days + "d " + hours + "h "
