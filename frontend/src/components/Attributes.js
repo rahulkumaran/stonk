@@ -47,18 +47,18 @@ function Attributes() {
 
     if (searchRange && search > 0 && search <= searchRange) {
 
-      if(searchedValue!== search){
-      setNftData(null)
-      setLoading(true)
-      fetch(`/api/attributes/nft-rarity-metadata/${search}`)
-        .then(response => response.json())
-        .then(data => {
-          setTimeout(() => {
-            setNftData(data)
-            setLoading(false)
-            setSearchedValue(search)
-          }, 600)
-        })
+      if (searchedValue !== search) {
+        setNftData(null)
+        setLoading(true)
+        fetch(`/api/attributes/nft-rarity-metadata/${search}`)
+          .then(response => response.json())
+          .then(data => {
+            setTimeout(() => {
+              setNftData(data)
+              setLoading(false)
+              setSearchedValue(search)
+            }, 600)
+          })
       }
     } else if (search > searchRange && search <= 3333) {
       alert(`NFT #${search} has not been minted yet.`)
@@ -133,9 +133,9 @@ function Attributes() {
 
                         <AttributeBlockOne>
                           <PH> Edition Rarity</PH>
-                          <P rarity={nftData.metadata.editionRarity}>
+                          <Phover rarity={nftData.metadata.editionRarity}>
                             {nftData.metadata.editionRarity}
-                          </P>
+                          </Phover>
                         </AttributeBlockOne>{' '}
 
                         <AttributeBlockOne>
@@ -143,9 +143,9 @@ function Attributes() {
                           <P>
                             {nftData.metadata.attributes[0].value}
                           </P>
-                          <P rarity={nftData.metadata.attributes[0].rarity}>
+                          <Phover rarity={nftData.metadata.attributes[0].rarity}>
                             ({nftData.metadata.attributes[0].rarity})
-                            </P>
+                            </Phover>
                         </AttributeBlockOne>{' '}
 
                         <AttributeBlockOne>
@@ -153,9 +153,9 @@ function Attributes() {
                           <P>
                             {' '}{nftData.metadata.attributes[1].value}{' '}
                           </P>
-                          <P rarity={nftData.metadata.attributes[1].rarity}>
+                          <Phover rarity={nftData.metadata.attributes[1].rarity}>
                             ({nftData.metadata.attributes[1].rarity})
-                            </P>
+                            </Phover>
                         </AttributeBlockOne>{' '}
 
                         <AttributeBlockOne>
@@ -163,58 +163,58 @@ function Attributes() {
                           <P>
                             {nftData.metadata.attributes[2].value}
                           </P>
-                          <P rarity={nftData.metadata.attributes[2]?.rarity}>
+                          <Phover rarity={nftData.metadata.attributes[2]?.rarity}>
                             ({nftData.metadata.attributes[2].rarity})
-                            </P>
+                            </Phover>
                         </AttributeBlockOne>{' '}
 
                         <AttributeBlockOne>
                           <PH>Suit</PH>
                           <P> {nftData.metadata.attributes[3].value} </P>
-                          <P rarity={nftData.metadata.attributes[3].rarity}>({nftData.metadata.attributes[3].rarity})</P>
+                          <Phover rarity={nftData.metadata.attributes[3].rarity}>({nftData.metadata.attributes[3].rarity})</Phover>
                         </AttributeBlockOne>
 
                         <AttributeBlockOne>
                           <PH>Skin Tone</PH>
                           <P> {nftData.metadata.attributes[4].value} </P>
-                          <P rarity={nftData.metadata.attributes[4].rarity}>({nftData.metadata.attributes[4].rarity})</P>
+                          <Phover rarity={nftData.metadata.attributes[4].rarity}>({nftData.metadata.attributes[4].rarity})</Phover>
                         </AttributeBlockOne>
 
                         <AttributeBlockOne>
                           <PH>Tie</PH>
                           <P>{nftData.metadata.attributes[5].value}</P>
-                          <P rarity={nftData.metadata.attributes[5].rarity}>({nftData.metadata.attributes[5].rarity})</P>
+                          <Phover rarity={nftData.metadata.attributes[5].rarity}>({nftData.metadata.attributes[5].rarity})</Phover>
                         </AttributeBlockOne>
 
                         <AttributeBlockOne>
                           <PH>Facial Hair</PH>
                           <P>{nftData.metadata.attributes[6].value}</P>
-                          <P rarity={nftData.metadata.attributes[6].rarity}>({nftData.metadata.attributes[6].rarity})</P>
+                          <Phover rarity={nftData.metadata.attributes[6].rarity}>({nftData.metadata.attributes[6].rarity})</Phover>
                         </AttributeBlockOne>
 
                         <AttributeBlockOne>
                           <PH>Mouth Piece</PH>
                           <P>{nftData.metadata.attributes[7].value}</P>
-                          <P rarity={nftData.metadata.attributes[7].rarity}>({nftData.metadata.attributes[7].rarity})</P>
+                          <Phover rarity={nftData.metadata.attributes[7].rarity}>({nftData.metadata.attributes[7].rarity})</Phover>
                         </AttributeBlockOne>
 
                         <AttributeBlockOne>
                           <PH>Eyes/Eye wear</PH>
                           <P>{nftData.metadata.attributes[8].value}</P>
-                          <P rarity={nftData.metadata.attributes[8].rarity}>({nftData.metadata.attributes[8].rarity})</P>
+                          <Phover rarity={nftData.metadata.attributes[8].rarity}>({nftData.metadata.attributes[8].rarity})</Phover>
                         </AttributeBlockOne>
 
                         <AttributeBlockOne>
                           <PH>Earring</PH>
                           <P>{nftData.metadata.attributes[9].value}</P>
-                          <P rarity={nftData.metadata.attributes[9].rarity}>({nftData.metadata.attributes[9].rarity})</P>
+                          <Phover rarity={nftData.metadata.attributes[9].rarity}>({nftData.metadata.attributes[9].rarity})</Phover>
                         </AttributeBlockOne>
 
 
                         <AttributeBlockOne>
                           <PH>Hair/Head Wear</PH>
                           <P>{nftData.metadata.attributes[10].value}</P>
-                          <P rarity={nftData.metadata.attributes[10].rarity}>({nftData.metadata.attributes[10].rarity})</P>
+                          <Phover rarity={nftData.metadata.attributes[10].rarity}>({nftData.metadata.attributes[10].rarity})</Phover>
                         </AttributeBlockOne>
 
                       </BlockWrapper>
@@ -539,6 +539,19 @@ const PH = styled.p`
   color: #ffa500;
   font-size: 15px;
   text-align: center;
+
+  @media (max-width: 550px) {
+    font-size: 12px;
+  }
+`
+
+const Phover = styled.p`
+  animation: hover infinite 4s;
+  color: white;
+  font-size: 15px;
+  text-align: center;
+
+  color : ${props => props.rarity && props.rarity === "common" ? "#86dc3d" : props.rarity === "uncommon" ? "#66aff5" : props.rarity === "rare" ? "#a95aec" : props.rarity === "legendary" ? "#fcc201" : ""};
 
   @media (max-width: 550px) {
     font-size: 12px;
