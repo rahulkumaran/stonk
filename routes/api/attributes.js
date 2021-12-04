@@ -72,10 +72,9 @@ router.get('/nft-metadata/:stonks_id', async (req, res) => {
         if (err) throw err
         let metadata = JSON.parse(data)
         res.json({
-          nft_id,
-          metadata,
+          tokenId: Number(nft_id),
+          ...metadata,
           image: imgUrl,
-          error: null
         })
       })
     } else {
