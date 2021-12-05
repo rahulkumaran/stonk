@@ -20,6 +20,7 @@
     "ethers": "^5.4.5",
     "ganache-cli": "^6.12.2",
     "ipfs-http-client": "^52.0.0",
+    "npm-build-zip": "^1.0.3",
     "react": "^17.0.2",
     "react-canvas-draw": "^1.1.1",
     "react-dom": "^17.0.2",
@@ -37,9 +38,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && npm run zip && node ./rename-build.js",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "zip": "npm-build-zip"
   },
   "eslintConfig": {
     "extends": "react-app"
