@@ -132,16 +132,7 @@ const ItemText = styled.div`
   // }
 `
 
-const ConnectedP = styled.p`
-  padding: 20px;
-  line-height: 35px;
-  text-align: center;
-  font-size: 20px;
-  @media (max-width: 768px) {
-    padding: 4vh;
-    font-size: 18px;
-  }
-`
+
 
 const ButtonsWrapper = styled.div``
 
@@ -200,107 +191,14 @@ const RightButton = styled(LeftButton)`
 
 const BottomTextContainer = styled.div`@media (max-width: 375px) {}`
 
-const CheckItOut = styled.p`
-  text-align: center;
-  color: #ffa500;
-  line-height: 30px;
-  &:hover {
-    opacity: 0.65;
-  }
-`
-
-const ConnectButton = styled.div`
-  background-color: rgba(23, 26, 32, 0.8);
-  border: ${props =>
-    props.isConnected ? 'solid 1px #86dc3d;' : 'solid 1px red;'};
-  height: 70px;
-  width: 300px;
-  color: white;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  border-radius: 5px;
-  opacity: 0.85;
-  text-transform: uppercase;
-  font-size: ${props => (!props.isConnected ? '20px;' : '15px;')};
-  margin: 8px;
-
-  &:hover {
-    opacity: 0.65;
-  }
-`
-const H1Count = styled.h1`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #86dc3d;
-`
 
 const H2 = styled.h2`
   color: #66aff5;
   white-space: pre;
-  @media (max-width: 500px) {
-    font-size: 18px;
-  }
-`
-
-const Address = styled.p`
-  @media (max-width: 550px) {
-    font-size: 18px;
-    max-width: 280px;
-    overflow-x: scroll;
-  }
-  color: white;
-`
-const MintInput = styled.input`
-  ${props => (props.shadowInput ? `opacity: 0.4;}` : '')};
-  border: 1px solid #ffa500;
-
-  background-color: rgba(255, 215, 0, 0.2);
-  width: 200px;
-  height: 65px;
-`
-
-const CounterButton = styled.div`
-  height: 65px;
-  width: 70px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0.85;
-  text-transform: uppercase;
-  font-size: 20px;
-  opacity: 0.85;
-  color: black;
-  border: 2px solid #ffa500;
-  background-color: white;
-
-  ${props =>
-    props.disabled ? `cursor: not-allowed; opacity: 0.4;}` : ''} ${props =>
-      !props.disabled &&
-      `&:hover{
-    opacity: 0.65;
-  };`};
-
-  @media (max-width: 768px) {
-    height: 80px;
-    width: 70px;
-  }
-`
-const WalletImg = styled.img`
-  height: 40px;
-  width: 60px;
 
   @media (max-width: 550px) {
-    height: 40px;
-    width: 40px;
-    padding-right: 5px;
+    font-size: 16px;
+    max-width: 350px;
   }
 `
-const Text = styled.p`
-  text-align: justify;
-  color: #66aff5;
-  @media (max-width: 550px) {
-    font-size: 15px;
-  }
-`
+
