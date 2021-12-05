@@ -42,48 +42,48 @@ export default function CardComponent() {
   return (<>
     {team.map((member, index) => (
       <CardWrapper key={index}>
-      <Fade right delay={index === 0 ? 500 : index === 1 ? 600 : index === 2 ? 700 : 800} >
-        <CustomCard key={index}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              // height="390"
-              image={member.image}
-              alt="green iguana"
-              style={{ maxWidth: "100%", maxHeight: "100%" }}
-            />
-            <CardContent style={{ opactity: "0.7", backgroundColor: "black", borderTop: "1px solid #ffa500" }}>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                color="#ffa500"
-                style={{ fontFamily: "manaspc" }}
-              >
-                {member.name}
-              </Typography>
-
-              <CustomDiv>
-                <Typography variant="body2" color="white" style={{ fontFamily: "manaspc" }}
+        <Fade delay={index === 0 ? 500 : index === 1 ? 600 : index === 2 ? 700 : 800} >
+          <CustomCard key={index}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                // height="390"
+                image={member.image}
+                alt="green iguana"
+                style={{ maxWidth: "100%", maxHeight: "100%" }}
+              />
+              <CardContent style={{ opactity: "0.7", backgroundColor: "black", borderTop: "1px solid #ffa500" }}>
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="div"
+                  color="#ffa500"
+                  style={{ fontFamily: "manaspc" }}
                 >
-                  {member.about}
+                  {member.name}
                 </Typography>
-                <a href={member.twitter} target="_blank" rel="noreferrer">
-                  <TwitterDiv aria-label="twitter" >
-                    <img src={TwitterIcon} alt="twitter" style={{ height: "30px", width: "30px", cursor:"pointer" }} />
-                  </TwitterDiv>
-                </a>
-              </CustomDiv>
-            </CardContent>
-          </CardActionArea>
-        </CustomCard>
-      </Fade>
+
+                <CustomDiv>
+                  <Typography variant="body2" color="white" style={{ fontFamily: "manaspc" }}
+                  >
+                    {member.about}
+                  </Typography>
+                  <a href={member.twitter} target="_blank" rel="noreferrer">
+                    <TwitterDiv aria-label="twitter" >
+                      <img src={TwitterIcon} alt="twitter" style={{ height: "30px", width: "30px", cursor: "pointer" }} />
+                    </TwitterDiv>
+                  </a>
+                </CustomDiv>
+              </CardContent>
+            </CardActionArea>
+          </CustomCard>
+        </Fade>
       </CardWrapper>
     ))}
   </>)
 }
 
-const CardWrapper= styled.div`
+const CardWrapper = styled.div`
 z-index:0;
 `
 const CustomCard = styled(Card)`
