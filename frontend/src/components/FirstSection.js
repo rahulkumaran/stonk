@@ -196,7 +196,7 @@ text-align: justify;
 color: #66aff5;
 
  @media (max-width: 550px) {
-    max-width: 300px;
+    max-width: 350px;
     font-size: 15px;
   }
 `
