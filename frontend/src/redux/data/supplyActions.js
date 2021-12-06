@@ -79,7 +79,7 @@ export const fetchSupply = () => {
       console.log(err)
       dispatch(
         fetchSupplyFailed(
-          'Oops! looks like there was a problem. Make sure you have Metamask installed before you proceed. Please refresh the page in case you already have it installed to retry.'
+          'Oops! looks like there was a problem. Make sure you have Metamask installed and you are connected to the right network before you proceed. Please refresh to try again.'
         )
       )
     }

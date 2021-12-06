@@ -10,130 +10,144 @@ import CircularProgress from '@mui/material/CircularProgress'
 import WalletIcon from '../assets/wallet-solid.svg'
 import PaintSwapLogo from '../assets/paintswap.png'
 import { fetchSupply } from '../../redux/data/supplyActions'
+import { addresses } from './whitelists'
 
 //const startMintingProcess = () => {}
 
 function PreSale({ backgroundImg, location, EE }) {
- const dispatch = useDispatch()
- const data = useSelector(state => state.data)
- const blockchain = useSelector(state => state.blockchain)
+  const dispatch = useDispatch()
+  const data = useSelector(state => state.data)
+  const blockchain = useSelector(state => state.blockchain)
 
- // const supply = useSelector(state => state.supply.totalSupply)
+  // const supply = useSelector(state => state.supply.totalSupply)
 
- console.log(data)
- const [feedback, setFeedback] = useState("Maybe it's your lucky day!")
- const [claimingNft, setClaimingNft] = useState(false)
- const [mintCount, setMintCount] = useState(1)
+  console.log(data)
+  const [feedback, setFeedback] = useState("Maybe it's your lucky day!")
+  const [claimingNft, setClaimingNft] = useState(false)
+  const [mintCount, setMintCount] = useState(1)
+  const [connectedAddress, setConnectedAddress] = useState('')
+  const [isWhitelisted, setIsWhitelisted] = useState(false)
 
- useEffect(
-  () => {
-   getData()
-  },
-  [blockchain.account]
- )
-
- var isConnected =
-  blockchain.account == '' || blockchain.smartContract !== null
-
- const claimNFTs = _amount => {
-  if (_amount <= 0) {
-   return
+  // setting whitelist flag
+  if (!isWhitelisted && connectedAddress !== '' && addresses.includes(connectedAddress?.toUpperCase())) {
+    setIsWhitelisted(true)
   }
-  setFeedback('Minting your Stonks >>>')
-  setClaimingNft(true)
-  blockchain.smartContract.methods
-   .mint(blockchain.account, _amount)
-   .send({
-    gasLimit: '350000',
-    to: '0xf86aA85CE16A665e581405Dab0d9b526Cb46e3cE',
-    from: blockchain.account,
-    value: blockchain.web3.utils.toWei((2 * _amount).toString(), 'ether')
-   })
-   .once('error', err => {
-    console.log(err)
-    setFeedback('Sorry, something went wrong. Try Again?')
-    setClaimingNft(false)
-   })
-   .then(receipt => {
-    setFeedback('Congratulation, you now own a Stonks NFT!!')
-    setClaimingNft(false)
-    dispatch(fetchSupply())
-    dispatch(fetchData(blockchain.account))
-   })
- }
 
- const getData = () => {
-  if (blockchain.account !== '' && blockchain.smartContract !== null) {
-   dispatch(fetchData(blockchain.account))
-  }
- }
+  useEffect(
+    () => {
+      setIsWhitelisted(false)
+      getData()
+      setConnectedAddress(blockchain.account)
+    },
+    [blockchain.account]
+  )
 
- const handleConnect = e => {
-  e.preventDefault()
-  if (!isConnected) {
-   if (blockchain.account === '' || blockchain.smartContract === null) {
-    dispatch(connect())
-   }
+  var isConnected =
+    blockchain.account == '' || blockchain.smartContract !== null
+
+  const claimNFTs = _amount => {
+    if (_amount <= 0) {
+      return
+    }
+    setFeedback('Minting your Stonks >>>')
+    setClaimingNft(true)
+    blockchain.smartContract.methods
+      .mint(blockchain.account, _amount)
+      .send({
+        gasLimit: '350000',
+        to: '0xf86aA85CE16A665e581405Dab0d9b526Cb46e3cE',
+        from: blockchain.account,
+        value: blockchain.web3.utils.toWei((2 * _amount).toString(), 'ether')
+      })
+      .once('error', err => {
+        console.log(err)
+        setFeedback('Sorry, something went wrong. Try Again?')
+        setClaimingNft(false)
+      })
+      .then(receipt => {
+        setFeedback('Congratulation, you now own a Stonks NFT!!')
+        setClaimingNft(false)
+        dispatch(fetchSupply())
+        dispatch(fetchData(blockchain.account))
+      })
   }
- }
- return (
-  <Fragment>
-   <Wrap
-    backgroundImg={backgroundImg}
-    id={`${location}`}
-    EE={EE}
-    extendedHeight={isConnected}
-   >
-    <Fade in delay={300}>
-     <ItemText>
-      <h2
-       style={{
-        color: '#ffa500',
-        animation: 'animateDown infinite 1.5s'
-       }}
+
+  const getData = () => {
+    if (blockchain.account !== '' && blockchain.smartContract !== null) {
+      dispatch(fetchData(blockchain.account))
+    }
+  }
+
+  const handleConnect = e => {
+    e.preventDefault()
+    if (!isConnected) {
+      if (blockchain.account === '' || blockchain.smartContract === null) {
+        dispatch(connect())
+      }
+    }
+  }
+  return (
+    <Fragment>
+      <Wrap
+        backgroundImg={backgroundImg}
+        id={`${location}`}
+        EE={EE}
+        extendedHeight={isConnected}
       >
-       Mint your NFT!
+        <Fade in delay={300}>
+          <ItemText>
+            <h2
+              style={{
+                color: '#ffa500',
+                animation: 'animateDown infinite 1.5s'
+              }}
+            >
+              Mint your NFT!
             </h2>
-      <br />
-      <Text>
-       If you love cool art, holding an NFT and literally letting your
-       NFT work for you to receive monthly airdrops, then you'd not wanna
-       miss out! Mint your Stonks now before it's too late.
+            <br />
+            <Text>
+              If you love cool art, holding an NFT and literally letting your
+              NFT work for you to receive monthly airdrops, then you'd not wanna
+              miss out! Mint your Stonks now before it's too late.
       </Text>
-     </ItemText>
+          </ItemText>
 
-     <h2 style={{
-      color: '#ffa500',
-      animation: 'blinker 1.5s linear infinite',
-     }}>PRE SALE</h2>
+          <h2 style={{
+            color: '#ffa500',
+            animation: 'blinker 1.5s linear infinite',
+          }}>PRE SALE</h2>
 
-     <Fragment>
-      {isConnected &&
-       <ConnectedP
-        style={{
-         color: '#ffa500',
-         display: 'flex',
-         alignItems: 'center',
-         justifyContent: 'center'
-        }}
-       >
-        <WalletImg src={WalletIcon} alt="wallet address" />
-        <Address>
-         {blockchain.account}
-        </Address>
-       </ConnectedP>}
-     </Fragment>
-    </Fade>
-    {blockchain.loading || data.loading
-     ? 'Processing..'
-     : <Fragment>
-      <Fade in delay={300} appear>
-       <Fragment>
-        {/*OPTION 1: first check if the account is connected, if yes then use supply from the data state.
+          <Fragment>
+            {isConnected &&
+              <ConnectedP
+                style={{
+                  color: '#ffa500',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <WalletImg src={WalletIcon} alt="wallet address" />
+                <Address>
+                  {blockchain.account}
+                </Address>
+              </ConnectedP>
+            }
+            {isConnected &&
+              connectedAddress !== "" && isWhitelisted ? <center><P>YOU ARE WHITELISTED!</P></center> :
+              isConnected && connectedAddress !== "" && !isWhitelisted ? <center><P>YOU ARE NOT WHITELISTED. PLEASE WAIT FOR PUBLIC SALE!</P></center> : ''}
+          </Fragment>
+        </Fade>
+        {blockchain.loading || data.loading
+          ? 'Processing..'
+          : <Fragment>
+            <Fade in delay={300} appear>
+              <Fragment>
+                {/*OPTION 1: first check if the account is connected, if yes then use supply from the data state.
       If account is not connected then pick the supply from the supply state which doesnt require wallet connection.
       If non of the above fetched the supply then show loader */}
 
-        {/* {(blockchain.account === '' || blockchain.smartContract !== null) ?
+                {/* {(blockchain.account === '' || blockchain.smartContract !== null) ?
           <H1Count>
             {data.totalSupply}/10 Minted
           </H1Count> :
@@ -149,144 +163,144 @@ function PreSale({ backgroundImg, location, EE }) {
                 <CircularProgress style={{ width: '40px' }} />&nbsp;/10 Minted!
               </H1Count>
         } */}
-        {/* OPTION 2 */}
-        {blockchain.account === '' ||
-         blockchain.smartContract === null
-         ? <H1Count>
-          <CircularProgress style={{ width: '40px' }} />&nbsp;/100
+                {/* OPTION 2 */}
+                {blockchain.account === '' ||
+                  blockchain.smartContract === null
+                  ? <H1Count>
+                    <CircularProgress style={{ width: '40px' }} />&nbsp;/100
                         Minted!
                       </H1Count>
-         : <H1Count>
-          {data.totalSupply}/100 Minted
+                  : <H1Count>
+                    {data.totalSupply}/100 Minted
                       </H1Count>}
-        <br />
-        {(blockchain.account === '' ||
-         blockchain.smartContract === null) &&
-         <ConnectButton
-          isConnected={
-           blockchain.account === '' ||
-           blockchain.smartContract !== null
-          }
-          onClick={handleConnect}
-         >
-          <img
-           src={metaMaskLogo}
-           alt="metamask"
-           style={{ width: '50px' }}
-          />
+                <br />
+                {(blockchain.account === '' ||
+                  blockchain.smartContract === null) &&
+                  <ConnectButton
+                    isConnected={
+                      blockchain.account === '' ||
+                      blockchain.smartContract !== null
+                    }
+                    onClick={handleConnect}
+                  >
+                    <img
+                      src={metaMaskLogo}
+                      alt="metamask"
+                      style={{ width: '50px' }}
+                    />
                       Connect Wallet
                     </ConnectButton>}
-       </Fragment>
-      </Fade>
-      <div />
-      <Fade>
-       <Fragment>
-        {Number(data.totalSupply) === 3333
-         ? <Fragment>
-          <ButtonsWrapper>
-           <ButtonGroup>
-            <RightButton>
-             <img
-              src={PaintSwapLogo}
-              style={{ height: '30px', width: '30px' }}
-              alt="paintswap"
-             />&nbsp;PaintSwap
+              </Fragment>
+            </Fade>
+            <div />
+            <Fade>
+              <Fragment>
+                {Number(data.totalSupply) === 3333
+                  ? <Fragment>
+                    <ButtonsWrapper>
+                      <ButtonGroup>
+                        <RightButton>
+                          <img
+                            src={PaintSwapLogo}
+                            style={{ height: '30px', width: '30px' }}
+                            alt="paintswap"
+                          />&nbsp;PaintSwap
                             </RightButton>
-           </ButtonGroup>
-          </ButtonsWrapper>
-          <H2>
-           The sale has ended! However, you can buy from our
-           Paintswap Collection!
+                      </ButtonGroup>
+                    </ButtonsWrapper>
+                    <H2>
+                      The sale has ended! However, you can buy from our
+                      Paintswap Collection!
                         </H2>
-         </Fragment>
-         : isConnected
-          ? <Fragment>
-           <ButtonsWrapper>
-            <ButtonGroup>
-             <CounterButton
-              disabled={claimingNft ? 1 : 0}
-              onClick={e => {
-               if (!claimingNft) {
-                if (mintCount > 1) {
-                 setMintCount(mintCount - 1)
-                }
-               } else {
-                alert(
-                 'You already have a pending transaction. Please check metamask!'
-                )
-               }
-              }}
-             >
-              -
+                  </Fragment>
+                  : isConnected && isWhitelisted
+                    ? <Fragment>
+                      <ButtonsWrapper>
+                        <ButtonGroup>
+                          <CounterButton
+                            disabled={claimingNft ? 1 : 0}
+                            onClick={e => {
+                              if (!claimingNft) {
+                                if (mintCount > 1) {
+                                  setMintCount(mintCount - 1)
+                                }
+                              } else {
+                                alert(
+                                  'You already have a pending transaction. Please check metamask!'
+                                )
+                              }
+                            }}
+                          >
+                            -
                               </CounterButton>
 
-             <MintInput
-              disabled
-              shadowInput={claimingNft ? 1 : 0}
-              onChange={e => setMintCount(e.target.value)}
-              value={mintCount}
-              style={{
-               paddingLeft: '85px',
-               fontSize: '40px'
-              }}
-             />
-             <CounterButton
-              disabled={claimingNft ? 1 : 0}
-              onClick={e => {
-               if (!claimingNft) {
-                if (mintCount < 2) {
-                 setMintCount(mintCount + 1)
-                }
-               } else {
-                alert(
-                 'You already have a pending transaction. Please check metamask!'
-                )
-               }
-              }}
-             >
-              +
+                          <MintInput
+                            disabled
+                            shadowInput={claimingNft ? 1 : 0}
+                            onChange={e => setMintCount(e.target.value)}
+                            value={mintCount}
+                            style={{
+                              paddingLeft: '85px',
+                              fontSize: '40px'
+                            }}
+                          />
+                          <CounterButton
+                            disabled={claimingNft ? 1 : 0}
+                            onClick={e => {
+                              if (!claimingNft) {
+                                if (mintCount < 2) {
+                                  setMintCount(mintCount + 1)
+                                }
+                              } else {
+                                alert(
+                                  'You already have a pending transaction. Please check metamask!'
+                                )
+                              }
+                            }}
+                          >
+                            +
                               </CounterButton>
-            </ButtonGroup>
-           </ButtonsWrapper>
+                        </ButtonGroup>
+                      </ButtonsWrapper>
 
-           <ButtonsWrapper>
-            <ButtonGroup>
-             <RightButton
-              disabled={claimingNft ? 1 : 0}
-              onClick={e => {
-               if (!claimingNft) {
-                e.preventDefault()
-                claimNFTs(mintCount)
-                getData()
-               } else {
-                alert(
-                 'You already have a pending transaction. Please check metamask!'
-                )
-               }
-              }}
-             >
-              {claimingNft ? 'Minting' : 'Mint Your Stonks'}
-             </RightButton>
-            </ButtonGroup>
-            <p
-             style={{ textAlign: 'center', color: '#86dc3d' }}
-            >
-             {feedback}
-            </p>
-            {feedback ===
-             'Congratulation, you now own a Stonks NFT!!' &&
-             <CheckItOut>
-              <Link to="/attributes">Check it out here!</Link>
-             </CheckItOut>}
-           </ButtonsWrapper>
-          </Fragment>
-          : null}
-       </Fragment>
-      </Fade>
-     </Fragment>}
-   </Wrap>
-  </Fragment>
- )
+                      <ButtonsWrapper>
+                        <ButtonGroup>
+                          <RightButton
+                            disabled={claimingNft ? 1 : 0}
+                            onClick={e => {
+                              if (!claimingNft) {
+                                e.preventDefault()
+                                claimNFTs(mintCount)
+                                getData()
+                              } else {
+                                alert(
+                                  'You already have a pending transaction. Please check metamask!'
+                                )
+                              }
+                            }}
+                          >
+                            {claimingNft ? 'Minting' : 'Mint Your Stonks'}
+                          </RightButton>
+                        </ButtonGroup>
+                        <p
+                          style={{ textAlign: 'center', color: '#86dc3d' }}
+                        >
+                          {feedback}
+                        </p>
+                        {feedback ===
+                          'Congratulation, you now own a Stonks NFT!!' &&
+                          <CheckItOut>
+                            <Link to="/attributes">Check it out here!</Link>
+                          </CheckItOut>}
+                      </ButtonsWrapper>
+                    </Fragment>
+                    : null}
+              </Fragment>
+            </Fade>
+          </Fragment>}
+      </Wrap>
+    </Fragment>
+  )
 }
 
 export default PreSale
@@ -299,15 +313,15 @@ const Wrap = styled.div`
   height: 100vh;
   max-height: auto;
   ${props =>
-  props.backgroundImg ? `background-image: url(${props.backgroundImg})` : ''};
+    props.backgroundImg ? `background-image: url(${props.backgroundImg})` : ''};
 
   background-color: black;
 
   ${props =>
-  props.EE
-   ? `background-size: cover;
+    props.EE
+      ? `background-size: cover;
         background-repeat: no-repeat;`
-   : ''};
+      : ''};
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -392,8 +406,8 @@ const RightButton = styled(LeftButton)`
  ${props => (props.disabled ? `cursor: not-allowed; opacity: 0.4;}` : '')}
 
   ${props =>
-  !props.disabled &&
-  `&:hover{
+    !props.disabled &&
+    `&:hover{
     opacity: 0.65;
   }`}
 
@@ -415,7 +429,7 @@ const CheckItOut = styled.p`
 const ConnectButton = styled.div`
   background-color: rgba(23, 26, 32, 0.8);
   border: ${props =>
-  props.isConnected ? 'solid 1px #86dc3d;' : 'solid 1px red;'};
+    props.isConnected ? 'solid 1px #86dc3d;' : 'solid 1px red;'};
   height: 70px;
   width: 300px;
   color: white;
@@ -473,9 +487,9 @@ const CounterButton = styled.div`
   background-color: white;
 
   ${props =>
-  props.disabled ? `cursor: not-allowed; opacity: 0.4;}` : ''} ${props =>
-   !props.disabled &&
-   `&:hover{
+    props.disabled ? `cursor: not-allowed; opacity: 0.4;}` : ''} ${props =>
+      !props.disabled &&
+      `&:hover{
     opacity: 0.65;
   };`};
 
@@ -500,4 +514,7 @@ const Text = styled.p`
   @media (max-width: 550px) {
     font-size: 15px;
   }
+`
+const P = styled.p`
+color: #66aff5;
 `

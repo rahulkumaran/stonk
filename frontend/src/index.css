@@ -35,7 +35,7 @@ a {
 
 /*main page scroll bar*/
 ::-webkit-scrollbar {
-  width: 3px;
+  width: 5px;
   height: 6px;
 }
 
