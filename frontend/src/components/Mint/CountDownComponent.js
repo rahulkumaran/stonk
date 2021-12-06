@@ -102,6 +102,9 @@ const SaleTitle = styled.p`
 const TimeContainer = styled.div`
   color: black;
   font-size: 30px;
+  // font-family: 'Courier New', monospace;
+  text-transform: lowercase;
+
 
   @media (max-width: 374px) {
     font-size: 25px;
