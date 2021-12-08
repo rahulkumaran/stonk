@@ -19,13 +19,18 @@ function MintSection({ backgroundImg, location, EE }) {
   var publicsaleIsLive
   var presaleIsLive
 
+
+
   // use timer feature based on flag
   if (!timerDisabled) {
-    var now = new Date().getTime()
-    var presaleTime = new Date(presaleTimestamp).getTime();
-    presaleIsLive = presaleTime - now < 0;
 
-    var publicsaleTime = new Date(publicsaleTimestamp).getTime();
+    var now = new Date().getTime()
+
+    var presaleTime = presaleTimestamp
+    presaleIsLive = presaleTime - now < 0
+
+
+    var publicsaleTime = publicsaleTimestamp
     publicsaleIsLive = publicsaleTime - now < 0;
 
     if (!presaleIsLive) {

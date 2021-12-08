@@ -55,7 +55,7 @@ function PreSale({ backgroundImg, location, EE }) {
       .mintWhitelist(blockchain.account, _amount)
       .send({
         gasLimit: '350000',
-        to: '0xac3f19ab2e8Fdc6DADa572554aAF7d90739954C8',
+        to: '0xB7B511cfe9Cb456644D97FD6696ED94b8a36A14B',
         from: blockchain.account,
         value: blockchain.web3.utils.toWei((1 * _amount).toString(), 'ether')
       })

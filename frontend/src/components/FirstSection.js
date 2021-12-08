@@ -22,11 +22,15 @@ function FirstSection({
 
   // only use the timer if timer flag is true
   if (!timerDisabled) {
+
     var now = new Date().getTime()
-    var presaleTime = new Date(presaleTimestamp).getTime();
+
+    var presaleTime = presaleTimestamp
+
+
     var presaleIsLive = presaleTime - now < 0;
 
-    var publicsaleTime = new Date(publicsaleTimestamp).getTime();
+    var publicsaleTime = publicsaleTimestamp
     var publicsaleIsLive = publicsaleTime - now < 0;
 
     if (!presaleIsLive) {
@@ -296,7 +300,7 @@ const TimeContainer = styled.div`
 color: black;
 font-size: 20px; 
 
-@media (max-width: 375px) {
+@media (max-width: 456px) {
     font-size: 15px;
   }
 `
