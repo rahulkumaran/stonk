@@ -52,12 +52,12 @@ function PreSale({ backgroundImg, location, EE }) {
     setFeedback('Minting your Stonks >>>')
     setClaimingNft(true)
     blockchain.smartContract.methods
-      .mint(blockchain.account, _amount)
+      .mintWhitelist(blockchain.account, _amount)
       .send({
         gasLimit: '350000',
-        to: '0xf86aA85CE16A665e581405Dab0d9b526Cb46e3cE',
+        to: '0xac3f19ab2e8Fdc6DADa572554aAF7d90739954C8',
         from: blockchain.account,
-        value: blockchain.web3.utils.toWei((2 * _amount).toString(), 'ether')
+        value: blockchain.web3.utils.toWei((1 * _amount).toString(), 'ether')
       })
       .once('error', err => {
         console.log(err)
