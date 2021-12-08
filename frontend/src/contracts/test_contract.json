@@ -3,16 +3,6 @@
         "inputs": [
             {
                 "internalType": "string",
-                "name": "_name",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "_symbol",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
                 "name": "_initBaseURI",
                 "type": "string"
             }
@@ -118,6 +108,19 @@
         "inputs": [
             {
                 "internalType": "address",
+                "name": "_address",
+                "type": "address"
+            }
+        ],
+        "name": "addWhitelistAddresses",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
                 "name": "to",
                 "type": "address"
             },
@@ -146,19 +149,6 @@
                 "internalType": "uint256",
                 "name": "",
                 "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "baseExtension",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
             }
         ],
         "stateMutability": "view",
@@ -278,6 +268,24 @@
         "type": "function"
     },
     {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_to",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_mintAmount",
+                "type": "uint256"
+            }
+        ],
+        "name": "mintWhitelist",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "name",
         "outputs": [
@@ -349,21 +357,34 @@
         "type": "function"
     },
     {
-        "inputs": [
+        "inputs": [],
+        "name": "presaleStart",
+        "outputs": [
             {
-                "internalType": "address",
-                "name": "_user",
-                "type": "address"
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
             }
         ],
-        "name": "removeWhitelistUser",
-        "outputs": [],
-        "stateMutability": "nonpayable",
+        "stateMutability": "view",
         "type": "function"
     },
     {
         "inputs": [],
         "name": "renounceOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "reserveForGiveaway",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -420,6 +441,19 @@
         "type": "function"
     },
     {
+        "inputs": [],
+        "name": "saleStart",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [
             {
                 "internalType": "address",
@@ -433,19 +467,6 @@
             }
         ],
         "name": "setApprovalForAll",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "string",
-                "name": "_newBaseExtension",
-                "type": "string"
-            }
-        ],
-        "name": "setBaseExtension",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -472,6 +493,39 @@
             }
         ],
         "name": "setCost",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_time",
+                "type": "uint256"
+            }
+        ],
+        "name": "setPresaleTime",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_time",
+                "type": "uint256"
+            }
+        ],
+        "name": "setSaleTime",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "setWhitelistBalances",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -655,6 +709,25 @@
         "inputs": [
             {
                 "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "whitelistBalance",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
                 "name": "_user",
                 "type": "address"
             }
@@ -687,7 +760,7 @@
         "inputs": [],
         "name": "withdraw",
         "outputs": [],
-        "stateMutability": "payable",
+        "stateMutability": "nonpayable",
         "type": "function"
     }
 ]
