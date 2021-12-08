@@ -95,7 +95,7 @@ export const fetchContract = () => {
 
       const SmartContractObj = new web3.eth.Contract(
         SmartContract,
-        '0x4Cf054A9BF7b0f17dd6ac913C5f66E3fE976Baa9'
+        '0xac3f19ab2e8Fdc6DADa572554aAF7d90739954C8'
       )
       dispatch(
         requestContractSuccess({

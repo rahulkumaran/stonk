@@ -1,2 +1,2 @@
-export const presaleTimestamp = "Dec 15, 2021 15:00:00"
-export const publicsaleTimestamp = "Dec 15, 2021 16:30:00"
+export const presaleTimestamp = "Dec 8, 2021 22:00:00"
+export const publicsaleTimestamp = "Dec 8, 2021 22:30:00"
