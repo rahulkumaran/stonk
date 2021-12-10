@@ -175,7 +175,7 @@ const ItemText = styled.div`
   line-height: 35px;
   text-align: center;
   font-size: 25px;
-  max-width: 1000px;
+  max-width: 1200px;
 
   @media (max-width: 1280px) {
     max-width: 1000px;
