@@ -196,7 +196,7 @@ const ItemText = styled.div`
 `
 
 const Text = styled.p`
-text-align: center;
+text-align: justify;
 color: #66aff5;
 
  @media (max-width: 550px) {
