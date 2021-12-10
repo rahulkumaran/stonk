@@ -69,11 +69,10 @@ function FirstSection({
           </SliderWrapper>
 
           <RarityItemText>
-            It's raining rewards! <span style={{ color: '#86dc3d' }}>Hold-</span>
+            <span style={{ color: '#86dc3d' }}>Hold-</span>
             <span style={{ color: '#66aff5' }}>Vote-</span>
             <span style={{ color: '#a95aec' }}>Rewards-</span>
-            <span style={{ color: '#fcc201' }}>Repeat</span>{' '}
-             #StonksForAII
+            <span style={{ color: '#fcc201' }}>Repeat</span>
 
           </RarityItemText>
 
@@ -103,7 +102,8 @@ function FirstSection({
                   {!sellOut &&
                     <a href="#mint">
                       <RightButton><img src={MintLogo} style={{ height: "30px", width: "30px" }} alt="mint" />&nbsp;Mint Now!</RightButton>
-                    </a>}
+                    </a>
+                  }
                   <RightButton disabled={!seventyFiveSold}>
                     <img src={PaintSwapLogo} style={{ height: "30px", width: "30px" }} alt="paintswap" />&nbsp;PaintSwap</RightButton>
                 </ButtonGroup>
@@ -298,7 +298,8 @@ const SaleTitle = styled.p`
 
 const TimeContainer = styled.div`
 color: black;
-font-size: 20px; 
+font-size: 20px;
+text-transform: lowercase;
 
 @media (max-width: 456px) {
     font-size: 15px;
