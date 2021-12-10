@@ -175,7 +175,7 @@ const ItemText = styled.div`
   line-height: 35px;
   text-align: center;
   font-size: 25px;
-  max-width: 1200px;
+  max-width: 1000px;
 
   @media (max-width: 1280px) {
     max-width: 1000px;
@@ -184,7 +184,7 @@ const ItemText = styled.div`
 
 
   @media (max-width: 1204px) {
-    max-width: 700px;
+    max-width: 800px;
     font-size: 25px;
   }
 
@@ -196,7 +196,7 @@ const ItemText = styled.div`
 `
 
 const Text = styled.p`
-text-align: justify;
+text-align: center;
 color: #66aff5;
 
  @media (max-width: 550px) {

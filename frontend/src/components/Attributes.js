@@ -6,8 +6,13 @@ import QuestionMark from '../components/assets/qm.gif'
 import StarBG from './assets/star1.gif'
 import SearchIcon from './assets/search.png'
 import { useSelector } from 'react-redux'
+import { presaleTimestamp } from './Mint/mintdates'
 
 function Attributes() {
+
+  // presale tracking timer
+  const timerDisabled = false
+  var presaleIsLive
 
   const [search, setSearch] = useState(0)
   const [supply, setSupply] = useState(null)
@@ -15,6 +20,7 @@ function Attributes() {
   const [loading, setLoading] = useState(false)
   const [gotResponse, setGotResponse] = useState(false)
   const [searchedValue, setSearchedValue] = useState(0)
+  const [enableSearch, setEnableSearch] = useState(false)
 
   const supplyState = useSelector(state => state.supply)
 
@@ -74,6 +80,22 @@ function Attributes() {
     }
   }
 
+  // use timer feature based on flag to enable/disable search before sale
+  if (!timerDisabled) {
+
+    var now = new Date().getTime()
+
+    var presaleTime = presaleTimestamp
+    presaleIsLive = presaleTime - now < 0
+
+    if (presaleIsLive && enableSearch === false) {
+      setEnableSearch(true)
+    }
+  } else {
+    if (enableSearch === false)
+      setEnableSearch(true)
+  }
+
   return (
     <Container>
       <Wrap nftData={nftData} backgroundImg={StarBG}>
@@ -83,16 +105,19 @@ function Attributes() {
             <br />
             <p>Find out what attributes every unique Stonk is made up of!</p>
           </ItemText>
-          <ButtonsWrapper>
-            <ButtonGroup>
-              <SearchInput
-                onKeyDown={handleEnter}
-                placeholder="Enter your Stonk number..."
-                onChange={e => setSearch(e.target.value)}
-              />
-              <RightButton onClick={searchHandler}><img src={SearchIcon} style={{ height: "25px", width: "25px" }} alt="search" />&nbsp;Search</RightButton>
-            </ButtonGroup>
-          </ButtonsWrapper>
+          {enableSearch ?
+            <ButtonsWrapper>
+              <ButtonGroup>
+                <SearchInput
+                  onKeyDown={handleEnter}
+                  placeholder="Enter your Stonk number..."
+                  onChange={e => setSearch(e.target.value)}
+                />
+                <RightButton onClick={searchHandler}><img src={SearchIcon} style={{ height: "25px", width: "25px" }} alt="search" />&nbsp;Search</RightButton>
+              </ButtonGroup>
+            </ButtonsWrapper> :
+            <h3 style={{ color: "red" }}>Please wait for sale to go live!</h3>
+          }
         </Fragment>
 
         {loading && <LoadingWrapper> LOADING.... </LoadingWrapper>}

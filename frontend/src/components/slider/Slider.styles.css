@@ -16,6 +16,7 @@
 section {
   width: 100%;
   overflow: auto;
+  cursor: pointer;
 }
 
 article {
