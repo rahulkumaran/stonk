@@ -31,7 +31,7 @@ router.get('/nft-rarity-metadata/:stonks_id', async (req, res) => {
 
     if (nft_id >= 1 && nft_id <= searchRange) {
       const resolvedPath = `${dir}/data/${nft_id}_rarity.json`
-      imgUrl = `https://alphatest.thestonksociety.com/api/attributes/nft-images/${nft_id}`
+      imgUrl = `https://thestonksociety.com/serve/attributes/nft-images/${nft_id}`
 
       fs.readFile(resolvedPath, (err, data) => {
         if (err) throw err
@@ -64,7 +64,7 @@ router.get('/nft-metadata/:stonks_id', async (req, res) => {
     if (nft_id >= 1 && nft_id <= searchRange) {
       const resolvedPath = `${dir}/metadata/${nft_id}.json`
 
-      imgUrl = `https://alphatest.thestonksociety.com/api/attributes/nft-images/${nft_id}`
+      imgUrl = `https://thestonksociety.com/serve/attributes/nft-images/${nft_id}`
 
       fs.readFile(resolvedPath, (err, data) => {
         if (err) throw err
