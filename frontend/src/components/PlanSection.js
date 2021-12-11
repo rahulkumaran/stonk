@@ -36,10 +36,7 @@ function PlanSection({
               <H3>Launch Treasury Fund</H3>
               <br />
               <p>
-                During minting, 50% of the mint cost goes into the treasury. The
-                purpose of this treasury is to choose secure farms, staking
-                pools and/or other strategies to generate rewards from the
-                existing that will be airdropped each month to Stonk holders.
+                50% of the mint cost goes into the community treasury. The purpose of this treasury is to choose and allocate funds into secure farming/staking pools and/or other strategies to generate rewards for Stonks holders that will be airdropped each month.
               </p>
               <br />
               <br />
@@ -47,10 +44,7 @@ function PlanSection({
               <br />
 
               <p>
-                The power of choosing these strategies lies at the hands of all
-                holders. At the start of every month, every holder will vote on
-                strategies. Once the vote concludes, the team will go ahead with
-                the strategy with the highest votes.
+                The power of choosing these strategies lies at the hands of all holders. At the start of each month, every Stonks holder will be eligible to vote on the proposed strategies for that month. Once the vote concludes, the team will go ahead with the strategy that has the highest votes.
               </p>
               <br />
               <br />
@@ -59,11 +53,7 @@ function PlanSection({
               <br />
 
               <p>
-                At the end of every month, the team will remove the treasury
-                fund in order to airdrop the rewards from the strategies to all
-                the holders. The airdrop amount will be equally split among each
-                NFT. The more Stonks you hold, the more you will receive from
-                monthly airdrops!
+                At the end of every month, the team will remove the treasury fund from the investments in order to airdrop the rewards from the strategies to all the holders. The airdrop you receive will be proportional to the number of Stonks you hold. The more Stonks you hold, the more you will receive from monthly airdrops!
               </p>
               <br />
               <br />
@@ -71,9 +61,7 @@ function PlanSection({
               <H3>Repeat</H3>
               <br />
               <p>
-                All you need to do is hold a Stonks, tell us what to do each
-                month and receive airdrops forever! Be a part of our
-                Vote-Hold-Receive Airdrops-Repeat strategy!
+                All you need to do is hold a(or many) Stonks, tell us what to do each month and receive airdrops forever! Be a part of our Vote-Hold-Receive Airdrops-Repeat strategy!
               </p>
               <br />
               <br />

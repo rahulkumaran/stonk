@@ -246,7 +246,7 @@ const RightButton = styled(LeftButton)`
     opacity: 0.65;
   }`}
 
-  @media (max-width: 768px) {
+  @media (max-width: 550px) {
     font-size: 16px;
     height: 50px;
     width: 170px;
