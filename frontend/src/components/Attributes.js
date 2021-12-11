@@ -25,7 +25,7 @@ function Attributes() {
   const supplyState = useSelector(state => state.supply)
 
   useEffect(() => {
-    fetch('/api/attributes/get-supply-snapshot')
+    fetch('/serve/attributes/get-supply-snapshot')
       .then(response => response.json())
       .then(data => {
         setSupply(data.currentSupply)
@@ -56,7 +56,7 @@ function Attributes() {
       if (searchedValue !== search) {
         setNftData(null)
         setLoading(true)
-        fetch(`/api/attributes/nft-rarity-metadata/${search}`)
+        fetch(`/serve/attributes/nft-rarity-metadata/${search}`)
           .then(response => response.json())
           .then(data => {
             setTimeout(() => {
