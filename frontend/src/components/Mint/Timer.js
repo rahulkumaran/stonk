@@ -26,7 +26,6 @@ const timer = (deadline, element, setMintPrompt = null) => {
     if (document.getElementById(element) || skip) {
 
       if (distance < 0 && distance >= -1000 && setMintPrompt) {
-        console.log("time up")
         setMintPrompt(true)
       }
 

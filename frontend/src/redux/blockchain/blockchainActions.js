@@ -4,14 +4,12 @@ import SmartContract from '../../contracts/test_contract.json'
 import { fetchData } from '../data/dataActions'
 
 const connectRequest = () => {
-  console.log('Conn_req')
   return {
     type: 'CONNECTION_REQUEST'
   }
 }
 
 const connectSuccess = payload => {
-  console.log(payload)
   return {
     type: 'CONNECTION_SUCCESS',
     payload: payload
@@ -19,7 +17,6 @@ const connectSuccess = payload => {
 }
 
 const connectFailed = payload => {
-  console.log(payload)
   return {
     type: 'CONNECTION_FAILED',
     payload: payload
@@ -27,7 +24,6 @@ const connectFailed = payload => {
 }
 
 const updateAccountRequest = payload => {
-  console.log(payload)
   return {
     type: 'UPDATE_ACCOUNT',
     payload: payload

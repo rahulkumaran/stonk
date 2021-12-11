@@ -20,7 +20,6 @@ function PublicSale({ backgroundImg, location, EE }) {
 
   // const supply = useSelector(state => state.supply.totalSupply)
 
-  console.log(data)
   const [feedback, setFeedback] = useState("Maybe it's your lucky day!")
   const [claimingNft, setClaimingNft] = useState(false)
   const [mintCount, setMintCount] = useState(1)
@@ -50,7 +49,6 @@ function PublicSale({ backgroundImg, location, EE }) {
         value: blockchain.web3.utils.toWei((1 * _amount).toString(), 'ether')
       })
       .once('error', err => {
-        console.log(err)
         setFeedback('Sorry, something went wrong. Try Again?')
         setClaimingNft(false)
       })

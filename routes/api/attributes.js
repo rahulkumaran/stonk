@@ -10,7 +10,6 @@ router.get('/', async (req, res) => {
   try {
     res.send('You are hitting the attributes Api endpoint')
   } catch (err) {
-    console.log(err.message)
     res.status(500).send('Internal Server Error')
   }
 })
@@ -48,7 +47,6 @@ router.get('/nft-rarity-metadata/:stonks_id', async (req, res) => {
       res.json({ response: 'NO NAUGHTY! ;) This NFT has not been minted yet!' })
     }
   } catch (err) {
-    console.log(err.message)
     res.status(500).send('Internal Server Error')
   }
 })
@@ -81,7 +79,6 @@ router.get('/nft-metadata/:stonks_id', async (req, res) => {
       res.json({ response: 'NO NAUGHTY! ;) This NFT has not been minted yet!' })
     }
   } catch (err) {
-    console.log(err.message)
     res.status(500).send('Internal Server Error')
   }
 })
