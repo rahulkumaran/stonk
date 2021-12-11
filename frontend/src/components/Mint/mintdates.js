@@ -6,5 +6,5 @@ export const toUTC = (timestamp) => {
  return utcTimestamp
 }
 
-export const presaleTimestamp = (new Date(Date.UTC(2021, 11, 10, 42, 25))) // yy mm dd hh mm ss
-export const publicsaleTimestamp = (new Date(Date.UTC(2021, 11, 10, 42, 30)))
+export const presaleTimestamp = (new Date(Date.UTC(2021, 11, 11, 19, 5))) // yy mm dd hh mm ss
+export const publicsaleTimestamp = (new Date(Date.UTC(2021, 11, 11, 19, 10)))

@@ -46,7 +46,7 @@ const requestContractFailed = payload => {
 }
 
 const updateSupply = _totalSupply => {
-  fetch('/api/attributes/update-supply-snapshot', {
+  fetch('/api/attributes/uss', {
     method: 'POST',
 
     body: JSON.stringify({

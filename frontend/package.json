@@ -38,7 +38,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "node ./cleanup-build.js && react-scripts build && npm run zip && node ./rename-build.js",
+    "build:local": "node ./cleanup-build.js && react-scripts build && npm run zip && node ./rename-build.js",
+    "build": "CI=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "zip": "npm-build-zip"

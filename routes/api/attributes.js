@@ -106,7 +106,7 @@ router.get('/nft-images/:stonks_id', async (req, res) => {
 })
 
 // api to update the supply in db to keep track for fetching metadata and images
-router.post('/update-supply-snapshot', async (req, res) => {
+router.post('/uss', async (req, res) => {
   try {
     let saveSupply = ''
     // fs.writeFileSync('./supplySnapshot.json', saveSupply)
@@ -127,7 +127,7 @@ router.post('/update-supply-snapshot', async (req, res) => {
       }
     })
 
-    res.json({ updatedSupply: JSON.stringify(currentSupply) })
+    res.send("USS Successful!")
   } catch (err) {
     res.json({ response: 'Internal Server Error, Try after some time!' })
   }
