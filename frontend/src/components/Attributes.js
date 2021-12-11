@@ -110,10 +110,10 @@ function Attributes() {
               <ButtonGroup>
                 <SearchInput
                   onKeyDown={handleEnter}
-                  placeholder="Enter your Stonk number..."
+                  placeholder="Enter Stonk number"
                   onChange={e => setSearch(e.target.value)}
                 />
-                <RightButton onClick={searchHandler}><img src={SearchIcon} style={{ height: "25px", width: "25px" }} alt="search" />&nbsp;Search</RightButton>
+                <RightButton onClick={searchHandler}><img src={SearchIcon} style={{ height: "25px", width: "25px" }} alt="search" /></RightButton>
               </ButtonGroup>
             </ButtonsWrapper> :
             <ItemText>
@@ -263,7 +263,7 @@ function Attributes() {
             </QuestionMarkWrapper>
           </ContentWrapper> : nftData && nftData.error ? <h2>{nftData.error}</h2> : null}
       </Wrap>
-    </Container>
+    </Container >
   )
 }
 
@@ -351,23 +351,21 @@ const ButtonGroup = styled.div`
   align-items: center;
 
   @media (max-width: 768px) {
-    flex-direction: column;
   }
 `
 
 const LeftButton = styled.div`
   background-color: rgba(23, 26, 32, 0.8);
   height: 40px;
-  width: 256px;
+  width: 50px;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
   opacity: 0.85;
   text-transform: uppercase;
   font-size: 20px;
-  margin: 8px;
+  margin: 0;
 `
 
 const RightButton = styled(LeftButton)`
@@ -383,11 +381,6 @@ const RightButton = styled(LeftButton)`
     `&:hover{
     opacity: 0.65;
   }`}
-
-  @media (max-width: 768px) {
-    height: 30px;
-    width: 150px;
-  }
 `
 
 const ContentWrapper = styled.div`
@@ -462,12 +455,16 @@ const AttributesInfo = styled.div`
 
 const SearchInput = styled.input`
   border: 1px solid #ffa500;
-  border-radius: 10px;
+  
   padding-left: 20px;
 
   background-color: rgba(255, 215, 0, 0.2);
   width: 250px;
   height: 40px;
+
+  @media (max-width: 768px) {
+    width: 200px;
+  }
 `
 const IMG = styled.img`border: 2px solid #ffa500;
 
