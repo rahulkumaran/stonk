@@ -122,11 +122,11 @@ function Header({ handleEasterEgg }) {
             <span style={{ color: '#66aff5' }}>Society</span>
           </a>
           <Menu showNav={colorChange}>
-            <Link to="/attributes">Attributes</Link>
             <a href="/#mint">Mint</a>
             <a href="/#plan">Plan</a>
             <a href="/#roadmap">Roadmap</a>
             <a href="/#team">Team</a>
+            <Link to="/attributes">Attributes</Link>
           </Menu>
         </Fragment>
         : <Fragment>
@@ -197,9 +197,6 @@ function Header({ handleEasterEgg }) {
 
           <Fragment>
             <li onClick={toggleBurger}>
-              <Link to="/attributes">Attributes</Link>
-            </li>
-            <li onClick={toggleBurger}>
               <a href="/#mint">Mint</a>
             </li>
             <li onClick={toggleBurger}>
@@ -210,6 +207,9 @@ function Header({ handleEasterEgg }) {
             </li>
             <li onClick={toggleBurger}>
               <a href="/#team">Team</a>
+            </li>
+            <li onClick={toggleBurger}>
+              <Link to="/attributes">Attributes</Link>
             </li>
           </Fragment>
         </BurgerNav>}
