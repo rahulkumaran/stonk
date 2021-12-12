@@ -116,9 +116,9 @@ function Attributes() {
                 <RightButton onClick={searchHandler}><img src={SearchIcon} style={{ height: "25px", width: "25px" }} alt="search" /></RightButton>
               </ButtonGroup>
             </ButtonsWrapper> :
-            <ItemText>
+            <center>
               <h3 style={{ color: "red" }}>Please wait for sale to go live!</h3>
-            </ItemText>
+            </center>
           }
         </Fragment>
 
