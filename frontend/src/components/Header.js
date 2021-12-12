@@ -97,66 +97,66 @@ function Header({ handleEasterEgg }) {
     <Container showNav={colorChange}>
       {location.pathname === '/'
         ? <Fragment>
-            <a
-              href="#"
+          <a
+            href="#"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <span style={{ color: '#ffa500' }}>Stonk</span>{' '}
+            <img
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
+                height: '30px',
+                width: '30px',
+                position: 'relative',
+                marginBottom: '10px',
+                marginLeft: '4px'
               }}
-            >
-              <span style={{ color: '#ffa500' }}>Stonk</span>{' '}
-              <img
-                style={{
-                  height: '30px',
-                  width: '30px',
-                  position: 'relative',
-                  marginBottom: '10px',
-                  marginLeft: '4px'
-                }}
-                src={ArrowLogo}
-                alt="logo"
-                onClick={handleEasterEgg}
-              />
-              {''}
-              <span style={{ color: '#66aff5' }}>Society</span>
-            </a>
-            <Menu showNav={colorChange}>
-              <Link to="/attributes">Attributes</Link>
-              <a href="/#mint">Mint</a>
-              <a href="/#plan">Plan</a>
-              <a href="/#roadmap">Roadmap</a>
-              <a href="/#team">Team</a>
-            </Menu>
-          </Fragment>
+              src={ArrowLogo}
+              alt="logo"
+              onClick={handleEasterEgg}
+            />
+            {''}
+            <span style={{ color: '#66aff5' }}>Society</span>
+          </a>
+          <Menu showNav={colorChange}>
+            <Link to="/attributes">Attributes</Link>
+            <a href="/#mint">Mint</a>
+            <a href="/#plan">Plan</a>
+            <a href="/#roadmap">Roadmap</a>
+            <a href="/#team">Team</a>
+          </Menu>
+        </Fragment>
         : <Fragment>
-            <Link
-              to="/"
+          <Link
+            to="/"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <span style={{ color: '#ffa500' }}>Stonk</span>{' '}
+            <img
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
+                height: '30px',
+                width: '30px',
+                position: 'relative',
+                marginBottom: '10px',
+                marginLeft: '4px'
               }}
-            >
-              <span style={{ color: '#ffa500' }}>Stonk</span>{' '}
-              <img
-                style={{
-                  height: '30px',
-                  width: '30px',
-                  position: 'relative',
-                  marginBottom: '10px',
-                  marginLeft: '4px'
-                }}
-                src={ArrowLogo}
-                alt="logo"
-              />
-              {''}
-              <span style={{ color: '#66aff5' }}>Society</span>
-            </Link>
-            <Menu showNav={colorChange}>
-              <Link to="/">Back to Home</Link>
-            </Menu>
-          </Fragment>}
+              src={ArrowLogo}
+              alt="logo"
+            />
+            {''}
+            <span style={{ color: '#66aff5' }}>Society</span>
+          </Link>
+          <Menu showNav={colorChange}>
+            <Link to="/">Back to Home</Link>
+          </Menu>
+        </Fragment>}
       <RightMenu>
         <SocialsWrapper>
           <SocialAnchor
@@ -177,16 +177,16 @@ function Header({ handleEasterEgg }) {
             />
           </SocialAnchor>
         </SocialsWrapper>
-        <WalletCard />
+        {/* <WalletCard /> */}
         {location.pathname === '/'
           ? <CustomMenuWrapper>
-              <CustomMenu onClick={toggleBurger} />{' '}
-            </CustomMenuWrapper>
+            <CustomMenu onClick={toggleBurger} />{' '}
+          </CustomMenuWrapper>
           : <Link to="/" style={{ padding: '0' }}>
-              <HomeWrapper>
-                <Home />
-              </HomeWrapper>
-            </Link>}
+            <HomeWrapper>
+              <Home />
+            </HomeWrapper>
+          </Link>}
       </RightMenu>
 
       {location.pathname === '/' &&
