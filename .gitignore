@@ -1,1 +1,4 @@
 node_modules/
+images/
+routes/api/data/
+routes/api/metadata/

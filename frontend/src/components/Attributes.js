@@ -11,7 +11,7 @@ import { presaleTimestamp } from './Mint/mintdates'
 function Attributes() {
 
   // presale tracking timer
-  const timerDisabled = true
+  const timerDisabled = false
   var presaleIsLive
 
   const [search, setSearch] = useState(0)
