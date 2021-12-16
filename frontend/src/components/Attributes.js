@@ -11,7 +11,7 @@ import { presaleTimestamp } from './Mint/mintdates'
 function Attributes() {
 
   // presale tracking timer
-  const timerDisabled = false
+  const timerDisabled = true
   var presaleIsLive
 
   const [search, setSearch] = useState(0)
@@ -220,29 +220,32 @@ function Attributes() {
                         </AttributeBlockOne>
 
                         <AttributeBlockOne>
-                          <PH>Mouth Piece</PH>
+                          <PH>Eyes/Eye wear</PH>
                           <P>{nftData.metadata.attributes[7].value}</P>
                           <Phover rarity={nftData.metadata.attributes[7].rarity}>({nftData.metadata.attributes[7].rarity})</Phover>
                         </AttributeBlockOne>
 
                         <AttributeBlockOne>
-                          <PH>Eyes/Eye wear</PH>
+                          <PH>Hair/Head Wear</PH>
                           <P>{nftData.metadata.attributes[8].value}</P>
                           <Phover rarity={nftData.metadata.attributes[8].rarity}>({nftData.metadata.attributes[8].rarity})</Phover>
                         </AttributeBlockOne>
 
                         <AttributeBlockOne>
-                          <PH>Earring</PH>
+                          <PH>Mouth Piece</PH>
                           <P>{nftData.metadata.attributes[9].value}</P>
                           <Phover rarity={nftData.metadata.attributes[9].rarity}>({nftData.metadata.attributes[9].rarity})</Phover>
                         </AttributeBlockOne>
 
 
+
                         <AttributeBlockOne>
-                          <PH>Hair/Head Wear</PH>
+                          <PH>Earring</PH>
                           <P>{nftData.metadata.attributes[10].value}</P>
-                          <Phover rarity={nftData.metadata.attributes[10].rarity}>({nftData.metadata.attributes[10].rarity})</Phover>
+                          <Phover rarity={nftData.metadata.attributes[10].rarity}>({nftData.metadata.attributes[9].rarity})</Phover>
                         </AttributeBlockOne>
+
+
 
                       </BlockWrapper>
 
