@@ -242,7 +242,7 @@ function Attributes() {
                         <AttributeBlockOne>
                           <PH>Earring</PH>
                           <P>{nftData.metadata.attributes[10].value}</P>
-                          <Phover rarity={nftData.metadata.attributes[10].rarity}>({nftData.metadata.attributes[9].rarity})</Phover>
+                          <Phover rarity={nftData.metadata.attributes[10].rarity}>({nftData.metadata.attributes[10].rarity})</Phover>
                         </AttributeBlockOne>
 
 

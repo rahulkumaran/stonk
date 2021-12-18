@@ -94,9 +94,8 @@ function PublicSale({ backgroundImg, location, EE }) {
             </h2>
             <br />
             <Text>
-              If you love cool art, holding an NFT and literally letting your
-              NFT work for you to receive monthly airdrops, then you'd not wanna
-              miss out! Mint your Stonks now before it's too late.
+              Hold2Earn Stonks that you dont want to miss out!
+
       </Text>
           </ItemText>
 
