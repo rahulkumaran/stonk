@@ -206,7 +206,7 @@ function RoadmapSection({
             <br />
             <div style={{ color: '#66aff5' }}>
               Please read the Medium article to understand the micro-goals that
-              will be achieved during Phase 0 and Phase 1.
+              will be achieved.
             </div>
             <br />
             <ButtonsWrapper>

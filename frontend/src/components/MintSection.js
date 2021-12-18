@@ -14,7 +14,7 @@ function MintSection({ backgroundImg, location, EE }) {
   const [presaleMintPrompt, setPresaleMintPrompt] = useState(null)
   const [publicSaleMintPrompt, setPublicsaleMintPrompt] = useState(null)
 
-  const timerDisabled = false
+  const timerDisabled = true
 
   var publicsaleIsLive
   var presaleIsLive

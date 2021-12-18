@@ -177,7 +177,7 @@ function Header({ handleEasterEgg }) {
             />
           </SocialAnchor>
         </SocialsWrapper>
-        {/* <WalletCard /> */}
+        <WalletCard />
         {location.pathname === '/'
           ? <CustomMenuWrapper>
             <CustomMenu onClick={toggleBurger} />{' '}

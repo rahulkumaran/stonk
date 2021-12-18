@@ -44,7 +44,7 @@ function PublicSale({ backgroundImg, location, EE }) {
       .mint(blockchain.account, _amount)
       .send({
         gasLimit: '350000',
-        to: '0xB7B511cfe9Cb456644D97FD6696ED94b8a36A14B',
+        to: '0xBa60457e2f458c4BFF612302Dc689F2EC07f47dC',
         from: blockchain.account,
         value: blockchain.web3.utils.toWei((1 * _amount).toString(), 'ether')
       })
@@ -151,11 +151,11 @@ function PublicSale({ backgroundImg, location, EE }) {
                 {blockchain.account === '' ||
                   blockchain.smartContract === null
                   ? <H1Count>
-                    <CircularProgress style={{ width: '40px' }} />&nbsp;/100
-                        Minted!
+                    <CircularProgress style={{ width: '40px' }} />&nbsp;/3333
+                        Minted
                       </H1Count>
                   : <H1Count>
-                    {data.totalSupply}/100 Minted
+                    {data.totalSupply}/3333 Minted
                       </H1Count>}
                 <br />
                 {(blockchain.account === '' ||
