@@ -68,7 +68,7 @@ export const fetchSupply = () => {
         .supply.contract.methods.totalSupply()
         .call()
 
-      updateSupply(totalSupply)
+      setTimeout(() => updateSupply(totalSupply), 2000)
 
       dispatch(
         fetchSupplySuccess({
