@@ -327,7 +327,7 @@ const TextContainer = styled.div`
 
   @media (max-width: 2000px) {
     max-width: 1300px;
-    font-size: 22px;
+    font-size: 24px;
     line-height: 25px;
   }
 
@@ -342,12 +342,10 @@ const TextContainer = styled.div`
 
   @media (max-width: 1025px) {
     max-width: 600px;
-    font-size: 17px;
   }
 
   @media (max-width: 800px) {
     max-width: 600px;
-    font-size: 17px;
   }
 
   @media (max-width: 550px) {

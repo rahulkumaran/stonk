@@ -18,7 +18,7 @@ function FirstSection({
   EE
 }) {
 
-  const timerDisabled = false
+  const timerDisabled = true
 
   // only use the timer if timer flag is true
   if (!timerDisabled) {
