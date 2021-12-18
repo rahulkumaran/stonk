@@ -1,4 +1,5 @@
 const colors = require('colors')
+const cors = require('cors')
 const environment = require('./helpers/environment.js')
 const connectDB = require('./helpers/connectDB.js')
 const path = require('path')
@@ -9,6 +10,8 @@ environment()
 connectDB()
 
 const app = express()
+
+app.use(cors())
 
 app.use(express.json({ extended: false }))
 
