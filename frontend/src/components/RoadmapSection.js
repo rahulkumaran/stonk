@@ -333,13 +333,11 @@ const TextContainer = styled.div`
 
   @media (max-width: 1280px) {
     max-width: 1050px;
-    font-size: 18px;
     line-height: 22px;
   }
 
   @media (max-width: 1204px) {
     max-width: 1050px;
-    font-size: 17px;
   }
 
   @media (max-width: 1025px) {
