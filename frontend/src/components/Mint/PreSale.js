@@ -53,10 +53,10 @@ function PreSale({ backgroundImg, location, EE }) {
     blockchain.smartContract.methods
       .mintWhitelist(blockchain.account, _amount)
       .send({
-        gasLimit: '350000',
-        to: '0xBa60457e2f458c4BFF612302Dc689F2EC07f47dC',
+        gasLimit: '750000',
+        to: '0x2f604079aFf2A11883736d189eF823e39abd6316',
         from: blockchain.account,
-        value: blockchain.web3.utils.toWei((1 * _amount).toString(), 'ether')
+        value: blockchain.web3.utils.toWei((45 * _amount).toString(), 'ether')
       })
       .once('error', err => {
         setFeedback('Sorry, something went wrong. Try Again?')
