@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import Fade from 'react-reveal/Fade'
 import styled from 'styled-components'
 import Medium from './assets/medium.svg'
+import Tick from './assets/tick.svg'
 
 function RoadmapSection({
   title,
@@ -49,20 +50,20 @@ function RoadmapSection({
                         }}
                       >
                         <ul style={{ marginLeft: '10px' }}>
-                          <li>
-                            Generate art, create minting site and secure
+                          <LI>
+                            <TickIcon src={Tick} />Generate art, create minting site and secure
                             metadata
-                          </li>
+                          </LI>
                           <br />
-                          <li>
-                            Collab with existing Projects on Fantom net for
+                          <LI>
+                            <TickIcon src={Tick} />Collab with existing Projects on Fantom net for
                             giveaways
-                          </li>
+                          </LI>
                           <br />
-                          <li>
-                            Launch marketing drive to build Discord & Twitter
+                          <LI>
+                            <TickIcon src={Tick} />Launch marketing drive to build Discord & Twitter
                             engagement{' '}
-                          </li>
+                          </LI>
                         </ul>
                       </div>
                     </div>
@@ -87,10 +88,10 @@ function RoadmapSection({
                         }}
                       >
                         <ul style={{ marginLeft: '10px' }}>
-                          <li>
-                            Launch website & fix on a minting price and a mint
+                          <LI>
+                            <TickIcon src={Tick} />Launch website & fix on a minting price and a mint
                             date
-                          </li>
+                          </LI>
                           <br />
                           <li>Start minting & sell out</li>
                           <br />
@@ -480,4 +481,12 @@ const CenterLine = styled.div`
 const MediumIcom = styled.img`
   height: 40px;
   width: 40px;
+`
+const TickIcon = styled.img`
+  height:35px;
+  width: 35px;
+  display:inline-block;
+`
+
+const LI = styled.li`
 `
