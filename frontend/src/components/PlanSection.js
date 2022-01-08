@@ -16,14 +16,14 @@ function PlanSection({
       <Fade in delay={300} appear>
         <Fragment>
           <ItemText>
-            <h2
+            <h1
               style={{
                 color: '#ffa500',
                 animation: 'animateDown infinite 1.5s'
               }}
             >
               {title}
-            </h2>
+            </h1>
             <br />
             <p style={{ color: '#66aff5' }}>
               {description}

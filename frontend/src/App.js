@@ -4,9 +4,13 @@ import './App.css'
 import Header from './components/Header'
 import Home from './components/Home'
 import Attributes from './components/Attributes'
+import MyStonks from './components/MyStonks'
 import NotFound from './components/NotFound'
 import { fetchSupply, fetchContract } from './redux/data/supplyActions'
 import { useDispatch, useSelector } from 'react-redux'
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   const dispatch = useDispatch()
@@ -50,6 +54,8 @@ function App() {
           element={<Home BG={clicks >= 9 ? BG : ''} EE={EE} />}
         />
         <Route exact path="/attributes" element={<Attributes />} />
+        <Route exact path="/my-stonks" element={<MyStonks />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

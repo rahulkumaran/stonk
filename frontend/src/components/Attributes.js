@@ -101,7 +101,7 @@ function Attributes() {
       <Wrap nftData={nftData} backgroundImg={StarBG}>
         <Fragment>
           <ItemText>
-            <h2 style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>Check Stonks</h2>
+            <h1 style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>Check Stonks</h1>
             <br />
             <p>Find out what attributes every unique Stonk is made up of!</p>
           </ItemText>
@@ -110,7 +110,7 @@ function Attributes() {
               <ButtonGroup>
                 <SearchInput
                   onKeyDown={handleEnter}
-                  placeholder="Enter Stonk number"
+                  placeholder="Stonk ID.."
                   onChange={e => setSearch(e.target.value)}
                 />
                 <RightButton onClick={searchHandler}><img src={SearchIcon} style={{ height: "25px", width: "25px" }} alt="search" /></RightButton>
@@ -470,6 +470,7 @@ const SearchInput = styled.input`
   }
 `
 const IMG = styled.img`border: 2px solid #ffa500;
+height: 500px;
 
 
 @media (min-width: 1700px) {
@@ -478,8 +479,8 @@ const IMG = styled.img`border: 2px solid #ffa500;
 }
 
 @media (max-width: 1280px) {
-  width: 350px;
-  height: 350px;
+  width: 450px;
+  height: 450px;
 }
 
 @media (max-width: 800px) {
@@ -507,11 +508,12 @@ const LoadingWrapper = styled.div`
 const QuestionMarkWrapper = styled.div`padding-top: 70px;`
 
 const AttributeBlockOne = styled.div`
-  // background-color: rgba(255,215,0, 0.2);
-  min-width: 200px;
-  height: 80x;
-  width: 200px;
-  padding: 15px;
+  min-width: 200px !important;
+  max-width: 200px !important;
+
+  height: 80x !impoatant;
+  width: 200px !impoarant;
+  padding: 5px;
   color: black;
   display: flex;
   flex-direction: column;
@@ -523,7 +525,7 @@ const AttributeBlockOne = styled.div`
   font-size: 20px;
   margin: 8px;
   border: 2px solid #ffa500;
-  line-height: 25px;
+  line-height: 20px;
 
 
   ${props =>
@@ -533,7 +535,7 @@ const AttributeBlockOne = styled.div`
   }`};
 
   @media (max-width: 550px) {
-      min-width:0;
+      min-width:0 !important;
       width: 150px;
     }
 `

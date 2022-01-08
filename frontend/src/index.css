@@ -8,7 +8,7 @@
 html {
   scroll-behavior: smooth;
   cursor: url("./components/assets/cursor.png"), auto;
-  background-color: black;
+  background-color: black !important;
 }
 
 * {
@@ -103,4 +103,8 @@ a {
   60% {
     transform: translateY(3px);
   } 
+}
+
+a {
+  text-decoration: none !important;
 }

@@ -127,6 +127,8 @@ function Header({ handleEasterEgg }) {
             <a href="/#roadmap">Roadmap</a>
             <a href="/#team">Team</a>
             <Link to="/attributes">Attributes</Link>
+            <Link to="/my-stonks">My Stonks</Link>
+
           </Menu>
         </Fragment>
         : <Fragment>
@@ -210,6 +212,9 @@ function Header({ handleEasterEgg }) {
             </li>
             <li onClick={toggleBurger}>
               <Link to="/attributes">Attributes</Link>
+            </li>
+            <li onClick={toggleBurger}>
+              <Link to="/my-stonks">My Stonks</Link>
             </li>
           </Fragment>
         </BurgerNav>}

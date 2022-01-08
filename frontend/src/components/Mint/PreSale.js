@@ -94,14 +94,14 @@ function PreSale({ backgroundImg, location, EE }) {
       >
         <Fade in delay={300}>
           <ItemText>
-            <h2
+            <h1
               style={{
                 color: '#ffa500',
                 animation: 'animateDown infinite 1.5s'
               }}
             >
               Mint your NFT!
-            </h2>
+            </h1>
             <br />
             <Text>
               Hold2Earn Stonks that you dont want to miss out!

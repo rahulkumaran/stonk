@@ -18,14 +18,14 @@ function RoadmapSection({
       <Fade in delay={300} appear>
         <Fragment>
           <ItemText>
-            <h2
+            <h1
               style={{
                 color: '#ffa500',
                 animation: 'animateDown infinite 1.5s'
               }}
             >
               {title}
-            </h2>
+            </h1>
             <br />
             <p style={{ color: '#66aff5' }}>
               {description}
@@ -49,19 +49,19 @@ function RoadmapSection({
                           backgroundColor: 'rgba(255,215,0, 0.2)'
                         }}
                       >
-                        <ul style={{ marginLeft: '10px' }}>
+                        <ul >
                           <LI>
-                            <TickIcon src={Tick} />Generate art, create minting site and secure
+                            <TickIcon src={Tick} /> Generate art, create minting site and secure
                             metadata
                           </LI>
                           <br />
                           <LI>
-                            <TickIcon src={Tick} />Collab with existing Projects on Fantom net for
+                            <TickIcon src={Tick} /> Collab with existing Projects on Fantom net for
                             giveaways
                           </LI>
                           <br />
                           <LI>
-                            <TickIcon src={Tick} />Launch marketing drive to build Discord & Twitter
+                            <TickIcon src={Tick} /> Launch marketing drive to build Discord & Twitter
                             engagement{' '}
                           </LI>
                         </ul>
@@ -87,9 +87,9 @@ function RoadmapSection({
                           backgroundColor: 'rgba(255,215,0, 0.2)'
                         }}
                       >
-                        <ul style={{ marginLeft: '10px' }}>
+                        <ul>
                           <LI>
-                            <TickIcon src={Tick} />Launch website & fix on a minting price and a mint
+                            <TickIcon src={Tick} /> Launch website & fix on a minting price and a mint
                             date
                           </LI>
                           <br />
@@ -122,18 +122,18 @@ function RoadmapSection({
                           backgroundColor: 'rgba(255,215,0, 0.2)'
                         }}
                       >
-                        <ul style={{ marginLeft: '10px' }}>
-                          <li>
-                            Add Discord-Metamask verification bot to verify
+                        <ul>
+                          <LI>
+                            <TickIcon src={Tick} /> Add Discord-Metamask verification bot to verify
                             holders on Discord
-                          </li>
+                          </LI>
                           <br />
-                          <li>
-                            Create “Top secret” channels for holders to have
+                          <LI>
+                            <TickIcon src={Tick} /> Create “Top secret” channels for holders to have
                             “Secret Discussions”
-                          </li>
+                          </LI>
                           <br />
-                          <li>Create airdrop tool for rewards airdrop</li>
+                          <LI>  <TickIcon src={Tick} /> Create airdrop tool for rewards airdrop</LI>
                         </ul>
                       </div>
                     </div>
@@ -156,15 +156,15 @@ function RoadmapSection({
                           backgroundColor: 'rgba(255,215,0, 0.2)'
                         }}
                       >
-                        <ul style={{ marginLeft: '10px' }}>
-                          <li>
-                            Launch treasury & devise rules to protect treasury
-                          </li>
+                        <ul>
+                          <LI>
+                            <TickIcon src={Tick} /> Launch treasury & devise rules to protect treasury
+                          </LI>
                           <br />
-                          <li>
-                            Integrate with Snapshot for voting & choose from
+                          <LI>
+                            <TickIcon src={Tick} /> Integrate with Snapshot for voting & choose from
                             available voting strategies
-                          </li>
+                          </LI>
                           <br />
                           <li>
                             Put forward strategies for first voting process
@@ -226,7 +226,7 @@ function RoadmapSection({
           </TextContainer>
         </Fragment>
       </Fade>
-    </Wrap>
+    </Wrap >
   )
 }
 

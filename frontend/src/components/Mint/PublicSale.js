@@ -10,6 +10,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import WalletIcon from '../assets/wallet-solid.svg'
 import PaintSwapLogo from '../assets/paintswap.png'
 import { fetchSupply } from '../../redux/data/supplyActions'
+import ftmlogo from '../../components/assets/ftm.svg'
 
 //const startMintingProcess = () => {}
 
@@ -46,7 +47,7 @@ function PublicSale({ backgroundImg, location, EE }) {
         gasLimit: '750000',
         to: '0x2f604079aFf2A11883736d189eF823e39abd6316',
         from: blockchain.account,
-        value: blockchain.web3.utils.toWei((45 * _amount).toString(), 'ether')
+        value: blockchain.web3.utils.toWei((23 * _amount).toString(), 'ether')
       })
       .once('error', err => {
         setFeedback('Sorry, something went wrong. Try Again?')
@@ -84,14 +85,14 @@ function PublicSale({ backgroundImg, location, EE }) {
       >
         <Fade in delay={300}>
           <ItemText>
-            <h2
+            <h1
               style={{
                 color: '#ffa500',
                 animation: 'animateDown infinite 1.5s'
               }}
             >
               Mint your NFT!
-            </h2>
+            </h1>
             <br />
             <Text>
               Hold2Earn Stonks that you dont want to miss out!
@@ -101,8 +102,8 @@ function PublicSale({ backgroundImg, location, EE }) {
 
           <h2 style={{
             color: '#ffa500',
-            animation: 'blinker 1.5s linear infinite',
-          }}>PUBLIC SALE</h2>
+            display: "flex"
+          }}>Mint: 23<img src={ftmlogo} alt="FTM" style={{ height: "30px", width: "30px", marginLeft: "10px", display: "inline-block" }} /> </h2>
 
           <Fragment>
             {isConnected &&
