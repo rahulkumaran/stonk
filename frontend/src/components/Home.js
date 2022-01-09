@@ -15,8 +15,8 @@ function Home({ BG, EE }) {
       <FirstSection
         backgroundImg={BG !== '' ? BG : StarBG}
         EE={EE}
-        sellOut={false}
-        seventyFiveSold={false}
+        sellOut={true}
+        seventyFiveSold={true}
       />
       <MintSection
         backgroundImg={BG !== '' ? BG : StarBG}

@@ -100,10 +100,15 @@ function PublicSale({ backgroundImg, location, EE }) {
       </Text>
           </ItemText>
 
+          {/* <h2 style={{
+            color: '#ffa500',
+            display: "flex"
+          }}>Mint: 23<img src={ftmlogo} alt="FTM" style={{ height: "30px", width: "30px", marginLeft: "10px", display: "inline-block" }} /> </h2> */}
+
           <h2 style={{
             color: '#ffa500',
             display: "flex"
-          }}>Mint: 23<img src={ftmlogo} alt="FTM" style={{ height: "30px", width: "30px", marginLeft: "10px", display: "inline-block" }} /> </h2>
+          }}>SOLD OUT! <img src={ftmlogo} alt="FTM" style={{ height: "30px", width: "30px", marginLeft: "10px", display: "inline-block" }} /> </h2>
 
           <Fragment>
             {isConnected &&
@@ -119,6 +124,7 @@ function PublicSale({ backgroundImg, location, EE }) {
                 <Address>
                   {blockchain.account}
                 </Address>
+
               </ConnectedP>}
           </Fragment>
         </Fade>
@@ -192,10 +198,11 @@ function PublicSale({ backgroundImg, location, EE }) {
                             </RightButton>
                       </ButtonGroup>
                     </ButtonsWrapper>
-                    <H2>
-                      The sale has ended! However, you can buy from our
-                      Paintswap Collection!
+                    <center>
+                      <H2>
+                        The sale has ended! However, We are on Paintswap!
                         </H2>
+                    </center>
                   </Fragment>
                   : isConnected
                     ? <Fragment>
@@ -341,6 +348,7 @@ const ConnectedP = styled.p`
   padding: 20px;
   line-height: 35px;
   text-align: center;
+  display: flex;
   font-size: 20px;
   @media (max-width: 768px) {
     padding: 4vh;
@@ -440,6 +448,9 @@ const H1Count = styled.h1`
 const H2 = styled.h2`color: #66aff5;`
 
 const Address = styled.p`
+
+  margin-bottom: 0 !mportant;
+  
   @media (max-width: 550px) {
     font-size: 18px;
     max-width: 280px;
