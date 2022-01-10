@@ -1,39 +1,54 @@
 import store from '../store'
 
-const fetchDataRequest = () => {
+const fetchStonksRequest = () => {
  return {
-  type: 'CHECK_DATA_REQUEST'
+  type: 'CHECK_STONKS_REQUEST'
  }
 }
 
-const fetchDataSuccess = payload => {
+const fetchStonksSuccess = payload => {
  return {
-  type: 'CHECK_DATA_SUCCESS',
+  type: 'CHECK_STONKS_SUCCESS',
   payload: payload
  }
 }
 
-const fetchDataFailed = payload => {
+const fetchStonksFailed = payload => {
  return {
-  type: 'CHECK_DATA_FAILED',
+  type: 'CHECK_STONKS_FAILED',
   payload: payload
  }
 }
 
-export const fetchMystonks = walletAddress => {
+
+export const fetchMystonks = (walletAddress = "") => {
  return async dispatch => {
-  dispatch(fetchingStonks())
+  dispatch(fetchStonksRequest())
   try {
-   // web3 logic goes here
+   let stonkIds = [1185, 967, 990, 1000]
 
+   fetch('/serve/attributes/show-my-stonks', {
+    method: 'POST',
 
-   dispatch(
-    fetchDataSuccess({
-     totalSupply
-    })
+    body: JSON.stringify({
+     ownedStonks: stonkIds
+    }),
+
+    headers: {
+     'Content-type': 'application/json; charset=UTF-8'
+    }
+   }).then(res => res.json()).then(send =>
+    dispatch(
+     fetchStonksSuccess({
+      ...send
+     })
+    )
    )
+    .catch(err => console.log(err))
+
+
   } catch (err) {
-   dispatch(fetchStonksFailed('Could not load data from contract.'))
+   dispatch(fetchStonksFailed('Something went wrong. Could not get your stonks.'))
   }
  }
 }

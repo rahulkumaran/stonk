@@ -156,4 +156,36 @@ router.get('/get-supply-snapshot', async (req, res) => {
   }
 })
 
+//api to deliver my stonks
+router.post('/show-my-stonks', async (req, res) => {
+  try {
+    let myStonksArray = []
+    const resolvedPath = `${dir}/combined-data/_metadata_rarity.json`
+
+    const ownedStonks = (req.body.ownedStonks)
+
+    fs.readFile(resolvedPath, (err, data) => {
+      if (err) throw err
+      let metadata = JSON.parse(data)
+
+
+      ownedStonks.map((stonkId, index) => {
+        let stonk = stonkId - 1
+        myStonksArray.push({
+          ...metadata[stonk],
+          image: `https://thestonksociety.com/serve/attributes/nft-images/${stonkId}`
+        })
+      })
+
+      res.json({
+        myStonksArray
+      })
+    })
+    // res.send(ownedStonks)
+
+  } catch (err) {
+    console.log(err)
+    res.json({ response: 'Internal Server Error, Try after some time!' })
+  }
+})
 module.exports = router

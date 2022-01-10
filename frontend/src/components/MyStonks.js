@@ -1,31 +1,28 @@
-import React, { useEffect, Fragment } from 'react'
+import React, { useEffect, Fragment, useState } from 'react'
 import styled from 'styled-components'
 import StarBG from './assets/star1.gif'
 import { Container } from 'react-bootstrap'
 import StonkCard from '../components/card/StonkCard'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { connect } from '..//redux/blockchain/blockchainActions'
-import { fetchData } from '..//redux/data/dataActions'
+import { connect } from '../redux/blockchain/blockchainActions'
+import { fetchData } from '../redux/data/dataActions'
 import metaMaskLogo from './assets/metamask.svg'
-import { fetchSupply } from '../redux/data/supplyActions'
-
-
-const stonks = [
-  { stonkId: "1" },
-  { stonkId: "2" },
-  { stonkId: "3" },
-  { stonkId: "4" },
-  { stonkId: "5" },
-  { stonkId: "6" },
-]
-
+import { fetchMystonks } from '../redux/data/fetchStonksActions'
 
 const MyStonks = () => {
 
   const dispatch = useDispatch()
   const data = useSelector(state => state.data)
   const blockchain = useSelector(state => state.blockchain)
+  const ownedStonksState = useSelector(state => state.ownedStonks)
+  const myStonks = ownedStonksState.ownedStonks
+
+  let stateLoading = ownedStonksState.loading
+  const [fetchedStonks, setFetchedStonks] = useState(false)
+
+
+  console.log("owned--", ownedStonksState)
 
   useEffect(
     () => {
@@ -52,53 +49,71 @@ const MyStonks = () => {
     }
   }
 
+  if (isConnected) {
+    if (!fetchedStonks) {
+      dispatch(fetchMystonks())
+      setFetchedStonks(true)
+    }
+  }
+
+
   return (
-    <Wrap backgroundImg={StarBG}>
-      <br />
-      {(blockchain.account === '' ||
-        blockchain.smartContract === null) ?
-        <Fragment>
-          <ItemText>
-            <h1 style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>My Stonks</h1>
-            <br />
-            <p>Connect your wallet</p>
-          </ItemText>
-          <ConnectButton
-            isConnected={
-              blockchain.account === '' ||
-              blockchain.smartContract !== null
-            }
-            onClick={handleConnect}
-          >
-            <img
-              src={metaMaskLogo}
-              alt="metamask"
-              style={{ width: '50px' }}
-            />
+
+    <Fragment>
+      {stateLoading ?
+        <ItemText style={{ marginTop: "20vh" }}>
+          loading..
+        </ItemText>
+
+        :
+        <Wrap backgroundImg={StarBG}>
+          <br />
+          {(blockchain.account === '' ||
+            blockchain.smartContract === null) ?
+            <Fragment>
+              <ItemText>
+                <h1 style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>My Stonks</h1>
+                <br />
+                <p>Connect your wallet</p>
+              </ItemText>
+              <ConnectButton
+                isConnected={
+                  blockchain.account === '' ||
+                  blockchain.smartContract !== null
+                }
+                onClick={handleConnect}
+              >
+                <img
+                  src={metaMaskLogo}
+                  alt="metamask"
+                  style={{ width: '50px' }}
+                />
                       Connect Wallet
                     </ConnectButton>
 
-        </Fragment> :
+            </Fragment> :
 
-        <Fragment>
-          <ItemText>
-            <h1 style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>My Stonks</h1>
-            <br />
-            <p>Owning : {stonks.length}</p>
-          </ItemText>
-          <Container>
+            <Fragment>
+              <ItemText>
+                <h1 style={{ color: '#ffa500', animation: "animateDown infinite 1.5s" }}>My Stonks</h1>
+                <br />
+                <p>Owning : {myStonks.length}</p>
+              </ItemText>
+              <Container>
 
-            <StonkCard myStonks={stonks} />
-          </Container>
-        </Fragment>
+                <StonkCard myStonks={myStonks} />
+              </Container>
+            </Fragment>
+          }
+
+
+          <br />
+          <br />
+          <br />
+
+        </Wrap>
       }
-
-
-      <br />
-      <br />
-      <br />
-
-    </Wrap>
+    </Fragment>
   )
 }
 

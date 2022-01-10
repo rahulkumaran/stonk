@@ -189,13 +189,16 @@ function PublicSale({ backgroundImg, location, EE }) {
                   ? <Fragment>
                     <ButtonsWrapper>
                       <ButtonGroup>
-                        <RightButton>
-                          <img
-                            src={PaintSwapLogo}
-                            style={{ height: '30px', width: '30px' }}
-                            alt="paintswap"
-                          />&nbsp;PaintSwap
+                        <a href="https://paintswap.finance/marketplace/collections/0x2f604079aff2a11883736d189ef823e39abd6316" target="_blank">
+
+                          <RightButton>
+                            <img
+                              src={PaintSwapLogo}
+                              style={{ height: '30px', width: '30px' }}
+                              alt="paintswap"
+                            />&nbsp;PaintSwap
                             </RightButton>
+                        </a>
                       </ButtonGroup>
                     </ButtonsWrapper>
                     <center>

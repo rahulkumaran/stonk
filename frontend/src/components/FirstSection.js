@@ -104,8 +104,10 @@ function FirstSection({
                       <RightButton><img src={MintLogo} style={{ height: "30px", width: "30px" }} alt="mint" />&nbsp;Mint Now!</RightButton>
                     </a>
                   }
-                  <RightButton disabled={!seventyFiveSold}>
-                    <img src={PaintSwapLogo} style={{ height: "30px", width: "30px" }} alt="paintswap" />&nbsp;PaintSwap</RightButton>
+                  <a href="https://paintswap.finance/marketplace/collections/0x2f604079aff2a11883736d189ef823e39abd6316" target="_blank">
+                    <RightButton disabled={!seventyFiveSold}>
+                      <img src={PaintSwapLogo} style={{ height: "30px", width: "30px" }} alt="paintswap" />&nbsp;PaintSwap</RightButton>
+                  </a>
                 </ButtonGroup>
               </ButtonsWrapper>
 

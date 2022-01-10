@@ -5,11 +5,13 @@ import thunk from 'redux-thunk'
 import blockchainReducer from './blockchain/blockchainReducer'
 import dataReducer from './data/dataReducer'
 import supplyReducer from './data/supplyReducer'
+import fetchStonksReducer from './data/fetchStonksReducer'
 
 const rootReducer = combineReducers({
   blockchain: blockchainReducer,
   data: dataReducer,
-  supply: supplyReducer
+  supply: supplyReducer,
+  ownedStonks: fetchStonksReducer
 })
 
 let composeEnhancers

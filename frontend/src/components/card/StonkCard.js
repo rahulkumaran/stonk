@@ -5,81 +5,86 @@ import Modal from 'react-bootstrap/Modal'
 
 const StonkCard = ({ myStonks }) => {
 
- const [show, setShow] = useState(false);
- const [activeStonk, setActiveStonk] = useState(0)
+  const [show, setShow] = useState(false);
+  const [activeStonk, setActiveStonk] = useState(0)
+  const [modalData, setModalData] = useState(null)
 
 
- const handleShowAttributes = (stonkId) => {
+  const handleShowAttributes = (stonkId, idx) => {
+    console.log(myStonks[idx])
+    const currentlyViewing = myStonks[idx]
 
-  if (!show) {
-   setShow(true)
-   setActiveStonk(stonkId)
+    if (!show) {
+      setShow(true)
+      setActiveStonk(stonkId)
+      setModalData(currentlyViewing)
+    }
   }
 
- }
+  return (
+    <Fragment>
+      {modalData &&
+        <Modal
+          show={show}
+          size="lg"
+          onHide={() => setShow(false)}
+          dialogClassName="modal-90w"
+          fullscreen="md"
+        >
+          <CustomModalHeader closeButton>
+            <CustomModalTitle>
+              Stonk #{activeStonk} <span style={{ color: "black" }}>({modalData.editionRarity})</span>
 
- console.log(activeStonk)
- return (
-  <Fragment>
+            </CustomModalTitle>
+          </CustomModalHeader>
 
-   <Modal
-    show={show}
-    size="lg"
-    onHide={() => setShow(false)}
-    dialogClassName="modal-90w"
-    fullscreen="md"
-   >
-    <CustomModalHeader closeButton>
-     <CustomModalTitle>
-      {activeStonk} <span style={{ color: "white" }}>Rarity</span>
+          <ModalBody>
 
-     </CustomModalTitle>
-    </CustomModalHeader>
-
-    <ModalBody>
-     <img src="/images/sliderimages/s1.png" alt="stonk" style={{ width: "350px", height: "350px", marginBottom: "30px", border: "1px solid #ffa500" }} />
-
-     <div style={{ color: "black", marginLeft: "20px" }}>
-      <P><Trait>Background:</Trait>qwertyuiopasd</P>
-      <P><Trait>Arrow: </Trait>qwertyuiopasd</P>
-      <P><Trait>Body:</Trait>qwertyuiopasd </P>
-      <P><Trait>Suit:</Trait> qwertyuiopasd</P>
-      <P><Trait>Skin Tone: </Trait>qwertyuiopasd</P>
-      <P><Trait>Tie:</Trait>qwertyuiopasd</P>
-      <P><Trait>Facial Hair</Trait>qwertyuiopasd</P>
-      <P><Trait>Eyes/Eye-Wear</Trait></P>
-      <P><Trait>Hair/Head-Wear:</Trait> qwertyuiopasd</P>
-      <P><Trait>Mouth Piece:</Trait> qwertyuiopasd</P>
-      <P><Trait>Earring:</Trait> qwertyuiopasd</P>
-     </div>
-    </ModalBody>
-   </Modal>
-
-
-   <Row xs={1} md={2} l={2} xl={3} className="g-5">
-    {myStonks.map((_, idx) => (
-     <Col>
-      <CustomCard border="secondary" className="glow">
-       <CardImg variant="top" src="/images/sliderImages/s6.png" />
-       <Card.Body>
-        <CardWrap style={{ display: "flex", justifyContent: "space-between" }}>
-         <Card.Title>{_.stonkId}</Card.Title>
-         <CardText>
-          rarity
-      </CardText>
-        </CardWrap>
-       </Card.Body>
-       <CardFooter onClick={() => handleShowAttributes(_.stonkId)}>
-        See Attributes
-      </CardFooter>
-      </CustomCard>
-     </Col>
-    ))}
-   </Row>
-  </Fragment >
+            <Fragment>
+              <img src={modalData.image} alt="stonk" style={{ width: "350px", height: "350px", marginBottom: "30px", border: "1px solid #ffa500" }} />
+              <div style={{ color: "black", marginLeft: "20px" }}>
+                <P><Trait>Background:</Trait> {modalData?.attributes[0].value}</P><br />
+                <P><Trait>Arrow: </Trait> {modalData?.attributes[1].value}</P><br />
+                <P><Trait>Body:</Trait> {modalData?.attributes[2].value} </P><br />
+                <P><Trait>Suit:</Trait> {modalData?.attributes[3].value}</P><br />
+                <P><Trait>Skin Tone: </Trait> {modalData?.attributes[4].value}</P><br />
+                <P><Trait>Tie:</Trait> {modalData?.attributes[5].value}</P><br />
+                <P><Trait>Facial Hair</Trait> {modalData?.attributes[6].value}</P><br />
+                <P><Trait>Eyes/Eye-Wear</Trait> {modalData?.attributes[7].value}</P><br />
+                <P><Trait>Hair/Head-Wear:</Trait> {modalData?.attributes[8].value}</P><br />
+                <P><Trait>Mouth Piece:</Trait> {modalData?.attributes[9].value}</P><br />
+                <P><Trait>Earring:</Trait> {modalData?.attributes[10].value}</P><br />
+              </div>
+            </Fragment>
+          </ModalBody>
+        </Modal>
+      }
 
 
- )
+      <Row xs={1} md={2} l={2} xl={3} className="g-5">
+        {myStonks.map((_, idx) => (
+          <Col>
+            <CustomCard border="secondary" className="glow">
+              <CardImg variant="top" src={_.image} />
+              <Card.Body>
+                <CardWrap style={{ display: "flex", justifyContent: "space-between" }}>
+                  <Card.Title style={{ color: "#ffa500" }}>{_.edition}</Card.Title>
+                  <CardText rarity={_.editionRarity}>
+                    {_.editionRarity}
+                  </CardText>
+                </CardWrap>
+              </Card.Body>
+              <CardFooter onClick={() => handleShowAttributes(_.edition, idx)}>
+                See Attributes
+              </CardFooter>
+            </CustomCard>
+          </Col>
+        ))}
+      </Row>
+    </Fragment >
+
+
+  )
 }
 
 export default StonkCard
@@ -97,7 +102,8 @@ const CardImg = styled(Card.Img)`
 `
 
 const CardText = styled(Card.Text)`
- color: #ffa500;
+color : ${props => props.rarity && props.rarity === "common" ? "#86dc3d" : props.rarity === "uncommon" ? "#66aff5" : props.rarity === "rare" ? "#a95aec" : props.rarity === "legendary" ? "#fcc201" : ""};
+
 `
 const CardWrap = styled.div`
 display: flex;
@@ -114,7 +120,7 @@ border-top: 1px dashed #ffa500 !important;
 :hover{
  background-color: #ffa500 !important;
  opacity: 0.6 !important;
- color: rgb(102, 175, 245) !important;
+ color: white !important;
 }
 `
 
@@ -148,4 +154,8 @@ display: inline-block;
 
 const Trait = styled.span`
  color: #2a9df4 !important;
+`
+
+const RarityText = styled.span`
+color : ${props => props.rarity && props.rarity === "common" ? "#86dc3d" : props.rarity === "uncommon" ? "#66aff5" : props.rarity === "rare" ? "#a95aec" : props.rarity === "legendary" ? "#fcc201" : ""};
 `
