@@ -17,7 +17,7 @@ const MyStonks = () => {
   const blockchain = useSelector(state => state.blockchain)
   const ownedStonksState = useSelector(state => state.ownedStonks)
   const myStonks = ownedStonksState.ownedStonks
-
+  const stonksFromWallet = []
   let stateLoading = ownedStonksState.loading
   const [fetchedStonks, setFetchedStonks] = useState(false)
 
@@ -49,13 +49,23 @@ const MyStonks = () => {
     }
   }
 
+  const fetchWalletOfOwnerTokenIds = blockchain.smartContract.methods.walletOfOwner(blockchain.account).call()
+    .then(function(receipt) {
+      console.log(receipt)
+    })
+  //console.log(fetchWalletOfOwnerTokenIds)
+
+  const retrieveTokenIds = async () => {
+    stonksFromWallet = await fetchWalletOfOwnerTokenIds
+    //console.log(temp)
+  };
+
   if (isConnected) {
     if (!fetchedStonks) {
-      dispatch(fetchMystonks())
-      setFetchedStonks(true)
+      dispatch(fetchMystonks(stonksFromWallet))
+      setFetchedStonks()
     }
   }
-
 
   return (
 

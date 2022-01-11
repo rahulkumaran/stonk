@@ -21,11 +21,11 @@ const fetchStonksFailed = payload => {
 }
 
 
-export const fetchMystonks = (walletAddress = "") => {
+export const fetchMystonks = (stonksFromWallet) => {
  return async dispatch => {
   dispatch(fetchStonksRequest())
   try {
-   let stonkIds = [1185, 967, 990, 1000]
+   let stonkIds = stonksFromWallet
 
    fetch('/serve/attributes/show-my-stonks', {
     method: 'POST',
